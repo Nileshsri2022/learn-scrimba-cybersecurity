@@ -1,0 +1,76 @@
+
+Transcript
+0:00
+Our second common algorithm is the sliding window log algorithm.
+0:04
+Instead of the window existing and resetting regardless of traffic like in the fixed window counter, this window is being calculated dynamically when each request arrives.
+0:15
+In sliding window log, the system looks back a certain length of time, the window length, and counts how many successful requests have occurred in that time range.
+0:25
+It then decides whether to allow or reject the current request on that calculation.
+0:30
+We're therefore gonna have to store time stamps for each request so the system knows exactly when each successful request arrived.
+0:37
+It's more accurate than the fixed window counter since there's no boundary issue, but it's more memory intensive.
+0:43
+It's called sliding window log because as requests arrive on a timeline, you'll see this later on in the slides, the window the system is looking back is sort of sliding along, constantly checking the window length behind each new request and counting the successful requests in it.
+1:00
+So an example, we're back to the parking garage.
+1:02
+We've got a thirty second window, and the limit is five requests.
+1:07
+So at t equals zero, the first request arrives.
+1:10
+You can see below the car, we are tracking what time the request arrived.
+1:15
+At t equals five seconds, two more requests arrive.
+1:19
+And because thirty seconds behind five seconds is all of the seconds we've had so far, the system counts requests and only counts up one.
+1:27
+And that's below the five limit, so we allow both of those.
+1:31
+At t equals fifteen seconds, it looks back thirty seconds and counts the successful request, and it gets to three, which is below five, so they are both accepted.
+1:41
+And at the current time point fifteen seconds, we are now at the limit of five requests in the previous thirty seconds.
+1:48
+At t equals twenty five seconds, another request arrives.
+1:51
+The system looks back thirty seconds, which is from zero to twenty five seconds, and counts five, so we reject.
+1:59
+However, at t equals thirty five seconds, the system looks back thirty seconds, and that window is now from five to thirty five seconds.
+2:07
+That means the car that arrived and was accepted at zero seconds is not in the window, so that sort of falls out of the window.
+2:16
+And the count is at four, so that means this request at thirty five seconds is accepted.
+2:21
+Now at t equals forty seconds, we get three requests arrive.
+2:25
+Can you have a think about what's gonna happen now?
+2:30
+The window is now from ten to forty seconds.
+2:33
+So the two cars that arrived at five seconds and were accepted fall out to the window.
+2:38
+We have a current count of three cars, so two are allowed.
+2:44
+One is rejected.
+2:45
+So on a timeline, this looks like this.
+2:48
+The green are accepted requests, and the red are rejected.
+2:52
+We had one at zero, two at five, two at fifteen, and then when the request arrived at twenty five seconds, the window going back thirty seconds, we can't go further than zero, so to zero counts at one two three four five, highlighted in yellow, therefore rejects.
+3:11
+When we get to the request arriving at thirty five seconds, the window now looks back to five seconds, and it counts one two three four.
+3:19
+Therefore, this fifth one is accepted.
+3:22
+When the three requests arrive at forty seconds, the window is now as you can see, it slides to the right.
+3:28
+It's counting these two at fifteen, the one at thirty five, one two three.
+3:32
+Therefore, it allows four and five, but rejects any more than five.
+3:36
+Hopefully, that visual aid helps you see how that window is sort of sliding along behind each new request.
+3:43
+See you in the next scrim
