@@ -1,0 +1,107 @@
+Transcript
+0:00
+So far, we've looked at Stride via the lens of what could go wrong, and then we've labeled those problems using the Stride letters.
+0:07
+Now let's flip it because as developers, we don't usually start with a list of bad things.
+0:12
+We start with a list of features.
+0:14
+So the next step to become more security minded is to think of an extra question.
+0:19
+What could go wrong with this feature?
+0:22
+So we're gonna do exactly that with our student portal app from the first scrim.
+0:26
+This one has been appropriated for a music school now.
+0:29
+It allows students to upload practice recordings for teachers to review them and provide feedback.
+0:35
+Here in the editor, I've got feature threats dot m d open.
+0:39
+You'll see feature one here for the student.
+0:41
+I've also dropped a reference to Stride down here at the bottom for easy access.
+0:46
+So for feature one, a student can log in and upload their weekly practice recording for their teacher to review.
+0:52
+It sounds simple, but let's run through Stride and see what might go wrong.
+0:57
+So first is spoofing.
+0:58
+Could one student pretend to be another student?
+1:01
+Well, yeah.
+1:02
+Sure.
+1:02
+Maybe they've got access to a friend's login and upload fake recordings in their name.
+1:07
+So, yes, spoofing is a potential threat.
+1:09
+So let's pop it in.
+1:11
+Someone logs in as another student and uploads fake files.
+1:14
+Next, let's have a look at t for tampering.
+1:17
+Could a student change data that they shouldn't?
+1:20
+Maybe they can rename their file to overwrite another student's upload, or they can intercept the request and change the file before it hits the server.
+1:27
+So tampering is a potential threat as well.
+1:30
+A student alters or overwrites another user's recording.
+1:34
+Next is r for repudiation.
+1:36
+Could a student do something and then deny it later?
+1:39
+Imagine a student deletes their upload and says, I definitely submitted it.
+1:43
+If there's no log or a time stamp, we can't prove who is right.
+1:47
+So repudiation joins our list of threats.
+1:50
+A student deletes their upload and denies ever doing it.
+1:54
+Moving on to information disclosure.
+1:56
+Could a student's private data leak out?
+1:59
+Maybe the video uploads to a public link or the file name includes the student's full name and email.
+2:05
+So, absolutely, information disclosure joins the ranks.
+2:09
+Uploaded videos or names could be visible to others.
+2:13
+Next, let's consider denial of service.
+2:15
+Could someone stop the app from working?
+2:18
+Sure.
+2:18
+A few students could spam the upload feature with huge video files until the server runs out of space and no one can upload anything anymore.
+2:26
+So absolutely, students spam giant video files and slow the system.
+2:31
+And finally, elevation of privilege.
+2:33
+Could a student get powers they shouldn't have?
+2:36
+And absolutely, a student could discover a hidden teacher page and view everyone's videos.
+2:42
+And so we have our sixth potential threat.
+2:45
+A student accesses the teacher area.
+2:47
+So even with one simple feature, which is a student uploading a recording, we found examples for all six Stride categories.
+2:55
+And that's the mindset you want.
+2:57
+Every time you design a feature, walk through those six questions and see what might come up.
+3:02
+In the next room, it's your turn to think like this.
+3:05
+But from the teacher's side, we'll look at how that side of things can bring their own security challenges.
+3:11
+I'll see you there.
