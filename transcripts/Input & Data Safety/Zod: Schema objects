@@ -1,0 +1,180 @@
+
+Transcript
+0:00
+Welcome back.
+0:01
+So a teacher might not just be their name.
+0:04
+They could have other properties.
+0:05
+So let's turn this into an object with a name property, and let's go for an age property.
+0:12
+Now regardless of how useful I sound, sadly, I'm not twenty one, but for now, let's imagine I am.
+0:18
+There we go.
+0:19
+So our data now is an object with two properties.
+0:22
+So we're changing what we're putting through our validation machine, But the settings of the machine is still expecting just a direct string.
+0:31
+So to tell the Zod machine that we're expecting an object, we're not gonna use zed dot string, we're gonna use zed dot object.
+0:37
+And we have the smooth brackets again, and in the smooth brackets, we place the object that we are expecting, that we're happy with.
+0:45
+So we're gonna have a name key.
+0:48
+Now these in Zod are called keys, and an age key.
+0:51
+And then we put the zed dot string here.
+0:55
+And for the age, because it's gonna be a number, we're gonna go for zed dot number.
+1:00
+I really recommend looking at all the primitive types that you can have in Zod in the Zod docs.
+1:06
+So now, the settings of the machine has changed.
+1:09
+The machine is gonna allow an object with a name property, which is any string you want, and an age property, which is any number you want.
+1:18
+And this is the data we're putting through the machine, which should satisfy that validation.
+1:22
+So we save, bring up the console, and, yes, here's that data that is returned if it's successful.
+1:29
+But if I changed the age to the string twenty one and saved, what are we gonna be expecting?
+1:36
+Yes.
+1:36
+An error.
+1:37
+That Zod error, I save.
+1:39
+Boom.
+1:40
+Uncaught Zod error.
+1:41
+Expected number received string.
+1:45
+Okay.
+1:45
+That's back to where it was.
+1:47
+So a little more about schemas now.
+1:49
+I mentioned they represent types.
+1:51
+Well, in Zod, a schema is essentially a runtime representation of a TypeScript type.
+1:58
+If you think about it, this does look a little bit like a type in TypeScript, and we're gonna be showing you how we can infer a TypeScript type from a schema a little later.
+2:07
+So this schema describes the structure and constraints of the data that we're gonna allow.
+2:13
+So this is saying this should be a string, and this should be a number.
+2:17
+We're gonna be adding onto these, saying, for instance, the number needs to be positive or needs to be smaller than x.
+2:24
+But the neat thing about Zod schemas are that they're different from TypeScript static types because TypeScript's types are erased at runtime.
+2:33
+Zod schemas exist at runtime and can actually validate data coming from external sources like APIs or user input.
+2:42
+So in TypeScript, at development, here we have the TypeScript type, a user type, and the type checking works in development.
+2:50
+But when TypeScript compiles the dot TS file and when we run TSC compile into a dot JS file, all the type annotations are completely removed.
+3:01
+There's no validation.
+3:03
+For instance, that string annotation vanishes.
+3:06
+At runtime, there's no way to check if the data matches the TypeScript type.
+3:10
+If an API returns unexpected data, your app can't catch it.
+3:15
+TypeScript only helps you during development.
+3:18
+TypeScript assumes your data is correct.
+3:20
+Zod, however, actually checks the data.
+3:24
+So in development, here is our dot TS file and our user schema.
+3:28
+We define the schema, and then when in runtime we run TSC compile, the schema still exists.
+3:35
+The data is validated.
+3:37
+Zod will throw an error or lets you handle validation failures gracefully.
+3:42
+And many developers in the wild use both Zod for runtime validation and extracting TypeScript types from the schema, giving you both compile time and runtime safety.
+3:53
+And as I mentioned, we're gonna be talking about extracting the TypeScript types from the schema very shortly.
+3:59
+Okay.
+3:59
+It's been a while since you've had a go.
+4:01
+I've got a challenge for you.
+4:02
+It's essentially just recreating what I did earlier in the scrim, but it's no bad thing, is it?
+4:08
+So I want you to create a student schema with the following keys, name, which is a string, and is pro, which is a Boolean.
+4:15
+Then I want you to define a student object with made up values for the following properties, name and is pro.
+4:21
+So you could just do yourself or anybody you want.
+4:24
+And then validate the student against the student schema.
+4:27
+Now I've kept the comment here to help you with the syntax since it's the first time you're doing it and log the result to the console.
+4:35
+So think what we're going to need because there's two keys here for the schema, you're gonna need to use zed dot something that's going to enable you to have two keys.
+4:44
+Alright.
+4:45
+Good luck.
+4:46
+Just have a look earlier in the scrim if you need to and use those Zod docs.
+4:50
+See you in a minute.
+4:53
+Okay.
+4:54
+I hope that went well.
+4:55
+So we've got const student schema, and this is gonna be zed dot, and we need object.
+5:02
+And then we go curlies, and we have name and is keys.
+5:09
+The name we've said is a string, so we need zed dot string.
+5:12
+And is pro is gonna be a boolean, so this is zed dot boolean.
+5:17
+There we go.
+5:18
+That's number one done.
+5:20
+Number two, we need a student object, and this is gonna have name property and is pro property.
+5:28
+Name, let me go for well, we're all still students, aren't we?
+5:32
+We're all still learning.
+5:33
+So let's go for me and is pro.
+5:38
+I'm gonna be bold and go for true.
+5:41
+Now to validate the student against the student schema, we need this syntax.
+5:45
+So we need schema name, which is student schema dot pass, and then smooth brackets.
+5:52
+The data to validate is student.
+5:54
+And then let's check by console logging.
+5:58
+We save, and there's the data.
+6:00
+So, yes, that's all good.
+6:02
+The machine has been set up wanting an object with a string, any string for the name property, and any Boolean for his pro, and we gave that here.
+6:11
+But if I change true to the string true and I save, we get this odd error.
+6:18
+Fantastic.
+6:19
+See you in the next scrim.
