@@ -1,0 +1,34 @@
+0:00
+Great job.
+0:01
+You've made it to the end of this course.
+0:03
+Thanks for following on and being a great student.
+0:06
+The core principle we've learned is never trust user input.
+0:10
+We've learned about defense in-depth.
+0:13
+We've covered multiple layers of protection, each serving a specific purpose.
+0:17
+XSS prevention protects your users from malicious scripts by properly handling how data is displayed.
+0:24
+For instance, using dot text content over dot inner HTML.
+0:29
+Denial of service mitigation ensures your application remains available even under attack through rate limiting and resource management.
+0:37
+SQL injection protection prevents attackers from manipulating your database queries through prepared statements and parameterized queries.
+0:45
+An input validation through libraries like Xod enforces data integrity and business rules, ensuring your application only processes well formed data.
+0:56
+The techniques covered in this course are fundamental, but security is an evolving field.
+1:02
+Stay informed about new vulnerabilities, Keep your dependencies updated and continue learning.
+1:08
+The registration form we used is just one example.
+1:11
+Apply these principles to every user interaction in your applications.
+1:16
+Thank you for joining me on this course.
+1:18
+Good luck with the rest of your learning.
