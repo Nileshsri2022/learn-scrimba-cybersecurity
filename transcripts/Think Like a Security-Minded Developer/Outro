@@ -1,0 +1,18 @@
+
+Transcript
+0:00
+Congratulations.
+0:01
+You finished this section on how to think like a security minded developer.
+0:06
+Throughout the section, we learned about these two things, using Stride to predict design time threats and using the OWASP top ten to recognize real world vulnerabilities.
+0:16
+Together, these tools train you to think in both directions, to design defensively before problems appear and to spot warning signs when they do.
+0:25
+Think like an attacker and design like a defender.
+0:28
+Keep this mindset with you as you build.
+0:30
+Every line of code, every feature choice, every API call, ask yourself what could go wrong, and how can I prevent it?
+0:38
+And that's how you think like a security minded developer.
