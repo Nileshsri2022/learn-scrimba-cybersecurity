@@ -1,0 +1,85 @@
+Transcript
+0:00
+Let's run the test file and see the results.
+0:03
+So I rerun the runner, and we run node test requests.
+0:10
+Okay.
+0:12
+So let's think about the limiter first.
+0:14
+We have a limit of seven, so we should be processing one, two, three, four, five, six.
+0:24
+Oh, seven is not there.
+0:26
+Verse two seems to have start before seven has been processed, so let's scroll down until we find seven.
+0:31
+There's our seven four two nine.
+0:35
+So that means that the seventh request that's been processed two hundred is actually here.
+0:41
+As you can see, we have remaining one and then remaining zero and then subsequent requests of four two nine.
+0:48
+So let's think about the throttling now.
+0:50
+We've got a delay after three.
+0:52
+So here's our three that have all been processed at arrival time, t equals zero.
+0:57
+Request four, that's our one times one.
+1:00
+And then request five should be two times two is four.
+1:02
+Yep.
+1:03
+Six should be three times three is nine.
+1:06
+And then seven should have been processed at four times four.
+1:10
+Let's get it back down to seven.
+1:11
+Four times four sixteen.
+1:13
+Brilliant.
+1:14
+So we have a good learning opportunity here.
+1:16
+This is actually realistic behavior for throttling systems.
+1:20
+It's not necessarily a FIFO first in, first out queue.
+1:24
+Delayed requests don't necessarily process in arrival order.
+1:27
+Each request gets its own delayed timer based on when it arrived.
+1:32
+So request eight basically jumped ahead in the limiter queue and became the last, the seventh successful request.
+1:40
+Because request seven had a timer on it, it was waiting sixteen seconds, and by that time, the limiter had already got to its limit.
+1:48
+And then we have request eleven, twelve, thirteen, and the same thing's happened.
+1:56
+There's no fourteen because fourteen is being delayed.
+2:00
+Let's find it below.
+2:02
+There it is.
+2:04
+And by the time fourteen gets to the end of its delayed time, the limiter window is reset, and we get a two hundred.
+2:12
+Two hundred.
+2:13
+Two hundred.
+2:14
+Alright.
+2:15
+I would recommend spending some time and looking at those results on your own just to get your head around it.
+2:20
+You could easily make another chart like I did previously.
+2:23
+I know we don't have any client identification here, but if we did, we could prevent one user hogging the service by delaying their requests, but allowing other new users' requests to be processed immediately.
+2:35
+I recommend you work on this in your own time separately, so so you do some work with a rate limiter, a throttler, and using client identification in different ways, and then bring them together as we can see here that the results can become quite complex quite quickly.
+2:49
+Do ask on Discord or using AI if you have any questions around this topic.
+2:55
+See you in the next scrim.
