@@ -1,0 +1,64 @@
+
+Transcript
+0:00
+Welcome back.
+0:01
+Now that we've explored stateful, stateless, and delegated identity on their own, we can finally zoom out and see the bigger picture and check out how they behave when you put them next to each other.
+0:11
+So let's take a look.
+0:12
+Stateful systems anchor everything on the server.
+0:15
+Identity lives there, trust lives there, and control lives there.
+0:19
+When you check it out alongside the others, one thing really stands out.
+0:22
+Stateful systems optimize for control and immediacy over convenience.
+0:27
+They're predictable, easy to update, and easy to revoke, but they also create this central point that has to scale, sync, and keep up with traffic, and that can be difficult the more servers you have to handle.
+0:38
+Opaque bearer tokens point to the server in order to identify a user.
+0:43
+Identity still lives on the server like in stateful systems, but only in a small token user mapping.
+0:49
+This does remove the need for a big shared session store.
+0:52
+So the opaque bearer tokens standout trait is that they make the server lighter, although not completely free.
+0:59
+You still need a small lookup, but the pressure on the back end drops dramatically.
+1:04
+It's a pretty practical halfway point between the server remembers everything and the client carries everything.
+1:10
+And speaking of which, JWTs extend the stateless idea to its logical extreme, placing the entire identity inside of the token itself.
+1:19
+And once you compare it with the others, their defining characteristic becomes obvious.
+1:24
+They prioritize distribution and speed above everything else.
+1:28
+No lookup, no shared store, no coordination, and therefore no server load.
+1:32
+Just a signed object that the server can trust instantly.
+1:35
+Although, it is a harder fight when you need to revoke or roll back access.
+1:40
+And finally, delegated identity is where we trust a third party like Google to provide identity services.
+1:47
+It shifts the responsibility elsewhere outside of our system entirely.
+1:51
+And this is, of course, super handy as we don't have to worry about any of that ourselves, but we do also inherit the complexity of that relationship.
+2:00
+We have to learn how to work with that third party provider in order to get it right.
+2:05
+So when you lay all three systems side by side, their purposes become clear.
+2:09
+Stateful is for control.
+2:11
+Stateless is for scale, and delegated is when you want to offload trust.
+2:16
+This isn't about which one is the best overall.
+2:18
+This is about figuring out which situation is best for which option.
+2:23
+So in the next scrim, we'll look deeper into how to pick an identity for different situations.
+2:28
+I'll see you there.
