@@ -1,0 +1,165 @@
+Transcript
+0:00
+Here we are back at our teacher schema.
+0:02
+So let's talk about TypeScript types.
+0:05
+We're used to saying type teacher, and then we say it's an object, and name is always gonna be of type string, and age is gonna be of type number.
+0:17
+And then we would make this teacher object of type teacher, wouldn't we?
+0:22
+But when we look at the TypeScript type here and the Zod schema, they're kinda doing the same thing, pretty much defining it twice.
+0:30
+So Zod lets us get rid of all of this and use the zed dot again, and we're gonna go for dot infer.
+0:38
+And then we have angle brackets, and in the angle brackets, we say it's a type of, and we just put the schema that we're using there.
+0:47
+So now as the schema changes and we maybe build it out, Zod is going to automatically infer this TypeScript type from that teacher schema.
+0:58
+So you're gonna be having a go at this on your own, so do just check out that syntax.
+1:02
+We use zed dot again, and it's dot infer.
+1:05
+We've got angle brackets type of, and we put the schema name after type of.
+1:10
+Alright.
+1:10
+The next thing to talk about, we've got very used to dot pass, and we remember that dot pass returns the data if the validation is successful and the uncaught Zod error if it's unsuccessful.
+1:24
+But we need to learn about something slightly different, so I'm gonna do another console log, and this is safe pass.
+1:31
+So when I now save, we can see that pass just gives us the data, but safe pass gives us an object with success property of true and a data property of the data.
+1:42
+Now this is when the validation is successful.
+1:45
+Let me show you what changes when it's unsuccessful, so I change this into a string.
+1:50
+Save.
+1:51
+And I need to comment out the pass to start with.
+1:55
+So save pass gives us a false reading for the success property and a new error property with that Zod error.
+2:03
+So if it passes validation, we get success true and the data.
+2:09
+And then if it fails validation, we get success false, and we get the error.
+2:16
+So why would we use this?
+2:17
+Well, having a success Boolean in this returned object is really helpful.
+2:22
+You can imagine using this in an app.
+2:25
+If you're validating the form inputs, you might want to know whether the validation has been successful or not, whether you need to show some errors, or whether you need to ask the data to the back end.
+2:36
+So we could, for instance, access the success property by going dot syntax success, and then we get the false or if I change this back, we'll get a true.
+2:49
+Okay.
+2:49
+So a few extra things I need to tell you about here.
+2:52
+We've used just dot string and dot number, but why don't we have a new key?
+2:57
+Let's go for is American so I can demonstrate the zed dot boolean method.
+3:03
+Hopefully, you've already checked out all of the primitive types in the XOD docs.
+3:08
+And then here, we're gonna need an is American property to our object.
+3:13
+And as you can probably hear, I am not American, so we go false.
+3:18
+And Xod also lets us chain methods onto the end of these.
+3:22
+So say dot number, if I wanted to go for a dot min, and in the smooths, I'll say you have to be eighteen to be a teacher.
+3:31
+So this is still going to pass, isn't it?
+3:33
+Because I've got twenty one here, but let's change this to thirteen.
+3:37
+Save.
+3:37
+And that's now failed the validation.
+3:41
+You can also have things like g t e greater than.
+3:44
+You can have l t e less than.
+3:47
+That's now true because less than eighteen, we've got thirteen.
+3:50
+Brilliant.
+3:51
+Now let's imagine teachers have IDs.
+3:54
+So this could be a number, and we're gonna chain on a dot default.
+3:59
+So in case there is not an ID given in the data, we can give a default value.
+4:05
+Why don't we use math dot random?
+4:07
+So now I'm just gonna get rid of the dot success so we can see the whole returned object.
+4:12
+And there we go.
+4:13
+Because I used dot default, it was okay that I didn't have a ID property in the data.
+4:19
+I could have specified one, but a way to give a default value if one is not specified is to use dot default.
+4:26
+And then another cool chaining thing to do is dot optional.
+4:29
+If you don't mind if that part of the data is there or not, you can use dot optional.
+4:35
+So I could now comment out the is American property, and it'll still pass the validation because I've made that key optional.
+4:43
+Okay.
+4:44
+Time for a quick challenge to get your hands on the keyboard.
+4:47
+Here we have it.
+4:48
+We're back to that student schema we had earlier.
+4:50
+I'd like you to complete the student type.
+4:53
+So notice we've got zed dot something and in the angle bracket something before student schema.
+5:01
+So that type is inferred by Zod from the student schema, and then add the type annotation to the student object, and then modify the console log to show whether the validation passes or fails as a simple Boolean.
+5:14
+We're gonna be changing this part, aren't we?
+5:17
+And then something on the end to make sure we access the part that's gonna give us in the console that Boolean.
+5:23
+Alright.
+5:23
+Good luck.
+5:24
+See you in a minute.
+5:28
+Okay.
+5:28
+I hope that was alright.
+5:30
+So after zed dot, we need infer.
+5:32
+And then in the angle brackets, we're going type of.
+5:37
+There we go.
+5:37
+That's number one done.
+5:38
+We need to add type annotation.
+5:41
+So we go colon to type of student, and then we need to make this safe pass.
+5:48
+There we go.
+5:49
+And if we save it now, we see we get that object, but we just want the true, so it's gonna be the success property.
+5:57
+There we go.
+5:58
+Awesome.
+5:59
+Hope that was alright.
+6:00
+So now you understand SafePaths and inferring TypeScript types.
+6:04
+See you in the next screen where you're gonna have a bit of a bigger challenge.
