@@ -1,0 +1,103 @@
+Transcript
+0:00
+Now that we understand how cookies and sessions work, let's look at the mistakes that developers commonly make with them.
+0:06
+Here in the editor, I've created cookie pitfalls dot j s.
+0:10
+This is where we're going to have a look at a few express style cookie examples.
+0:14
+These look a bit like real server code and they'll give us a nice concrete frame to explore each pitfall.
+0:19
+Don't worry, we're not actually running the code.
+0:21
+It's just a realistic frame to help you spot what's going on.
+0:25
+In this grim, we'll have a look at two common cookie mistakes.
+0:28
+And then in the next grim, we'll switch on over to session side mistakes.
+0:32
+The first pitfall is the classic beginner mistake, putting sensitive information directly inside of a cookie.
+0:38
+Remember, the cookie is just your gym locker key.
+0:41
+Its only job is to hold a session ID that points back to the real session on the server.
+0:46
+Sometimes developers end up doing something like this, session ID, user ID, role, email, password, IP address as well.
+0:54
+Now it may look convenient to have all of this data in one place for our browser, but it's a huge security risk.
+1:02
+Cookies can be intercepted, logged, leaked, or read by JavaScript by the attacker.
+1:07
+So at the moment you start putting private information inside a cookie, that data starts traveling everywhere the user goes.
+1:14
+And this introduces two major stride problems.
+1:17
+Information disclosure because private details are being exposed.
+1:20
+Spoofing because leaked IDs or roles can help an attacker impersonate a user, and in OWASP terms this becomes broken access control since exposing roles or IDs can accidentally hand attackers extra privileges.
+1:33
+The fix is super simple.
+1:35
+Keep all sensitive data on the server inside the session store and make sure that cookies only contain a session ID.
+1:41
+So here in the editor, we're gonna fix this up.
+1:44
+Let's grab a copy of this cookie and we're going to cut absolutely everything except for the session ID and nothing else.
+1:52
+And this here is the perfect cookie, or is it?
+1:56
+The second pitfall is easy to miss.
+1:58
+Cookies that last way too long or worse never expire.
+2:01
+When the server sends a cookie back to the browser, we can specify a max age or expiry date.
+2:07
+If we don't, many browsers will just keep the cookie indefinitely.
+2:10
+For example, down here in cookie pitfall two, a server can send back this particular cookie.
+2:15
+It's a great cookie.
+2:16
+It just has the session ID.
+2:17
+And in fact, it's exactly the same as the one we just fixed.
+2:20
+But this cookie doesn't expire.
+2:22
+And with no expiry set, that cookie may live for months or years if the user never clears their browser data.
+2:29
+And this is dangerous for two main reasons.
+2:31
+If an attacker ever steals that cookie, they have access for as long as it lives, which might be forever.
+2:37
+And a user whose permission has changed or whose account should no longer be active might still have access through that long lived cookie.
+2:44
+So in stride terms, this leads to elevation of privilege because outdated permissions can remain valid.
+2:50
+And in OWASP terms, this is authentication failure because identity isn't being revalidated often enough.
+2:57
+And the fix is simple.
+2:58
+Just give cookies a reasonable lifespan.
+3:01
+Back here in the editor, let's take a copy of this cookie so we can fix it.
+3:04
+To add an expiry, we can add a max age property and we'll set it to eighteen hundred which is thirty minutes.
+3:11
+Short lived cookies limit how long a stolen cookie is useful for and they force the system to reconfirm identity regularly.
+3:18
+It's one of the easiest security wins you can implement.
+3:22
+So the two big cookie mistakes are putting sensitive data in cookies and cookies that never expire.
+3:27
+There are simple concepts, but they show up in real code all the time.
+3:30
+Fixing them requires almost no code and the security payoff is huge.
+3:34
+Okay.
+3:35
+That's the cookie side of stateful identity.
+3:37
+In the next Grimm, we're going to have a look at some session pitfalls.
+3:41
+I'll see you there.
