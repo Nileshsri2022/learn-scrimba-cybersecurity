@@ -1,0 +1,101 @@
+Transcript
+0:00
+Our first vulnerability is cross site scripting or XSS.
+0:05
+This is when malicious script is injected into a trusted website to run on the victim's browser.
+0:10
+XSS has been around since around nineteen ninety nine, and you know it's a big deal when it's number one impactful attack from the X Force Cloud Threat Landscape Report of twenty twenty four.
+0:22
+Gosh.
+0:23
+So a bad guy on the left here injects some code into a trusted website at the top.
+0:29
+The victim visits the website, could be a comment section, and by interacting with it, executes the code in their browser.
+0:39
+The important thing here is that it runs under the context of the website.
+0:43
+And since the end user's browser has no way of knowing that the script should not be trusted, it will execute that script.
+0:50
+So potential outcomes could be the site served for the victim is defaced.
+0:55
+It's rewritten the content of the HTML page, and this could easily make them do something they shouldn't do.
+1:01
+Sensitive info in the form of cookies could be transferred, so there's a hijacking.
+1:06
+Malware could be transferred to the victim, or the victim could be redirected to another site for a phishing campaign, and then data sent to the bad guy.
+1:16
+If we think back to where this all started, the user input in the website, we need to learn to not trust user input.
+1:24
+We must validate inputs, inspect, and potentially reject.
+1:29
+OWASP have a great cross site scripting prevention cheat sheet that I've linked here.
+1:33
+I recommend you bookmark it for the future.
+1:36
+So our form project here, let's get the front end running with NPM run dev.
+1:41
+This is what you're gonna be doing in a minute.
+1:43
+Here we go.
+1:44
+And let me just show you whatever name we put into the name field.
+1:50
+We submit, and that name is gonna be rendered in the success message.
+1:54
+So if we look in app dot t s in the front end folder, we see display success.
+1:59
+Here's that message taking the response dot user dot name and using dot text content to render that.
+2:06
+But here is why returning user input directly is dangerous.
+2:10
+Text content treats everything as plain text, so it's nice and secure.
+2:15
+But in another scenario, we may be using inner HTML instead.
+2:20
+This passes the HTML and executes any code that is in here.
+2:26
+Let's add some comments.
+2:27
+So text content is safe.
+2:31
+Any script is escaped, but inner HTML is vulnerable.
+2:39
+Script executes.
+2:42
+Let me demo that.
+2:44
+So I've got a little script here that I wrote earlier.
+2:46
+Let me put it as a comment so you can see the whole thing.
+2:48
+It's an tag with an on error.
+2:51
+So let me save first.
+2:53
+I'm gonna stop the server and restart it and then see what happens when I submit this in the name field.
+3:00
+Oh, blimey.
+3:01
+Data breach.
+3:02
+XSS successful.
+3:03
+So this is only a demo.
+3:05
+Don't worry.
+3:05
+Nothing bad has really happened.
+3:07
+So that just shows us the issue with executing user inputted scripts.
+3:12
+So it's gonna be your challenge now in the next scrim.
+3:14
+Have a quick look at these comments.
+3:16
+I'm gonna delete them in a second.
+3:17
+They are gonna help you.
+3:18
+Great.
+3:19
+See you in the next scrim.
