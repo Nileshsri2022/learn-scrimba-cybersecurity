@@ -1,0 +1,75 @@
+Transcript
+0:00
+Okay.
+0:01
+It's challenge time.
+0:02
+So this is what I'd like you to do.
+0:04
+As the challenge starts, you're probably going to have to start the front end in terminal with NPM run dev, and then I want you to copy in these name inputs and see what they do.
+0:14
+So we've got a div, we've got an SVG, and we've got an iframe.
+0:18
+So you'd be copying them into the name input and then submitting the form and looking below the submit button for that success message.
+0:26
+Then in app dot t s, here we are, Change the way the success message is being rendered.
+0:32
+So the injected script is escaped rather than ran.
+0:35
+We need to change this part here.
+0:38
+Save this file.
+0:39
+That will recompile the back end.
+0:41
+Then you need to go into terminal, restart the front end, so you may need to control c to stop it, and then NPM run dev again.
+0:48
+And then test with these same scripts the form to check that the behavior has changed and nothing bad is happening, that all of these are just being rendered as text.
+0:59
+Alright.
+1:00
+Good luck.
+1:00
+See you in a minute.
+1:05
+Hope that was alright.
+1:06
+So I'm gonna go into terminal and run NPM run dev.
+1:09
+Nice.
+1:10
+So let me see what happens maybe with the iframe.
+1:13
+So we go into name, paste it in, and, oh, we get this big XSS attack.
+1:21
+So we need to change this inner HTML to text content.
+1:26
+There we go.
+1:26
+That means that the text is gonna be rendered as plain text, and the script is not gonna be executed.
+1:32
+So we now save, then we need to stop this server, npm run dev to restart it, and let's try the iframe again.
+1:41
+We should get different behavior.
+1:44
+There we go.
+1:45
+You see the plain text rendered rather than the actual iframe with that message.
+1:50
+Brilliant.
+1:51
+So this was an example when we're rendering part of the code that has been inputted.
+1:56
+But remember, inputted data is gonna be potentially sent to a database and may be rendered later, maybe in an admin panel or in an email template.
+2:04
+So it's not just the front end that shouldn't trust any input.
+2:07
+The back end also shouldn't trust inputs.
+2:09
+Other consumers of the API may render it unsafely.
+2:13
+Alright.
+2:13
+Well done.
+2:14
+Onwards.
