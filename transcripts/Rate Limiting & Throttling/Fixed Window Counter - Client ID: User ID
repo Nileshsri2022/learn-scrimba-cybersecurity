@@ -1,0 +1,193 @@
+Transcript
+0:00
+The second way to identify the client is using an authenticated user ID.
+0:05
+So this could be from a session, a JWT, or a database.
+0:09
+The pros here are that each real user gets their own limit because they are the authenticated user.
+0:15
+It's fair.
+0:16
+Users don't interfere with each other.
+0:18
+Users get the same limit regardless of location, device, or network, so it's portable, and you can't bypass it by changing IPs, so it's enforceable.
+0:27
+The cons are you would require, obviously, an authentication system.
+0:31
+It doesn't protect unauthenticated endpoints, and it won't catch abuse before account creation.
+0:37
+So this is best for authenticated API endpoints, user specified quotas, SaaS applications with tiered pricing, and per user feature limits.
+0:47
+So I've made a little mock auth here.
+0:50
+I know this isn't the real way that auth works, but it's just to simulate it for the purposes of this scrim.
+0:55
+We're gonna be checking for this header in the request.
+0:59
+We're then gonna attach the user object to the request, and then we're gonna be asking our rate limiter to use that user ID as the identifying characteristic.
+1:09
+So over in test requests, I've had to modify this a little.
+1:12
+I'm now passing an options object to the get request, and here's the options object.
+1:17
+And this is the custom header that we're gonna be sending.
+1:20
+It's gonna be called x dash user dash ID.
+1:24
+I've added it here in the console log, so we're going to see that when we read about the response.
+1:30
+And then at the bottom here, I've modified our demo rate limit function because we're going to be making three different demos.
+1:37
+The first one is gonna be with user one.
+1:40
+The second one with user two, and demo three is gonna be actually alternating between user one and user three.
+1:46
+So this is quite a real world situation where we have multiple users firing requests at the API.
+1:53
+So back up to the top, you can see here we're passing that user ID to make requests.
+1:59
+Now in a real world authentication flow, we would not be sending the user ID in the headers, but this is the only way that it can work here in this scrim.
+2:06
+In a real world flow, the user would log in with credentials.
+2:10
+The server would validate your credentials and create a token, maybe a JWT or a session cookie.
+2:15
+The client then stores that token and sends it with every request.
+2:19
+The server then validates the token and extracts the user ID from it.
+2:22
+But this is just a more direct way because we don't have real auth here.
+2:27
+Right.
+2:28
+A little challenge for you.
+2:30
+So I'd like to add the property down here to this object we're passing to rate limit to specify the key for the rate limited to use.
+2:39
+In the previous screen, when we were talking about IP addresses, we used a specific property name, and then we used that special IP key generator.
+2:48
+Oh, we can actually get rid of that, can't we?
+2:50
+Because we're not doing IP anymore.
+2:52
+So have a think back.
+2:53
+If you need to look at that previous scrim, be my guest.
+2:56
+But we're gonna make the key this time the user ID from the mock auth middleware.
+3:02
+So you can have a look up here and think where we're going to access that user ID.
+3:09
+So, yeah, it's gonna be quite similar to the PRASSCRM, but the value of the property here is going to be different.
+3:15
+Don't worry if you can't work it out.
+3:17
+I will show you in a second.
+3:18
+Okay.
+3:19
+Good luck.
+3:24
+Okay.
+3:24
+Hope that was alright.
+3:25
+So remember the property is called key generator, and it needs to be a function that accepts the express request and response objects and returns a string.
+3:35
+So before, we passed rec res.
+3:39
+We had our arrow, and this needs to return a string.
+3:42
+Now we don't need to use that import from before because we now need the user ID, and the user ID has been attached to the rec dot user.
+3:53
+So we're gonna go for rec dot user here and then access it with the dot and then ID.
+4:01
+And you see how res isn't being used, so actually we don't need it necessarily.
+4:04
+We could just clean it up like that.
+4:06
+Brilliant.
+4:07
+Hope that was alright.
+4:08
+Don't worry if you didn't quite get there.
+4:11
+Now we can see up here that mock auth is gray because we're not actually using it, so we need to add it to this endpoint.
+4:18
+Now express executes middleware left to right.
+4:22
+So we want the mock auth to work before the limiter, So we're gonna put it just there.
+4:27
+So we want the mock auth to run first.
+4:29
+It sets the rec dot user dot ID, and the limiter runs second.
+4:33
+It uses rec dot user ID for rate limiting, and then the root handler runs last and sends the response.
+4:39
+Okay.
+4:40
+Let's run this, but before, let's just have a little prediction of what's gonna happen.
+4:44
+So user one is gonna fire five requests.
+4:48
+User two is gonna run five requests, and then user one and three are gonna go back and forth.
+4:55
+Okay.
+4:56
+Hopefully, they're gonna have their own limit because they're different users.
+5:01
+Okay.
+5:02
+Let's rerun the runner, and let's run this.
+5:09
+This is going pretty fast.
+5:10
+Don't worry.
+5:10
+We're gonna go through it together.
+5:12
+So demo one, user one.
+5:15
+We have a two hundred, two remaining, two hundred one remaining, two hundred zero remaining, and then four two nine.
+5:23
+Four two nine.
+5:24
+Okay.
+5:24
+That's pretty normal.
+5:26
+Then immediately, if we look at the current time here, fifty eight fifty.
+5:32
+So, yep, pretty much immediately afterwards, demo two starts and user two, since we've already got eight seconds till reset, but demo two starts with user two having a fresh limit because they've got a two hundred, and they're back to ten second reset.
+5:53
+So user two has a two hundred, two remaining, two hundred one remaining, two hundred zero remaining, and then two four two nines.
+6:01
+Now this is where it gets interesting.
+6:03
+Demo three.
+6:04
+So user three is a new user.
+6:07
+They have a fresh limit.
+6:09
+But user one, there's still four seconds to reset.
+6:13
+So there's still four two nine.
+6:16
+So user one's reset time has stayed counting, and then user three is still on two hundred, one remaining.
+6:24
+User one still not quite reset.
+6:27
+User three, there's their last success.
+6:31
+User one then has reset Back to two hundred success.
+6:35
+Alright.
+6:36
+Fantastic.
+6:37
+So we see how each user has their own rate limit, window, and counter when we specify that the key for the rate limiter should be a user ID instead of the IP address.
+6:49
+Next up, we're gonna be talking about API keys and session IDs.
+6:53
+See you there.
