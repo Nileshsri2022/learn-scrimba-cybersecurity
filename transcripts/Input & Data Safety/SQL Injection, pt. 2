@@ -1,0 +1,155 @@
+Transcript
+0:00
+Welcome back.
+0:01
+So still on the topic of SQL injection.
+0:03
+If we could imagine a registration form that's taking a name and an email and inserting it into a user's table, we could imagine a SQL template could be set up a bit like this at the top.
+0:14
+Insert into users, into the name column, and email column with the values of whatever they've inputted as name and whatever they've inputted as email.
+0:23
+So I want you to think, what could a bad guy submit in the email field to do some real damage?
+0:29
+Say, to delete or, in SQL terminology, drop this whole user's table.
+0:35
+I want you to have a go at crafting an inputs which would drop the user's table.
+0:39
+You might want to have a look up what the SQL command for dropping a table is.
+0:43
+This is just a bit of fun to get you into the right mindset.
+0:46
+It's gonna be going in here where dollar curly email curly is.
+0:52
+So you might want to think about the syntax that we used here.
+0:56
+We had a single quote, didn't we, to close this single quote here.
+1:01
+So you may need one to close this single quote, and then you'll be in a bracket, won't you?
+1:06
+So you may want to close that bracket and then think about what indicates we're stopping one SQL query and starting a new one because we may want to make the system think that we're stopping this one and then starting our new malicious dropping the table command.
+1:23
+And then think what we had at the end of this one to make sure that anything after that would be taken as a comment.
+1:31
+So I've got the challenge text here for you.
+1:32
+I'm just gonna put it at the top.
+1:35
+So you'll need to start the front end in terminal by running NPM run dev.
+1:39
+You should then see the form on the right in the mini browser.
+1:42
+Then I want you to write an input for the email address field, which would drop the user's table.
+1:47
+Assume that the SQL template is this.
+1:51
+You can write it in the email field, submit the form, and then check the runner terminal.
+1:57
+Now I've set this up so you will actually see the full query in the runner terminal.
+2:02
+Let me show you that.
+2:03
+So if I run n p m run dev and I add dave at dave dot com and I submit this form and we look in the runner terminal, there you go.
+2:13
+It says vulnerable executing query and that dave at dave dot com has been added or inserted or injected in here, hasn't it?
+2:22
+So you can keep modifying your malicious email address by looking here and saying, oh, I need to change something so that we potentially close the single quote, close off this bracket, finish this SQL command, and then start a new malicious one.
+2:40
+And I also have this setup that if you do manage to fictitiously drop the table, you will get told you've managed to do it in the runner terminal.
+2:49
+Don't worry if you don't manage it.
+2:50
+I'll go through it all in a minute.
+2:52
+Okay.
+2:53
+Good luck.
+2:54
+See you in a minute.
+3:02
+Okay.
+3:03
+Hope that was alright.
+3:04
+So back to this slide.
+3:05
+As I said, I think we're going to need to use a single quote.
+3:09
+We're gonna have to close off this bracket.
+3:11
+We're then gonna use something that stops a SQL query, is a semicolon.
+3:16
+So here we have it.
+3:18
+Single quote, smooth bracket, semicolon, and then the command drop table users.
+3:24
+Then I've got another semicolon to finish that command, and I've used dash dash in case there was anything after it, which would be then taken as a comment.
+3:33
+So the total command would be this.
+3:36
+Here's my inserted code.
+3:39
+Let's give that a go, shall we?
+3:41
+So in email address, I add that, and I submit.
+3:46
+And let's have a look in the runner.
+3:48
+Disaster dropping users table.
+3:50
+And if we look at the top of our form, it says we currently have zero signed in users.
+3:55
+So that's just a bit of fun that I've set up, manually hard coded it so that we go back to zero.
+4:01
+Don't fret.
+4:02
+Nothing has actually been deleted.
+4:04
+Alright.
+4:05
+Well done.
+4:06
+So how can we stop this happening?
+4:08
+Well, we've seen that when we build queries by concatenating strings, the database can't tell what's supposed to be SQL code versus what's supposed to be data.
+4:17
+Anything we enter becomes part of the SQL command.
+4:20
+But there are ways to safely handle user input in SQL queries by keeping the query structure separate from the data.
+4:27
+So using prepared statements with variable binding, aka parameterized queries, is the way to go.
+4:34
+They're simple to write and easier to understand than dynamic queries, and parameterized queries force the developer to define all SQL code first and pass in each parameter to the query later.
+4:45
+So here are my parameters.
+4:48
+This is just an example.
+4:49
+I've got rec dot body dot username, assign that to username, and the password to password.
+4:54
+And here's the query structure I'm defining.
+4:56
+I've used placeholders here, question mark, and question mark.
+5:00
+This will depend on the language and library you're using.
+5:04
+So the syntax could be different depending on the type of database or the SQL type or potentially if you're using an ORM.
+5:12
+We pass the data separately.
+5:14
+So here's username and password from up here, and then the database driver handles escaping.
+5:19
+So it knows the structure is fixed and treats parameters as pure data, not executable code.
+5:26
+Prepared statements ensure that an attacker cannot change the intent of a query even if SQL commands are inserted by an attacker.
+5:34
+So if username here was that one equals one example, it would be treated as a literal username to search for in the database, which as you can imagine, would come away with nothing because there's not gonna be a username as inverted comma or one equals one dash dash.
+5:52
+The parameterized queries are defense at the database layer.
+5:57
+In real life, you can have front end HTML five validation, and then what we're about to talk about is Zod middleware input validation and sanitization, and then finally, database layer prepared statements.
+6:09
+And just before we finish this ORMs can handle parameterization automatically, so that's another plus point for ORMs.
+6:17
+Alright.
+6:18
+See you in the next scrim.
