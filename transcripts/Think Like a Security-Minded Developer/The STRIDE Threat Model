@@ -1,0 +1,95 @@
+Transcript
+0:00
+Alright.
+0:00
+Let's get to it.
+0:01
+In the last scrim, we talked about why security isn't just about code.
+0:05
+It's about how we think.
+0:07
+So let's put that mindset to work.
+0:09
+Imagine we're starting the design and development for a food delivery app called QuickBite.
+0:14
+Customers can browse restaurants, place orders, and track deliveries.
+0:18
+And delivery drivers can claim orders, deliver orders, and mark orders as delivered.
+0:22
+Pretty standard food delivery app.
+0:24
+Now both customers and delivery drivers use the same QuickBite app.
+0:29
+They just have different roles and permissions.
+0:31
+And this app talks to the back end, and the back end talks to the database.
+0:35
+So this is the world that we're analyzing.
+0:38
+We want to look at the system from a high level and model what kinds of threats could show up in our design.
+0:43
+And one of the best ways to start thinking this way is with a framework called STRIDE, s t r I d e.
+0:50
+It was created at Microsoft to help teams spot potential threats early in the design phase.
+0:56
+Stride is basically a checklist of six different ways an attacker might try to mess with your system.
+1:01
+Now the goal here isn't to get super technical.
+1:04
+It's to start asking better questions.
+1:06
+We're still in design mode here, so we're not fixing anything yet.
+1:10
+We're just learning to spot the cracks before they spread.
+1:13
+So let's have a look at our QuickBite app through the lens of Stride.
+1:17
+So first is s for spoofing or pretending to be someone else.
+1:21
+What if a delivery driver figures out how to log in as another driver to steal their orders or a customer somehow places an order under a different account.
+1:29
+That is spoofing.
+1:30
+T is for tampering.
+1:32
+Now tampering is all about changing or manipulating data on its way through the system.
+1:37
+Imagine a customer edits their order price in the browser before it's sent, changing a thirty dollar order to a three dollar order.
+1:44
+If our app doesn't check that data on the server, that change could slip through.
+1:48
+R is for repudiation.
+1:50
+Repudiation is about being able to deny your actions.
+1:54
+Let's say a restaurant marks an order as handed over to driver, but the customer says it never arrived, and we have no delivery log or photo proof.
+2:02
+There's no evidence either way, and that's a repudiation problem.
+2:06
+There is no reliable trail.
+2:08
+Next, I is for information disclosure.
+2:11
+Now this means leaking secrets.
+2:13
+Maybe our error messages include customers' addresses or payment info, or we accidentally expose a full list of users in a public API.
+2:22
+Even small leaks can be gold for attackers.
+2:25
+D is for denial of service, and at scale, distributed denial of service or DDoS.
+2:31
+And this is when someone floods your system so real users can't get through.
+2:35
+A flood of fake orders can overwhelm the server, and the app will crawl or crash, and there's no food for anyone.
+2:41
+And finally, e is for elevation of privilege.
+2:45
+And this is when someone gets access that they shouldn't.
+2:47
+Imagine a driver finds a hidden admin dashboard link and can suddenly issue refunds or give themselves a huge tip.
+2:55
+And that's Stride, six letters that help you see where your app might be vulnerable before you even write a single line of code.
+3:02
+So in the next scrim, we're going to try to put Stride into practice with a few exercises.
+3:07
+I'll see you there.
