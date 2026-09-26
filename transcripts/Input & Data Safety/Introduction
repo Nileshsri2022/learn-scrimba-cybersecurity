@@ -1,0 +1,52 @@
+
+Transcript
+0:00
+Welcome to this course on input and data safety.
+0:03
+I'm Jonathan Hill.
+0:04
+Every day, applications process billions of user inputs, usernames, passwords, email addresses, comments, search queries.
+0:14
+These interactions are the lifeblood of modern web applications, but they also represent the primary attack surface for malicious actors.
+0:23
+In this course, we're gonna be considering a basic registration form, a few input fields, a submit button, seemingly pretty straightforward.
+0:32
+Yep.
+0:32
+This simple interface can be exploited in devastating ways.
+0:37
+An attacker could inject malicious scripts that steal other users' session data.
+0:43
+They could manipulate database queries to access or delete sensitive information.
+0:48
+They could flood your server with requests until it crashes.
+0:52
+These aren't hypothetical scenarios.
+0:55
+They happen constantly to applications that haven't implemented proper input safety measures.
+1:01
+So the fundamental problem is trusting user input.
+1:04
+The single biggest mistake developers make is treating user input as safe data.
+1:10
+When you accept input from a form and use it directly, whether displaying on a page, inserting it into a database, or processing it in your application logic, you're essentially allowing users to control parts of your application's behavior.
+1:24
+Most users are perfectly harmless, but it only takes one malicious actor to compromise your entire system, steal user data, or take your application offline.
+1:34
+In this course, we're gonna use a registration form as a working example to explore the most critical input safety vulnerabilities and their solutions.
+1:42
+These are gonna be cross site scripting, how attackers insert malicious code through input fields, denial of service, how attackers can overwhelm your application, and SQL injection, how attackers manipulate database queries through input fields.
+1:58
+And then for validation, we're gonna learn all about this Zod library, which is how to enforce data integrity and business rules on the back end.
+2:06
+These all contribute to defense in-depth.
+2:09
+You'll learn that security isn't about implementing one perfect solution.
+2:14
+It's about creating multiple layers of protection.
+2:17
+If one defense fails, others are there to prevent the attack from succeeding.
+2:22
+That's enough from me.
+2:23
+Let's go.
