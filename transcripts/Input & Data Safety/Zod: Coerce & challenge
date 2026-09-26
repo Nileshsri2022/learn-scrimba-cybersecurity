@@ -1,0 +1,131 @@
+Transcript
+0:00
+Welcome back.
+0:01
+Before I get you stuck into another challenge, I just want to tell you about coercion.
+0:06
+There may be a time when you want to convert one data type into another while validating.
+0:12
+For instance, if we think about HTML forms, they always return strings, but you may want to store the data in your database in a different data type.
+0:22
+So let's imagine that this data has a string of thirteen, but we want it as a number.
+0:28
+So here up in age, I can add dot coerce.
+0:33
+That means that it's going to convert the string to a number and then validate it with the LTE.
+0:40
+So I save that, bring up the console, and we now see that age is actually a number.
+0:46
+It's not failed the validation even though the data is a string.
+0:50
+It's coerced it and converted it into a number and run any other validation on it.
+0:56
+Okay.
+0:57
+Challenge time.
+0:58
+Let me take this back to our character schema.
+1:01
+There we go.
+1:02
+And here's the challenge text.
+1:04
+So I'd like you to create a character type, which is inferred by Zod from the character schema.
+1:10
+Then I'd like you to add typed annotation to the character object.
+1:15
+Then I'd like you to add an optional is Jedi boolean key to the character schema, and then convert the episode key to a number.
+1:24
+So right now, if you look at the data, the value of the episode property of the character object is a string.
+1:32
+So we want to convert that into a number, and then modify the log to the console down here to show whether the validation passes or fails as a simple Boolean.
+1:42
+So it's this part here you're going to have to change and maybe add something onto the end, but you can always save and check the console and modify your answer accordingly.
+1:52
+Alright.
+1:52
+Good luck.
+1:53
+Use those Zod docs if you need them.
+1:55
+See you in a minute.
+2:03
+Okay.
+2:03
+Hope that was alright.
+2:04
+So create a character type.
+2:06
+So we go type character,
+2:08
+and we want to infer with Zod from the character schema.
+2:13
+So we'd use the zed dot, and it was dot infer.
+2:16
+And we need our angle brackets, and inside here, we have type of, and then we just give it the name of the schema.
+2:25
+Bingo.
+2:25
+And then we can type this object, the type of character, and an optional is Jedi Boolean to this character schema.
+2:37
+There we go.
+2:38
+And this is gonna be zed dot Boolean.
+2:41
+And it's optional, so we're going to chain on dot optional.
+2:46
+Now because it's optional, we don't need to add an isJedi property to this object.
+2:52
+Convert the episode key data to a number.
+2:55
+So episode, we're gonna go zed dot coerce dot number.
+3:01
+There we go.
+3:02
+And modify the log to the console to show whether the validation passes or fails as a simple Boolean.
+3:08
+So instead of pass, we now need safe pass.
+3:11
+Let's check-in the console what that gives us.
+3:13
+Oh, yes.
+3:14
+That gives us the object with the success and the data properties, but we want just the value of the success property, So we can go into this with dot success.
+3:25
+Save and check that.
+3:27
+Yes.
+3:27
+We get the Boolean.
+3:29
+Brilliant.
+3:29
+I hope that was alright.
+3:31
+Now before we finish this scrim, let me show you one more thing.
+3:34
+Let's change this from Luke Skywalker to maybe Jabba the Hutt, and he's in episode six, I believe.
+3:42
+Now let's add another key to this schema.
+3:44
+Let let's go for email, and this is gonna be zed dot email that I mentioned earlier.
+3:50
+This runs a special email regex that Zod has created that make sure the data is in an email format with an at and things like that.
+4:00
+Very similar to the rules that Gmail has for what an email address is.
+4:04
+So we can add down here an email property, and let's imagine this is jabba at hutcorp dot com.
+4:15
+Now, is that gonna pass?
+4:17
+It is.
+4:18
+Let's imagine we get rid of the app.
+4:19
+So now that's not really an email, and it fails.
+4:26
+Okay.
+4:26
+Good work.
+4:27
+See you in the next scrim.
