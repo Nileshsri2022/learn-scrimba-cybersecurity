@@ -1,0 +1,86 @@
+
+Transcript
+0:00
+The third client identification strategy is using an API key.
+0:05
+This is common in developer APIs.
+0:07
+Pros here are that it ties to a specific application or integration.
+0:12
+You can have different tiers, free, pro, enterprise.
+0:16
+It's revocable if abused, and it's easy to track usage.
+0:20
+The cons, though, keys can be shared or linked.
+0:23
+It doesn't identify the end user.
+0:26
+One key could serve thousands of users, and it requires key management infrastructure.
+0:31
+This is best for third party API integrations, b to b APIs, and tiered service plans.
+0:38
+So API keys are commonly sent via headers.
+0:41
+So we could set this up in a similar way to before using key generator, and we only need the request object.
+0:50
+So we're gonna say rec.
+0:52
+And then we go into rec and use headers as we did before, and let's imagine it's called x API key.
+1:02
+This isn't gonna work with our actual setup.
+1:04
+It's just a little example for you.
+1:06
+And then to show you how this could work for a tiered system, let's imagine the limit is actually a function, so we could pass the request object as well.
+1:16
+And let's imagine we had different limits per tier.
+1:21
+So we can make a tier variable, and then say if we had a get user tier function earlier in the program, we call that.
+1:31
+We could then pass in our API key, which should be accessed in the same way.
+1:37
+And this function could return if tier is, say, pro.
+1:42
+Let's use a question mark.
+1:44
+Then the limit could be a thousand, and if it's not, maybe a hundred.
+1:49
+So that's just an example of using an API key as client identification and then making a tiered limit.
+1:58
+The final solution for a client identification could be session ID.
+2:02
+This could be a cookie or a session token.
+2:05
+This works well for logged in and guest users.
+2:08
+It's more persistent than an IP, and it can span multiple requests in a user journey.
+2:13
+The cons, users can clear cookies or sessions to reset.
+2:17
+There are session fixation concerns, and it doesn't work for stateless APIs.
+2:22
+So this solution would be good for web applications with sessions, shopping carts, checkout flows, and form submissions.
+2:29
+So you're gonna start seeing some repetition here, but we could again pass the request object, our arrow, and then you go into that request object.
+2:38
+And if there was a session, you could access the ID inside it.
+2:42
+So, again, this won't actually work here in practice, but it's just to see how we would use the session ID for client ID.
+2:50
+So in the real world, you might want a hybrid approach.
+2:53
+So combine multiple identification methods with fallbacks.
+2:57
+So you could start with an authenticated user ID, and if there isn't one of those, you could use an API key for integrations.
+3:05
+And then if there's not one of those, the session ID for guests, and then use the IP address as a final fallback.
+3:11
+Okay.
+3:12
+Well done there.
+3:13
+We've finished this section on the fixed window counter example.
+3:17
+Any questions you have, please ask them in the Discord community or use some AI.
+3:22
+Take a quick break if you need it, and then crack on with the rest of this course.
