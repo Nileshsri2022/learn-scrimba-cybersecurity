@@ -1,0 +1,91 @@
+Transcript
+0:00
+Let's finish off with a quick challenge to check if we know what identity is best for what use case.
+0:05
+I know I said at the beginning there would be one challenge per identity family, but I figured one more wouldn't hurt.
+0:12
+So here in the editor, there are a bunch of scenarios that need an identity solution.
+0:17
+Which identity model would you choose for each and why?
+0:21
+Let's do this first one together as always.
+0:23
+A classic web dashboard used by internal staff.
+0:27
+Admins need instant logout, permission changes should apply immediately, and security is more important than scale.
+0:33
+This is a perfect job for a stateful identity.
+0:36
+Why?
+0:36
+Because the server is in charge.
+0:38
+If you change someone's role or want to log them out straight away, it takes effect instantly.
+0:43
+And for a normal web page in a browser, sessions are simple and reliable.
+0:48
+So Stateful is the safest cleanest option here.
+0:51
+Stateful identity, the server needs to stay in control.
+0:55
+Okay.
+0:55
+Your turn.
+0:56
+Give each of the remaining scenarios a go and think about what identity solution you would use for each of these.
+1:02
+Think it through, choose your model, and write up a short explanation.
+1:06
+I'll see you in a little bit.
+1:11
+Welcome back.
+1:12
+Let's get right to it.
+1:13
+Scenario two is a public API for a mobile app.
+1:17
+For these, we usually don't want the server to keep track of lots of user sessions.
+1:21
+It's much easier if each request brings a token and the server can quickly check it and move on.
+1:26
+So stateless tokens are the best fit here, either opaque tokens or JWTs.
+1:31
+They keep the back end simple and easy to handle as more people use the app.
+1:35
+Moving right along to scenario three.
+1:38
+This scenario has a large microservice architecture.
+1:42
+When lots of small services need to talk to each other, you don't want them all checking with a central server to see who's allowed to do what.
+1:49
+It's much easier if each service can quickly identify a token on its own, and that's why JWTs will work well here.
+1:56
+They're self contained, and every service can trust them straight away.
+2:00
+Scenario four is a consumer app with easy sign up, ideally with Google or Apple.
+2:06
+Well, this one is very clear.
+2:08
+If your whole goal is to sign in with Google and fast onboarding, then you don't want to handle passwords at all.
+2:14
+So delegated identity is definitely the right choice here.
+2:18
+Scenario five is a single server hobby project.
+2:21
+When it's just you, one server, and a small app, the simplest option wins.
+2:26
+Stateful sessions are easy to set up, easy to understand, and you don't need anything fancy.
+2:31
+No tokens, no OAuth, just a small session table and a single cookie.
+2:37
+And that's it.
+2:38
+Nice work.
+2:39
+Choosing the right identity model isn't about memorizing features.
+2:43
+It's about learning how to think about control, scale, and trust.
+2:47
+You've now seen how stateful, stateless, and delegated identity each solve different problems.
+2:53
+Now let's finally move on and wrap up our identity journey in the next scrim.
