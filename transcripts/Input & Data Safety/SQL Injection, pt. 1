@@ -1,0 +1,50 @@
+
+Transcript
+0:00
+Our last vulnerability is SQL injection, inserting malicious code into database queries.
+0:07
+So, yes, this attack consists of inserting or injection of a SQL query via the input data from the client to the application.
+0:16
+There we are.
+0:17
+It's due to poorly sanitized data, and the result could be reading sensitive data, modifying data from the database, executing admin operations on the database, such as potentially shutting down the DBMS, and in some cases, issuing commands to the operating system.
+0:35
+So here's an example of a SQL query.
+0:38
+This could be from a login form.
+0:39
+We're all very used to login forms these days.
+0:43
+So this says select all, which is the star, from a fictitious users table where username equals whatever has been inputted in the username field, and the password is whatever the password has been inputted.
+0:56
+So a legitimate login checks if a row exists where both the username and the password match.
+1:02
+If a row is returned, the credentials are valid, and it grants access.
+1:06
+But if no row is returned, the credentials are invalid and it denies access.
+1:11
+But a bad guy could potentially add something like this into the username field, inverted comma or one equals one dash dash.
+1:21
+So this would be added where the dollar username is here.
+1:25
+So it would create this complete query.
+1:28
+Here's the first inverted comma, and then we would sort of close that inverted comma with the first from the username.
+1:35
+Then we'd have or, which is a SQL special word, and then one equals one, then the dash dash.
+1:43
+So the single quote closes the username string early.
+1:46
+We know that one equals one always evaluates to true, so this makes the whole where clause evaluate to true.
+1:53
+And the dash dash in SQL starts a comment, so anything after the dash dash essentially becomes irrelevant.
+1:59
+So this would then potentially return all of the users from the user table, logging the bad guy in and bypassing the authentication check.
+2:07
+Okay.
+2:08
+In the next screen, you're gonna play the part of the bad guy.
+2:10
+I'm gonna get you to come up with something to insert into a SQL command to delete all the records from a fictitious table.
+2:18
+See you then.
