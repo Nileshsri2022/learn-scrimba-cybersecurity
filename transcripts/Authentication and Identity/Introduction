@@ -1,0 +1,56 @@
+
+Transcript
+0:00
+Hello, and welcome back to the back end security course.
+0:03
+In this section, we're diving into authentication and identity, how apps figure out who you are and how they keep that information trustworthy.
+0:11
+Last time, we put on our attacker goggles and learned to spot weaknesses with stride and OWASP.
+0:16
+We looked at all the ways that people tried to sneak in, pretend to be someone else, or poke at the edges of an app to see what breaks.
+0:23
+And now we're going to switch perspectives.
+0:25
+Instead of finding the cracks, we're going to study the structures that hold everything up, the systems that apps use to verify identity and keep it consistent across requests.
+0:35
+If you have a look at most of the threats in STRIDE or the issues in OWASP, almost all of them tie back to identity.
+0:42
+Spoofing is when someone pretends to be another user.
+0:45
+Broken access control is when someone is doing stuff they really shouldn't be, and sensitive data exposure often happens because the app didn't properly check who was getting access.
+0:55
+If an attacker can trick your app about who they are, then everything within is up for grabs, and that's why authentication is one of the foundations of back end security.
+1:04
+Before we get hands on, let's set the stage.
+1:07
+First, we're going to untangle the two big auth words that you hear everywhere, authentication and authorization.
+1:13
+Then we'll explore the three major identity models used in real apps, stateful identity, stateless identity, and delegated identity.
+1:21
+Now these are the three big arcs of this section.
+1:24
+Each arc focuses on one identity model, how it works, where it's used, and the common pitfalls to watch out for.
+1:31
+And as usual, there will be opportunities to challenge yourself with the new concepts.
+1:35
+By the end, you'll understand not just what these systems do, but why real apps choose one approach over another.
+1:42
+Each of our three arcs finishes with a challenge so that the learning stays tight and focused.
+1:46
+You'll complete one identity model before stacking the next one on top.
+1:50
+For each one, I'll walk through the first scenario so you can see the kind of reasoning we're aiming for, then the screen will pause and hand things over to you.
+1:57
+You'll get a handful of short situations to read and reflect on using the same mental model we would have just explored.
+2:03
+And once you've had time to consider your answers, you can resume the lesson and we'll walk through some possible answers together.
+2:09
+The examples and challenges in this section will be in JavaScript because it's familiar, But just know that the ideas apply no matter what back end stack you use.
+2:17
+We're not here to memorize framework methods or learn a new language.
+2:21
+We're here to understand how identity flows through a system and how we can protect it.
+2:26
+Alright.
+2:26
+Let's jump in and explore how modern apps prove who you are and keep that identity secure.
