@@ -1,0 +1,113 @@
+Transcript
+0:00
+Welcome back.
+0:01
+We've already looked at the student feature together, so now we're gonna switch perspectives.
+0:06
+In the same feature threats dot MD file, you'll see that I added a second section for the teacher.
+0:11
+So this time, it's your turn.
+0:13
+You can use what we just did with the student feature as a guide.
+0:16
+And remember, the Stride reference is still sitting down here for you if you need it.
+0:21
+Now as for this feature, our teachers can log into the music school portal, review their students recordings, and leave feedback for each one.
+0:29
+So think about what could go wrong here.
+0:32
+Run through each of the six stripe letters and jot down a quick line for each, if applicable.
+0:38
+Once you're done, we'll compare notes.
+0:39
+I'll catch you in a bit.
+0:44
+Alright.
+0:45
+How did you go?
+0:46
+Let's check out what might show up on the teacher side using our trusty STRIDE framework.
+0:51
+So first, spoofing.
+0:53
+Could someone pretend to be a teacher?
+0:55
+That's definitely possible.
+0:57
+If our login system isn't rock solid, a sneaky student could spoof a teacher account and leave feedback on their own video.
+1:06
+Okay.
+1:06
+Next, tampering.
+1:07
+Could someone mess with data that they shouldn't?
+1:10
+Well, maybe.
+1:11
+Imagine a student intercepting a feedback request and tweaking the teacher's rating or comment before it is saved.
+1:19
+Next up is repudiation.
+1:21
+Could someone deny their actions later?
+1:23
+Well, I think so.
+1:25
+Picture this.
+1:26
+A teacher edits or deletes a comment and then insists that they never did.
+1:30
+Without any kind of audit trail or time stamp, we have zero proof.
+1:35
+Next is information disclosure.
+1:38
+Could private stuff leak out?
+1:40
+Well, absolutely.
+1:41
+Maybe the feedback page accidentally shows other students' videos, or the API could return way too much information.
+1:50
+Up next is denial of service.
+1:52
+Could someone jam the system?
+1:54
+Sure.
+1:55
+If multiple teachers all upload a lot of feedback files at once, the portal could slow down or even crash.
+2:02
+And finally, elevation of privilege.
+2:05
+Could someone get more access than they should?
+2:08
+Oh, yes.
+2:08
+Always.
+2:09
+Maybe a teacher finds a hidden admin page and then can suddenly see every single student's videos.
+2:16
+And here we go.
+2:17
+All six are applicable once again.
+2:20
+Even though it is a different role, we're still asking the same six questions, just pointing them to a new feature.
+2:27
+And that's what makes STRIDE so powerful.
+2:29
+It's flexible enough to apply anywhere in your system.
+2:33
+And that stride is not just a checklist.
+2:36
+It's a way of thinking before you even write a single line of code.
+2:40
+By walking through each feature and asking what could go wrong, you start designing with security in mind, not just bolting it on at the end.
+2:49
+And that's the power of threat modeling.
+2:52
+It helps you spot cracks early when they're still easy and relatively cheap to fix.
+2:57
+But, of course, once an app is live, new threats come into play.
+3:01
+So in the next screen, we're going to shift gears.
+3:03
+We're going to move from design time thinking to real world defense, and we'll do that with another industry classic.
+3:10
+So I will see you there.
