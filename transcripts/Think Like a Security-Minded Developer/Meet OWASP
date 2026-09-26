@@ -1,0 +1,108 @@
+
+Transcript
+0:00
+In the last few scrims, we looked at how to predict potential threats using Stride.
+0:05
+That's all about design time thinking, spotting weak points before the app ever goes live.
+0:09
+But what happens after launch?
+0:11
+Once your app is out in the wild, it's no longer about what could go wrong.
+0:15
+It's about what's going wrong right now and how we fix it.
+0:19
+So let's bring back our music school student portal.
+0:22
+We've built it.
+0:23
+We're using it, and everything is running smoothly.
+0:25
+Students can even level up based on their weekly performance until one day that same curious seven year old pipes up in her lesson.
+0:33
+Miss, I'm level ten thousand, and she's bright.
+0:37
+She'd realized that she could tweak the URL, resend the request, and boom, her level updated in the system.
+0:44
+No hacking tools, no special access, just curiosity and a browser.
+0:48
+And that's the moment we go from design time prediction to runtime reality.
+0:53
+When your app is live, you need a new kind of map, one that helps you recognize, prioritize, and respond to real security risks.
+1:02
+And that is when oWASP comes in.
+1:04
+OWASP stands for the Open Web Application Security Project and is a global nonprofit foundation that works to improve the security of software.
+1:14
+Their website is an absolute treasure trove of resources, guides, cheat sheets, testing tools, community projects, all aimed at helping developers understand how attackers think and how to build apps that can stand up to them.
+1:28
+Now one of their most famous projects is the oWASP top ten.
+1:32
+Basically, the greatest hits of web vulnerabilities that developers keep accidentally releasing.
+1:38
+It's updated every few years and is built from huge amounts of real world data, industry reports, community feedback, and security testing across thousands of applications.
+1:48
+And what comes out is a ranked list of the ten most critical security risks seen in the wild.
+1:54
+And each one isn't just a label.
+1:56
+It comes with background information, examples, and practical advice on how to detect and mitigate those risks.
+2:03
+So let's think about our seven year old hacker who managed to change their level using just a URL.
+2:09
+What oWASP category will this fall under?
+2:13
+Well, the clearest one is the first one, broken access control.
+2:16
+The app didn't check whether the student was allowed to perform that action.
+2:21
+They could change their own level simply by tweaking the URL.
+2:24
+And that's exactly what broken access control looks like in real life, someone doing something that the system should have stopped.
+2:32
+Now, technically, this little student hacker could touch a few other oWASP categories too.
+2:38
+It's also an example of insecure design because the feature itself was never built with role limits in mind.
+2:44
+Why would we let a student's level be changed with just the URL?
+2:49
+It might also fall under security misconfiguration if the route that updates a level was left open to everyone instead of just teachers or admins.
+2:58
+And you can even argue authentication failures if the app never double checked who was making the request in the first place.
+3:05
+As you can see, real vulnerabilities rarely fit neatly into one box, and that's why oWASP gives us language to describe the different angles of what went wrong.
+3:15
+But now you're probably thinking, so what?
+3:17
+I can name the issue, but how is that going to help?
+3:21
+Well, that's where oWASP really shines.
+3:23
+Here is that main oWASP top ten page again.
+3:26
+You can click into any of these categories to learn more about it.
+3:30
+Things like what it means, how it happens, and most importantly, how to now stop it.
+3:34
+Let's have a look at the broken access control page to fix our problem.
+3:39
+Right here under description, we can confirm that this is the problem that we're encountering.
+3:43
+Access control enforces policy such that users cannot act outside of their intended permissions.
+3:50
+This is exactly what went wrong for us.
+3:52
+And if you scroll down a little bit, you'll hit my personal favorite section, how to prevent.
+3:57
+And this is where oWASP turns theory into action, such as denying access by default, along with a ton of other actionable points.
+4:06
+In other words, it's not just don't do this.
+4:09
+It's a ready made checklist that you can actually apply.
+4:12
+And that's the gold right there because once you can name a vulnerability, OWASP tells you how to fix it.
+4:19
+In the next grim, you'll get to play bug triage.
+4:21
+You'll see short real world inspired bug reports, and your challenge will be to match each one to its oWASP top ten category.
+4:29
+I'll see you there.
