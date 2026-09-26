@@ -1,0 +1,61 @@
+Transcript
+0:00
+Onto the sliding window counter.
+0:02
+This is an approximation of the log method.
+0:05
+It's not perfectly accurate, but close enough.
+0:08
+We start by defining two fixed windows.
+0:11
+Our window is still thirty seconds, so the first window will be from zero to thirty seconds, and then the second thirty to sixty seconds.
+0:19
+This sliding window counter algorithm is sort of a combination of a fixed window and sliding window.
+0:26
+We've just used the fixed window part of it by defining these windows, and then we're gonna count the accepted requests in the current window and the previous window.
+0:35
+Therefore, the memory needed for this is just two counters.
+0:38
+There's no need for the system to look back through the logs at time stamps of when requests arrive as we did before.
+0:45
+So we start pretty much thinking like a fixed window, and we've got five requests that have been accepted here in this initial window.
+0:53
+And then at t equals twenty five, we're already at the limit, so this would be rejected.
+0:58
+Now as soon as we get into the second window, which is now the current window, if we think about time progressing to t equals thirty five, the count of the previous window here is moved to five.
+1:09
+We're gonna work out with an equation, a weighted count, and then use this to work out if the new request here at t equals thirty five is accepted or rejected.
+1:20
+So x here is the proportion of time in the current window.
+1:24
+So because this request is coming at t equals thirty five, it's the proportion of time that has elapsed in the current window.
+1:31
+So from t equals thirty to t equals thirty five, that five seconds.
+1:35
+And since it's the proportion, it's five seconds of the thirty second window we're in.
+1:41
+So that's five over thirty, which is a sixth.
+1:44
+So when we work out one minus a sixth, let's focus on that part.
+1:48
+Here is when we start thinking about a sliding window going back from our current time.
+1:54
+We're working out a fraction of the previous window which overlaps with our sliding window look back.
+2:01
+So if we know this is a sixth, when we do one minus a sixth, we get the rest of the sliding window look back here, a proportion of the time.
+2:10
+Okay?
+2:11
+We then do that times the previous window count, which we know is five, plus the current window count, which is currently zero, and that's our weighted count.
+2:20
+And if that weighted count plus one is smaller or equal than our limit of five requests, we will accept this new request.
+2:29
+So there's our one minus a sixth, which is five sixths times five plus zero.
+2:35
+That's the previous window count, and it's our current window count is about four point one seven.
+2:41
+Now that plus one is five point one seven, which is larger than five.
+2:45
+And because, remember, it has to be smaller or equal to for accept, that means we're going to reject this request.
+2:52
+Join me in the next screen where we continue to work out if requests are accepted or rejected using this sliding window counter, and we see how it compares to the sliding window log.
