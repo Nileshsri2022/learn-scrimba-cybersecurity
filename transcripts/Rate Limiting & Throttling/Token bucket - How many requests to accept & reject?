@@ -1,0 +1,69 @@
+Transcript
+0:00
+Another challenge for you.
+0:01
+Wow.
+0:02
+I do work you hard, don't I?
+0:04
+I need you to determine how many requests to accept or reject.
+0:08
+So num request is how many the user has requested in this round.
+0:13
+I want you to define a variable accepted as the minimum of, oh, we did that earlier, didn't we?
+0:17
+Hint.
+0:17
+Hint.
+0:18
+Requests made and tokens available, and then define a variable rejected as the remaining request that were not accepted.
+0:25
+So you can do that below the challenge text here.
+0:29
+Good luck.
+0:29
+See you in a minute.
+0:36
+I hope that went okay.
+0:37
+So we need const accepted.
+0:41
+And as I mentioned, we did the math dot min earlier, so we need the same thing.
+0:45
+I I gave you quite a big hint with this bracket here.
+0:47
+So math dot min, and we want the smaller of the requests made, which we know is num requests, and the tokens available.
+0:57
+That's this dot tokens.
+0:59
+Because if the tokens available is a larger number than the requests made, then we just want the requests made as the accepted number.
+1:07
+But if it's the other way around, the number of requests is bigger than there are tokens in the bucket, then we can only accept the available tokens.
+1:15
+Now rejected, and this is the remaining request that were not accepted.
+1:20
+So it's gonna be the number of requests, and we need to remove how many were accepted.
+1:27
+There we go.
+1:28
+Well done.
+1:29
+Not too bad at all.
+1:30
+So let me consume the tokens.
+1:33
+This dot tokens is how many we have at the moment, and we need to remove from it how many are accepted so we can use our minus equals.
+1:42
+Done.
+1:43
+And return the number of accepted rejected requests.
+1:47
+So we return accepted and rejected.
+1:51
+Brilliant.
+1:52
+In the next screen, we're gonna play the game.
+1:53
+Finally.
+1:54
+See you there.
