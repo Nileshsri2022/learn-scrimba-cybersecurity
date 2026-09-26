@@ -1,0 +1,132 @@
+
+Transcript
+0:00
+Time to finally play this game.
+0:02
+Let's have a look at the readme, and we're told we can use either Node token bucket game dot j s or NPM start.
+0:10
+So I'm gonna go for NPM start, and we are given the rules.
+0:16
+We've got a bucket capacity of ten tokens, a refill amount of six every three seconds, and we know that each round is essentially one second passing.
+0:25
+And the bucket starting with ten full capacity.
+0:28
+Here are the rules we should know about that by now.
+0:32
+We can either enter in a number or quit or exit or reset.
+0:36
+Okay.
+0:36
+Here's that question.
+0:37
+So let's go for, in the first second, three requests.
+0:42
+Here's the round results.
+0:43
+Round one, we made three requests, and because we started with ten, all three were accepted, none rejected.
+0:50
+We now have seven tokens remaining, and we'll refill again in two seconds.
+0:55
+We start with a refill interval of three seconds, but because one round has now finished, we're down to two seconds.
+1:01
+So next one, let's go for five requests.
+1:05
+They are all accepted again in round two.
+1:08
+Two tokens remaining, but we are refilling in the next round.
+1:13
+So if I went for more requests than tokens are in the bucket, let's go for seven, we're told that the bucket's been refilled, now has eight because we did have two, and we are refilling with six.
+1:27
+So six plus two is eight.
+1:29
+We made seven requests.
+1:31
+All were accepted.
+1:32
+Only one token remaining.
+1:33
+Let's try and see some rejections, shall we?
+1:35
+So let's go for nine.
+1:38
+Only one is accepted because we had one token left, eight are rejected, and there's no tokens remaining.
+1:45
+So it doesn't matter how many I try and fire at the API, they're all rejected until the bucket's refilled again, and I get out with exit.
+1:55
+Okay.
+1:56
+Let me scroll down.
+1:57
+It's time for another challenge
+2:00
+for you to modify the game parameters.
+2:03
+So I'd like you to run the game and play a few rounds to get used to how it all works, Then I'd like you to modify the game parameters, these here, so the bucket has a capacity of eight tokens and refills two tokens every ten seconds.
+2:17
+Then before running the game again, I want you to predict here the behavior.
+2:22
+Don't worry if this is gonna sound a little obvious.
+2:24
+It's good to put this sort of thing into words.
+2:26
+Maybe think how it will act differently to the last configuration you just watched me play.
+2:32
+Then run the game and check if your prediction is correct.
+2:34
+Don't forget to save the token bucket game file before running the game again.
+2:40
+Okay.
+2:40
+See you in a minute.
+2:46
+Right.
+2:46
+I hope that was okay.
+2:47
+So we're just modifying this to now a capacity of eight tokens and a refill of two tokens every ten seconds.
+2:57
+There we go.
+2:58
+I'm gonna save, and let's have a quick play.
+3:04
+So we start with eight tokens.
+3:06
+So let's start three.
+3:08
+Three are accepted, five remaining.
+3:11
+So let's go for five.
+3:13
+Brilliant.
+3:14
+All five accepted, but now we have no tokens left.
+3:17
+And we've got eight seconds to refill.
+3:19
+That is a long time.
+3:20
+So I can keep firing requests at the API, but I am not gonna get any accepted.
+3:26
+Gosh.
+3:27
+Uh, let's go for twenty four.
+3:30
+Uh, all rejected.
+3:31
+So this is a real long time to wait until it refills, but now only with two tokens.
+3:38
+So that's not many, is it?
+3:40
+So when I think about what prediction I would have made, well, as a user, you'd have to be a lot more selective about when you send requests to the API because a lot of them are gonna get rejected because you've only got those two tokens.
+3:53
+They're quite valuable, aren't they?
+3:54
+So understanding rate limits, you can see how it really affects the user's experience.
+3:59
+The behavior can really be affected by different parameters.
+4:03
+Okay.
+4:03
+Fantastic work.
+4:04
+See you in the next scrim.
