@@ -1,0 +1,90 @@
+
+Transcript
+0:00
+Okay.
+0:00
+The first rate limiting algorithm we're looking at is the fixed window counter.
+0:05
+This is when the system counts requests in a specific window length.
+0:10
+And if this count reaches a set limit, it will start rejecting requests.
+0:15
+So it's quite a simple algorithm.
+0:16
+The count resets at the end of the window, and you'll see in this example I give you that the state management required is quite simple because you just need to keep track of the count and the timer.
+0:27
+So in my example, we have a parking garage.
+0:30
+The window is thirty seconds, and the limit is five requests or five cars in that thirty second window.
+0:37
+So here you can see window one is open because we are at the beginning of window one, t equals zero, and window two is closed for now, but at thirty seconds, it will open.
+0:47
+As long as there's a space free, I e, we haven't hit our limit, new cars will be allowed to park, I e, new requests will be accepted.
+0:55
+So here we are at t equals zero.
+0:56
+A request arrives or a car gets to the barrier.
+1:01
+Since there is space for the car, it is accepted.
+1:04
+We progressed to t equals five seconds, and we have two requests arrive.
+1:08
+These are also both accepted because the count was only at one.
+1:11
+Now it's at three.
+1:12
+At fifteen seconds, two more requests.
+1:15
+These are both accepted, but the count is now at five.
+1:19
+So the barrier comes down, and no further requests will be accepted in window one.
+1:24
+So when at twenty five seconds, a new request arrives, I'm afraid it is rejected.
+1:30
+As window one ends at t equals thirty seconds and window two begins, we reset our current count to zero, and the car park barrier rises.
+1:39
+The system does not need to remember the count from the previous window.
+1:42
+We progress through window two, and at t equals fifty seconds, two requests arrive.
+1:47
+And these, as you can see, are both accepted.
+1:50
+At fifty five seconds, two more requests arrive.
+1:53
+And at sixty seconds, as window two closes, window three opens and two more requests arrive, which are both accepted.
+2:01
+Now I want to show you something.
+2:02
+Let's imagine that each car was given a ticket on arrival.
+2:06
+And on that ticket, it has the time they arrived.
+2:08
+So let's have a look at the times on those tickets for Windows two and three.
+2:13
+We've got two cars here that arrived at fifty seconds, two at fifty five, and two more at sixty.
+2:19
+Now here we have seven cars, and they arrived between t equals fifty and t equals sixty.
+2:26
+Now that's only a ten second period of time, isn't it?
+2:30
+Hang on.
+2:30
+This is over our limit of five requests in a thirty second window.
+2:35
+But since these cars arrived over two different windows, with the fixed window counter algorithm, they were all accepted.
+2:43
+This is called the window boundary issue where bursts can occur around the window edges, I e, at the end of one window or at the beginning of another window.
+2:54
+Because of the very basic, we're in one window, that ends, count goes back to zero, there is no flexibility there, is there?
+3:01
+Another point to make is that if, say, at the beginning of a window you had all five requests arriving, you would then have a drought because you wouldn't be able to have any requests after that because they will have all been accepted and reached the limit.
+3:15
+And as I mentioned, any state management required for this algorithm is fairly simple.
+3:19
+You just need to know where you are in the window with a timer and the current count that you're on.
+3:23
+Okay.
+3:24
+Onto the next algorithm.
+3:25
+See you in the next scrim.
