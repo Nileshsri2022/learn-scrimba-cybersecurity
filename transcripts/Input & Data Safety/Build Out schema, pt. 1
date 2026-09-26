@@ -1,0 +1,230 @@
+
+Transcript
+0:00
+Welcome.
+0:00
+We're getting close to the end of this form project, but we only have these two keys for the register schema.
+0:06
+We need to build it out.
+0:08
+And it's your challenge again.
+0:09
+Blimey.
+0:10
+I really work you hard, don't I?
+0:12
+Here we have it.
+0:12
+So I'd like you to add an age key to the register schema, which converts the string to a number.
+0:18
+Now remember that HTML forms all return strings as standard.
+0:23
+So even if the user inputs a number eight, we're gonna be receiving that data as the string of that number.
+0:30
+So we are going to convert it back to a number because that's how I'd like it in our database.
+0:35
+And then we want to validate it between thirteen and a hundred and twenty.
+0:38
+I'd love to see a hundred and twenty year old using this API, wouldn't you?
+0:42
+Then add a username key to the schema which only validates strings of between three and twenty characters.
+0:48
+Now Zod lets us make some data transformations.
+0:51
+So I'd like to chain the necessary transformations to ensure the email is stored in lowercase.
+0:56
+So this is a really great opportunity for you to look in those Zod docs and without any surrounding white space.
+1:03
+That's gonna mean that all the data is nice and uniform and standardized.
+1:06
+Then save, which remember will recompile the back end, and then restart the front end in terminal using NPM run dev and test the form to check that we get errors when we fail the validation and a nice success message if the validation passes.
+1:22
+Right.
+1:22
+Take it slow.
+1:23
+See you in a minute.
+1:24
+Good luck.
+1:30
+Okay.
+1:31
+Let's add age below here, which converts the string to a number.
+1:36
+So we think back to that mini zod course, and we need to go zed dot and then coerce because we are transforming it.
+1:44
+And then we say into what?
+1:45
+Into a number.
+1:47
+Let's make sure we spell that right.
+1:50
+And validates it between, so we're gonna add more dot somethings onto here between thirteen.
+1:56
+So that means we're gonna have a dot min and a dot max.
+2:01
+Hundred and twenty.
+2:03
+There we go.
+2:04
+So we have transformed the data and then validated it with dot min and dot max.
+2:10
+Now a username key only validates strings.
+2:14
+So we're gonna go zed dot string between three.
+2:17
+So again, we need our dot min and twenty.
+2:22
+There we go.
+2:23
+Now chain the necessary transformations to ensure the email is stored in lowercase.
+2:28
+So the Zod docs tell us that we have a dot to lowercase method.
+2:34
+To lower case.
+2:36
+There we go.
+2:37
+That's a transformation after the dot email validation has processed and without any surrounding white space.
+2:44
+So then we also need dot trim.
+2:47
+Great.
+2:47
+Let's save that.
+2:49
+Check the runner is all happy.
+2:50
+Yep.
+2:51
+And then we run our NPM run dev.
+2:54
+Starts up the front end, and we can test this.
+2:57
+So why don't I just not add anything?
+2:58
+I should get lots of errors now.
+3:00
+Great.
+3:00
+I'm being told the age is too small.
+3:03
+I'm being told the username's too small.
+3:06
+So email address, let's go for pair again.
+3:09
+Actually, you know what?
+3:10
+Let's go for Tom.
+3:12
+Age needs to be between thirteen and hundred.
+3:15
+Let's go for, I don't know, twenty one.
+3:18
+Username needs to be at least three, so we'll go four characters.
+3:22
+Password above eight characters.
+3:24
+Should this pass?
+3:25
+Yes.
+3:26
+It does.
+3:27
+And if I say went for five here, age should still be erroring.
+3:33
+Yes.
+3:33
+Too small.
+3:34
+And that's the default error message there since we haven't put any custom error messages on the age key.
+3:40
+Awesome.
+3:40
+Let's get rid of the channel to text, and I'm just gonna tidy this up and put these on different lines.
+3:45
+Okay?
+3:45
+So give me a second.
+3:47
+That looks better.
+3:48
+I'm gonna just modify this.
+3:50
+I don't like invalid email address.
+3:52
+Let's go for required and must be a valid email address.
+3:58
+So in case they don't add one, they're gonna be told it's required.
+4:02
+Let's go for required here in case they miss out age.
+4:06
+I'm just gonna add a quick custom error message for min and max.
+4:11
+Let's add a quick comment here.
+4:14
+Now I want to actually add one more method here, and it's gonna be dot int.
+4:20
+We want integers only.
+4:22
+So my custom error message is going to be age must be an integer.
+4:29
+Even though we know HTML forms do always give us strings, it's always good to be really clear in case, for instance, a bad guy could hit our API directly and sort of bypass the front end.
+4:43
+So that's why we still have dot strings here, but we're not gonna put custom error messages on dot strings because they're never gonna be showing up in the UI because the HTML forms do return strings.
+4:54
+Let me add a few here.
+4:55
+And the last thing to make the password a bit more safe, I'm going to add a regex.
+5:01
+This is gonna make sure that they can only use letters, numbers, and underscores.
+5:07
+I'm not gonna go into how we write regex.
+5:09
+You can always ask your favorite AI, but we're gonna go for that.
+5:14
+There we go.
+5:15
+That's looking much better now.
+5:16
+Let's test it.
+5:17
+We save that.
+5:19
+Let's stop that and rerun.
+5:23
+So let me add loads of exclamation marks for the password.
+5:27
+Let's check that our custom error messages are working.
+5:31
+There we go.
+5:32
+We've got that custom error message for password.
+5:34
+Username is good.
+5:36
+Age is good.
+5:37
+Required and must be a yep.
+5:38
+Fantastic.
+5:40
+Now a little bit more housekeeping.
+5:43
+Back in auth, we need to update our response.
+5:47
+Send an ID.
+5:49
+Let's go for date dot now.
+5:52
+And then we've got username as well.
+5:55
+Okay.
+5:55
+Lovely.
+5:57
+We're almost there.
+5:58
+We just need the name and the bio.
+6:00
+See you in the next scrim.
