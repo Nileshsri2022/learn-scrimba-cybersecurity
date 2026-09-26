@@ -1,0 +1,84 @@
+
+Transcript
+0:00
+Congratulations.
+0:01
+You've made it through this course on rate limiting and throttling.
+0:05
+You even helped with some practical examples of different algorithms used to rate limit applications.
+0:12
+Let's go through what we've learned.
+0:13
+So we started with talking about what rate limiting is.
+0:17
+I enjoy talking about this topic because these concepts directly impact how your applications perform in the real world.
+0:23
+When you build APIs or services, users can overwhelm your servers with too many requests.
+0:29
+Without rate limiting, a single user could accidentally or maliciously crash your application.
+0:35
+It's kinda like leaving your front door wide open and being surprised when too many people walk in at once.
+0:40
+If we think about it, almost every modern application uses external APIs, and they all have rate limits.
+0:47
+If you don't understand these limits, your code will break in production when you exceed them.
+0:51
+Nobody wants to see those cryptic four two nine too many request errors.
+0:55
+Right?
+0:56
+With this knowledge, you can have better cost management.
+0:58
+Many services charge based on usage.
+1:01
+Without throttling requests, you could rack up huge bills.
+1:04
+We talked about the core concepts, rate limiting versus throttling, having a hard cutoff versus slowing down requests, client identification.
+1:12
+Are you gonna use IP address, user IDs, or API keys?
+1:17
+Time windows in some of the different algorithms.
+1:20
+Here are those algorithms.
+1:21
+We had fixed window counter where the system just counts requests in a fixed window.
+1:26
+We had the sliding window log or counter where the window slides along the timeline as you keep making requests.
+1:33
+We had the token bucket.
+1:35
+Here's the number of tokens.
+1:36
+When you've used them up, you have to wait for that to refresh.
+1:40
+And the leaky bucket, when requests are processed at a fixed rate.
+1:44
+And if while they're waiting to be processed, the queue exceeds the limit, they get discarded.
+1:49
+Understanding throttling helps you design better retry logic and error handling.
+1:53
+Instead of bombarding a server when it's struggling, you can implement exponential back off, waiting progressively longer between retries, which is more respectful and effective.
+2:03
+Rate limiting and throttling topics always come up in interview questions, especially for back end roles.
+2:10
+Interviewers want to see what you think about scalability and system design, not just making code work on your laptop.
+2:16
+And, of course, you had lots of challenges along the way.
+2:19
+Before we finish, I could not stop myself from putting this GIF in.
+2:23
+The perfect throttling GIF if I've ever seen one.
+2:26
+What now then?
+2:27
+I recommend taking a break, getting a snack, and then carrying on your learning here on Scrimba.
+2:32
+Put the momentum from this course into good use.
+2:35
+I've been Jonathan Hill.
+2:36
+It's been fantastic to go through these topics with you.
+2:39
+If you have any questions or would just like to reach out, check out Jonathan Hill on the Scrimba Discord.
+2:44
+Good luck with the rest of your learning.
