@@ -1,0 +1,49 @@
+Transcript
+0:00
+Our next algorithm is the token bucket algorithm.
+0:03
+I'm gonna use a plant metaphor with leaves growing and being eaten.
+0:07
+So my plant has a capacity of five leaves, and the leaves grow three per day.
+0:13
+So we are at the start of the first day, and three leaves grow.
+0:17
+Two caterpillars arrive.
+0:19
+Each caterpillar needs one leaf to survive.
+0:22
+So caterpillar one eats a leaf, and caterpillar two eats another leaf.
+0:26
+That means we're down to one leaf on our plant.
+0:29
+It gets to the second day, and three more leaves are grown.
+0:33
+Now we have five caterpillars arrive, but there are only four leaves.
+0:38
+So four caterpillars eat their fill, and, unfortunately, the fifth doesn't make it.
+0:44
+On the third day, three more leaves are generated.
+0:47
+No caterpillars arrive.
+0:49
+On the fourth day, because we have a capacity of five leaves, only two more can grow.
+0:54
+So you can see here that each leaf represents a token.
+0:59
+Usually, one request takes up one token, and the bucket or the plant in this case has a limited capacity.
+1:05
+It can't hold more tokens than the capacity, and that the tokens or leaves are replenished at a steady fixed rate.
+1:12
+So it's flexible for short term bursts.
+1:14
+If we had a bucket that was full, at that moment, you could use up all of the tokens in a burst.
+1:20
+If each user was to have a bucket themselves, then this could be potential memory issue because you'd have to keep track of a lot of tokens in lots of different buckets.
+1:29
+Due to these potential spikes, we don't get a smooth request rate.
+1:34
+And the configuration required of what the capacity of the bucket is, the replenish rate, and how long to wait for each refill means it's not quite as simple as other algorithms.
+1:43
+But this is very popular for public APIs to prevent server overload, to handle occasional peaks while maintaining overall traffic stability.
+1:52
+See you in the next scrim.
