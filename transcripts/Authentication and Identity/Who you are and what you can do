@@ -1,0 +1,72 @@
+
+Transcript
+0:00
+Before we dig into authentication, we have to talk a little bit about the other auth in the room, authorization.
+0:06
+The two both start with auth and can sometimes be mixed up or understood as the same thing, but they're not.
+0:12
+Whenever a user interacts with your app, two big questions decide everything.
+0:16
+Who is the user and what is that user allowed to do?
+0:20
+One is authentication and the other is authorization, often said together and often mixed up, but they solve two totally different problems.
+0:29
+Let's start with authentication.
+0:30
+Authentication proves who you are.
+0:33
+It answers the question of, is this really who the user claims to be?
+0:37
+Now as an Internet user, you'll be familiar with some of these authentication methods.
+0:41
+Logging in with a username and password, signing in with Google, or sending an API key or a token.
+0:48
+If an app gets authentication wrong, someone can pretend to be someone else, and that's spoofing, the s in stride.
+0:54
+Now authorization comes after that.
+0:57
+Once the app knows who the user is, authorization decides what the user is allowed to do.
+1:03
+So some common examples include a user reading their own data, a user updating their own profile, reading student data if you're a teacher, or getting no access to other student data if you are a student yourself.
+1:15
+If authorization fails, user can do things that they shouldn't, leading to elevation of privilege or broken access control.
+1:22
+So how do the two fit together?
+1:24
+Well, most back end systems follow a simple flow.
+1:27
+Request, then authentication, then authorization, and finally, the resource.
+1:32
+For example, if a user is trying to read their own profile, the request for data comes in.
+1:37
+Authentication will then check if the user is logged in.
+1:40
+After that, authorization will check that the user is accessing their own data.
+1:45
+And finally, if all that is fine, then the resource or the access is granted.
+1:49
+Now another example is an admin trying to reach an admin only endpoint.
+1:54
+You'll notice that only one of these four things has changed, the authorization part.
+1:58
+So the request arrives, authentication identifies the user, and then authorization checks for admin rights.
+2:05
+And if that all checks out, then access is granted.
+2:08
+So realistically, we need both authentication and authorization.
+2:12
+Good authentication with weak authorization is unsafe, and good authorization without solid authentication is meaningless.
+2:20
+If someone can pretend to be the wrong user or act beyond their permissions, they can break almost anything in your app and that's why so many real world vulnerabilities boil down to these two things.
+2:31
+Now to set expectations, the focus of this section is authentication and identity.
+2:37
+How apps prove who a user is and how they keep that identity consistent across requests.
+2:42
+We will mention authorization where it helps the bigger picture, but we won't dive deeply into authorization logic.
+2:49
+So now that we separated who you are from what you can do, the next step is understanding how apps actually remember you from one request to the next.
+2:57
+So in the next screen, we're gonna look at the three big families of identity systems used across the web.
+3:02
+I'll see you there.
