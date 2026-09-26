@@ -1,0 +1,132 @@
+
+Transcript
+0:00
+Time to see a token bucket algorithm in action.
+0:03
+I've developed a sort of game where the user is told the capacity of the bucket, the refill rate, and refill interval of the bucket, and asked how many requests they want to send.
+0:14
+Each second is a round or a new question in the game.
+0:17
+We are gonna be modifying the parameters together and seeing how this affects the gameplay.
+0:22
+I'm gonna go through the code that we have so far, then I'll set you a few challenges to help me finish it off.
+0:28
+Playing the game should help you see a token bucket algorithm in action, and modifying parameters at the end should ensure we really understand how it works.
+0:37
+So the game mechanics work like this.
+0:39
+We start with a welcome message logged in the terminal.
+0:43
+This gives the player the rules, the capacity of the bucket, the refill rate, and interval.
+0:48
+As I mentioned, each round or question the user gets asked is like one second passing.
+0:54
+The user gets asked how many requests.
+0:57
+They answer with either a number or some special commands like exit to exit the game or reset to start again.
+1:03
+They then get given the round results, the round number, the number of requests that they made, the number that were accepted, and the number that were rejected, tokens remaining in the bucket, was it refilled, and how long until the bucket is next refilled.
+1:20
+Then the loop restarts, they get asked how many requests for the next second or round of the game.
+1:26
+So we've got a token bucket game dot j s file.
+1:30
+Let's go through this.
+1:31
+Readline is just so that we can play this game in the terminal, and it works in a logical manner.
+1:36
+So don't worry about that.
+1:37
+We'll see a bit more readline later.
+1:39
+Then I'm using some object oriented programming here by making a token bucket class.
+1:44
+We have a constructor with a capacity, the refill rate, and the refill interval passed, and then some instance properties.
+1:52
+We've got the capacity of the bucket.
+1:54
+We've got the refill rate and the refill interval.
+1:57
+You're gonna be finishing off these last two properties, how many tokens are in the bucket, and how many seconds until the last refill.
+2:05
+You can imagine at the start of the game, that would be zero since there hasn't been a refill.
+2:10
+Then we have this process requests method.
+2:13
+So when the player decides how many requests per round, process requests will be fired.
+2:19
+We need to check if it's time to refill.
+2:21
+We'll have to process the requests, consume the tokens, and we're gonna return number of accepted and rejected requests for that turn of the game.
+2:30
+We need a method to get how many tokens are in the bucket at a particular point.
+2:34
+We need to know how many seconds until the next refill.
+2:37
+Here's just a separator for cosmetic purposes.
+2:40
+And as I mentioned at the start of the game, the user is gonna be told a lot.
+2:44
+So here's all the console logs.
+2:46
+They're gonna be told the capacity, the refill amount, the refill interval, starting tokens.
+2:51
+We're actually gonna start the bucket always full, and then some game rules and some special commands that they can use per go.
+2:58
+Here's a function to print the round results.
+3:01
+They're gonna be told how many requests they made, how many were accepted, rejected, how many tokens remaining, and how long until the next refill of the bucket.
+3:10
+And here's the important play game function.
+3:12
+So we have a few default values in case no arguments are provided, but we will be providing arguments.
+3:17
+Don't worry.
+3:18
+We create a new instance of the token bucket class.
+3:22
+We set the round number to zero.
+3:24
+Here's some more read line stuff.
+3:26
+Let's not worry about that.
+3:27
+We print the game info, passing the configuration, and we ask that question.
+3:32
+How many requests do you want to make?
+3:35
+User input is the answer that's been trimmed and made lowercase.
+3:38
+We handle any special commands they might make.
+3:41
+We then do some input validation, and numRequests is the final number of requests after validation.
+3:48
+We increment the round number because it starts at zero.
+3:51
+And once we've asked a question, that will mean we're into round one.
+3:55
+We get how many tokens are in the bucket.
+3:58
+We process the requests, returning how many are accepted and rejected.
+4:03
+We find out how many are now in the bucket after they're processed.
+4:07
+This helps us find out if the bucket was refilled at this round, and we work out how many seconds until refill because we're gonna be passing a lot of information to the print round results function so the user can see where they're up to at the end of that round.
+4:20
+Then we continue the loop by asking another question.
+4:24
+And then we have a main function with our game configuration and passing that to the play game function.
+4:31
+Okay.
+4:31
+I know that's a lot to take in.
+4:32
+But as I mentioned earlier, when you play the game and you see the structure of it, it will make more sense.
+4:38
+But do pause now and go through that again in your own time if you'd want to.
+4:43
+Okay.
+4:44
+A challenger awaits in the next scrim.
+4:45
+See you then.
