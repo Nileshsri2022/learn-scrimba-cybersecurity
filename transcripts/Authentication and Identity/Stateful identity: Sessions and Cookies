@@ -1,0 +1,83 @@
+Transcript
+0:00
+In this scrim, we're going to have a look at how stateful identity actually works.
+0:04
+This is the classic pattern where the server remembers who you are and your browser just carries a tiny ID that points back to that memory.
+0:12
+As we mentioned earlier, HTTP requests are stateless, so every request is brand new.
+0:18
+Nothing remembers anything between requests by default.
+0:21
+So when a user logs in, our app needs a way to identify who is sending these requests.
+0:26
+Stateful systems solve this by creating a session on the server.
+0:31
+A session is just a small bundle of data that represents the logged in user.
+0:35
+It may include a user ID, a name, or maybe the user role.
+0:39
+Now this session lives only on our server.
+0:42
+And to reconnect the user with that session, the server sends the browser a cookie.
+0:47
+Now the cookie lives in the browser and is sent automatically with every request to that domain.
+0:52
+The only job of this cookie is to let the server know what user session this particular request belongs to.
+0:59
+So let's see what actually happens in a typical Stateful system.
+1:02
+The user logs in by submitting their username and password.
+1:06
+The server checks if the username and password match a user.
+1:09
+And if the login is valid, the server makes a session for this user.
+1:14
+This session is stored on the server only.
+1:16
+And as mentioned before, it might include a user ID, a name, and potentially a role for authorization.
+1:22
+The server then sends back a cookie that contains just a tiny reference to the user session, a user session ID.
+1:28
+Now the browser receives this and stores the cookie automatically.
+1:32
+You don't have to write any code for that part.
+1:34
+And on every future request to that domain, the browser sends this cookie along with the request.
+1:40
+Again, this is automatic, so don't worry too much.
+1:44
+And finally, the server looks up the session by the session ID in the cookie.
+1:48
+If it finds a valid user session, then that user is authenticated for that request.
+1:54
+So once the user has the session, it can also use information inside of it like the role to help with authorization decisions.
+2:02
+But like I said before, we're not going to go too deep into authorization logic now, but it is good to know that some apps reuse the same session data for both identity and permissions.
+2:11
+Now the cookie is the key to this entire system.
+2:15
+A typical session cookie does not store the user's identity directly.
+2:19
+It does not store roles or permissions.
+2:21
+It only stores a tiny session ID.
+2:25
+All the sensitive data lives on the server in the session, and the cookie is just our lookup key.
+2:30
+It's a little bit like leaving your stuff in a gym locker and grabbing a numbered key for that locker.
+2:36
+The key itself doesn't list what's in your locker, and it doesn't have any real value by itself.
+2:41
+It's just the thing that you use with the locker to get your stuff back.
+2:45
+And that's what a cookie is.
+2:47
+It's just a numbered key.
+2:48
+The real information lives safely on the server side or in your gym locker.
+2:53
+And this is one of the reasons why stateful identity is so widely used.
+2:57
+Server is in control of the session, which makes it much harder for attackers to tamper with directly.
+3:03
+So now that we've seen how cookies and sessions work in a healthy stateful system, our next scrim looks at what happens when things go wrong, the common mistakes that developers make with sessions, and how those mistakes can turn into real issues.
