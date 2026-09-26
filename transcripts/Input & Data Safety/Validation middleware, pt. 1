@@ -1,0 +1,118 @@
+
+Transcript
+0:00
+Welcome back.
+0:01
+Let's install Zod and then create our validation middleware.
+0:04
+So we start by using n p m install Zod.
+0:09
+Done.
+0:10
+Now our middleware is gonna be in back end.
+0:12
+Let's make a new folder called middleware.
+0:16
+And in there, let's make a new file called validate dot t s.
+0:22
+Okay.
+0:22
+So the main goal of this file, let's write a comment, is to validate the request body against Azod schema.
+0:31
+Yeah?
+0:32
+So this file is basically gonna be a validation middleware factory function, and we're gonna be writing a higher order function that takes Azod schema
+0:46
+and returns an express middleware function, which runs when a post to the path arrives.
+0:58
+Okay.
+0:59
+So our function, let's call it validate.
+1:02
+It's gonna take a Zod schema.
+1:05
+Now the Zod docs say that all schemas extend the zed dot Zod type base class.
+1:10
+So that's the type we're gonna use here.
+1:12
+So let's import that at the top, and this is gonna be of type Zod type.
+1:18
+So this is returning our function.
+1:20
+So let me set that up.
+1:22
+And the parameters are gonna be rec, the express request object, res, the express response object, and next function.
+1:35
+This calls the next middleware.
+1:37
+So we need to import those.
+1:39
+So they're gonna go in here.
+1:42
+And the types we're going to import at the top, these are from express.
+1:48
+Okay.
+1:50
+And then the return of this function is gonna be void.
+1:54
+There we go.
+1:56
+So this validate function is gonna be called once during the root setup, and it's gonna return this middleware function that express calls on each request.
+2:05
+So we need to bring this down here now.
+2:09
+This is our main thing that we want to do, validate the request body against a Zod schema.
+2:15
+And this is where you're gonna come in.
+2:17
+So here's your challenge.
+2:19
+We went through this when we did our mini Zod course.
+2:21
+We need to validate rec dot body against the schema.
+2:25
+So think back to what the syntax was.
+2:28
+Schema is gonna be just called schema, and we're gonna use the Zod passing method, which returns a result object.
+2:35
+So if you think back, there were two types of passing method, a sort of smaller, simpler one, which if successful, returned the data, and if unsuccessful, returned the Zod error.
+2:45
+But there was a slightly longer version which returned an object with a success property and then either a data or an error property.
+2:55
+That's the one we're gonna use here.
+2:56
+I'd like to store the result in a variable.
+2:59
+You can do that above the challenge text or below.
+3:02
+It doesn't matter.
+3:03
+Okay.
+3:03
+Good luck.
+3:03
+See you in a minute.
+3:10
+Okay.
+3:11
+I hope that was alright.
+3:12
+So I'm just gonna write out the syntax.
+3:15
+It was schema name dot safe pass.
+3:18
+That was what we needed, wasn't it?
+3:20
+And then it's the data to validate.
+3:25
+So for us, the schema name is just schema dot safe pass, and the data to validate is rec dot body.
+3:35
+Fantastic.
+3:36
+And then store the result in a variable.
+3:40
+Bingo.
+3:41
+Nice work.
+3:42
+See you in the next scrim where I'm gonna complete this function.
