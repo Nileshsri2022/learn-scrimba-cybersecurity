@@ -1,0 +1,156 @@
+
+Transcript
+0:00
+Time for us to see the standard headers that we have turned on here.
+0:04
+So I've got a little challenge here for you.
+0:07
+I'd like you to navigate in the mini browser to the slash API slash data endpoint, then I'd like you to bring up your browser's developer tools.
+0:15
+And in Chrome, that's f twelve.
+0:17
+In other browsers, I'm sure you can find that information using Google, and open the network tab.
+0:22
+And then with that open, I want you to refresh the Scrimba mini browser, which will send a request to the API endpoint.
+0:29
+You should see in the developer's tools a little data request payload.
+0:34
+If you click on that and select headers, you should see the rate limit headers.
+0:40
+And because we've turned on standard headers, it should look a little bit like this.
+0:45
+You should see rate limit dash limit, rate limit dash policy, rate limit dash remaining, and rate limit dash reset.
+0:52
+So this is the little data payload I mentioned, and you'll only see this after you've refreshed the mini browser, I e, you've sent a request.
+1:00
+And here is the little headers menu you'll need to see, and you may need to scroll down in this box to see the rate limit headers.
+1:07
+Okay.
+1:07
+Good luck.
+1:14
+Okay.
+1:14
+I hope that worked.
+1:15
+Don't worry if it didn't.
+1:16
+We're actually gonna see the headers in a different way in a second in the terminal.
+1:21
+So the way we're gonna do that, let me clear this up, is I'm gonna go into test requests, and we're gonna actually extract the headers.
+1:29
+So I'm gonna do that up here, and I'm gonna make some variables.
+1:34
+I'm gonna make one called rate limit limit.
+1:37
+So we're gonna extract the rate limit headers from the HTTP response.
+1:41
+So that is res, and we use headers.
+1:44
+And then in square brackets, we specify as a string which header we want.
+1:49
+And because this is the limit, it's gonna be called rate limit dash limit.
+1:55
+Now I feel like you could do the other two for me.
+1:58
+So here's a quick challenge for you.
+1:59
+In a similar format to rate limit limit, continue to extract the rate limit headers for rate limit remaining and rate limit reset.
+2:07
+So this can be just under here.
+2:09
+Good luck.
+2:09
+See you in a minute.
+2:13
+K.
+2:13
+I hope that made sense.
+2:14
+So let's make some more variables.
+2:17
+Let's keep the same format.
+2:18
+So we're gonna go rate limit, and this is gonna be remaining.
+2:22
+And I'm gonna just copy the rest of this.
+2:24
+And instead of rate limit limit, we're gonna go rate limit remaining.
+2:28
+There we go.
+2:29
+And let's copy the whole thing just to speed things up.
+2:34
+And this is gonna be rate limit reset.
+2:39
+Brilliant.
+2:39
+I hope that was alright.
+2:41
+Just keeping the same format there.
+2:43
+So now to use this.
+2:45
+I'm gonna add some console logs here so we have all of the information in a nice format, and then I'll explain what's going on.
+2:51
+Okay.
+2:51
+So at the top here, I've got our current date, and then I've worked out what time the rate limiter will reset by getting the time from the current date, adding how long until the reset, times it by one second, and that's gonna be our reset date.
+3:05
+Then here are the headers that we extracted.
+3:08
+We've got rate limit limit, rate limit remaining, and rate limit reset.
+3:12
+And then here's the reset time.
+3:14
+So it's our reset date to dot to local time string and the current time so we can see the difference if we want to and the response.
+3:24
+You'll see this all in a second in the terminal, and it will make sense.
+3:28
+But now because we are extracting the headers, we don't need to use it in the JSON response.
+3:32
+We're gonna remove this line here and just leave the time stamp.
+3:36
+And because we modified server dot j s, let's rerun the runner.
+3:40
+And in the terminal, let's see what happens.
+3:45
+There we go.
+3:46
+Now as you can see, we have a lot more information now.
+3:51
+So we have request number one.
+3:54
+So we have which request it is and the status code.
+3:58
+We then have a line for headers.
+3:59
+It's telling us the limit's five, remaining four, and we're gonna reset in sixty seconds.
+4:05
+It tells us the reset time, six zero four.
+4:08
+Current time here is six zero three, so that's in sixty seconds, and there's our little time stamp response.
+4:14
+Now as we get to request two, obviously, goes down by one.
+4:18
+Remaining goes down again.
+4:19
+This is similar to what we saw in the previous scrim, but now it's coming from the headers.
+4:24
+Then we get our four two nine after five successful requests.
+4:28
+And you might ask, why is reset not going down?
+4:31
+Well, because test requests, we've got such a tiny set time out here.
+4:36
+They're all essentially happening within a second so fast that we're not actually seeing the reset go down at all.
+4:43
+In the future, we're gonna space these out so we can see that changing.
+4:47
+Okay.
+4:48
+Fantastic.
+4:48
+We're gonna modify our limit now and see how that affects the results.
+4:52
+See you in the next scrim.
