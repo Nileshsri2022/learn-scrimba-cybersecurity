@@ -1,0 +1,91 @@
+Transcript
+0:00
+Your turn now.
+0:01
+Here is the challenge text.
+0:03
+I'd like you to configure the throttling middleware by setting the window length to ten seconds, then set the middleware to start delaying after two requests per window.
+0:12
+Do remember to use the docs for this, then I want you to apply the throttling middleware to the endpoint.
+0:18
+So do you remember where that went for the rate limiter?
+0:21
+Same thing here.
+0:23
+Then we start the runner and run node test requests to see the effect that that's had.
+0:28
+K.
+0:28
+Good luck.
+0:29
+See you in a minute.
+0:33
+I hope that went okay.
+0:35
+So window length is going to be window m s, and we want ten seconds.
+0:41
+So ten, and then milliseconds is three zeros.
+0:46
+Then start delaying responses after two.
+0:49
+As you saw in the docs, we need delay after, and that's just a number.
+0:55
+Okay.
+0:55
+Fantastic.
+0:56
+Apply this throttling middleware to the endpoint.
+0:59
+So I'm gonna change this first throttled endpoint, and it needs to be in between the path and the handler.
+1:07
+And you can see it's grayed out because it's not being used yet.
+1:10
+And then as soon as we place it here, it's no longer grayed out.
+1:13
+I'm gonna save this.
+1:15
+We're gonna rerun the runner and then run our test requests.
+1:23
+Uh-huh.
+1:24
+One and two have gone very fast, but now we've got that delay.
+1:27
+Oh, three, four, five.
+1:31
+Okay.
+1:32
+Interesting.
+1:33
+So we can see that request one and two have both been allowed at t equals zero, and then request three has arrived at t equals zero but been delayed to t equals five.
+1:45
+So has request four.
+1:47
+So has request five.
+1:49
+And then at t equals fifteen as before, the next burst is fired.
+1:55
+And we've got our two, six, and seven here that have been processed at the time of firing, but then we hit our limit of two.
+2:04
+And eight is delayed by five seconds after fifteen takes it to twenty.
+2:09
+Then t is clicked on one second, but essentially all at twenty seconds.
+2:13
+There we go.
+2:15
+So remember that all of the requests in the burst all hit the endpoint at essentially the same time.
+2:21
+So one to five have all arrived at t equals zero, but two have been processed, and the rest in this burst have been delayed.
+2:29
+So three has been delayed five seconds, four has been delayed five seconds, and five has as well.
+2:34
+And then because our window length is ten seconds, at t equals ten seconds, the window will have closed and will start a new delay after two limit.
+2:45
+So we have the two that are not delayed and then subsequent requests all delayed by five seconds or essentially five seconds.
+2:51
+Great.
+2:52
+Let's get rid of this challenge text.
+2:54
+We're gonna talk more about this delay MS time in the next scrim.
+2:58
+See you there.
