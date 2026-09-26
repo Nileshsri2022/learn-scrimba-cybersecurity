@@ -1,0 +1,71 @@
+Transcript
+0:00
+Welcome to this course on rate limiting and throttling.
+0:03
+My name's Jonathan Hill, and I'm really excited that you are here.
+0:07
+We're gonna be learning what rate limiting is, the core concepts, the difference between rate limiting and throttling, client identification, time windows, and some common rate limiting algorithms, fixed window counter, sliding window log and counter, token bucket, and leaky bucket.
+0:26
+And then there's gonna be a section near the end on throttling, and, of course, challenges along the way.
+0:31
+So what is rate limiting?
+0:33
+So it can be used to control traffic flow to web servers, APIs, or other online services.
+0:40
+There are three main points here.
+0:41
+Fair use, helps organizations to ensure fair use of their APIs, avoiding resource hogging by single clients, ensures legitimate users can still access the service.
+0:53
+Security, preventing brute force attacks, login attempts, and also mitigating those denial of service attacks.
+1:01
+However, sophisticated DDoS attacks often use distributed sources, making per IP rate limiting less effective.
+1:08
+So this can require additional mitigation strategies like geographic filtering, behavioral analysis, or upstream protection services.
+1:17
+And resources.
+1:17
+We wanna help protect resources by preventing overload, which can cause them to slow down or become unavailable.
+1:24
+We wanna maintain consistent performance, fast response times, and a smoother experience for those legitimate users.
+1:32
+So some core concepts now.
+1:34
+Rate limiting is like a hard cap on requests per time period, whereas throttling is slowing down responses when the limit approaches.
+1:42
+Client identification.
+1:45
+So this can be by IP address, an authenticated user ID, an API key, or a JWT claim.
+1:53
+So there are a few different types of rate limiting.
+1:56
+IP based is commonly used to prevent DDoS attacks.
+2:00
+Server based rate limiting is preventing resource exhaustion and ensuring fair use of server resources.
+2:06
+And then geographical based is preventing attacks from specific regions, such as those where, like, a large number of malicious requests might originate.
+2:15
+When we're talking about rate limiting, we want to think about differentiating between user level limits and system wide limits.
+2:22
+And time windows can be per second, per minute, or per hour.
+2:26
+Do we want a certain number of requests in thirty seconds or one minute?
+2:31
+So now you know about those core concepts, a little about me.
+2:34
+My name is Jonathan Hill.
+2:35
+I'm a School of Code Boot Camp graduate.
+2:38
+I used to teach music and perform music on stage.
+2:40
+I worked a few years on cruise ships, and I'm a proud cat dad to two Siberian fluffs.
+2:46
+If you wanna reach out, find me on the Scrimba Discord community.
+2:50
+The name's just Jonathan Hill, and I'm also on LinkedIn.
+2:53
+Okay.
+2:53
+Let's get cracking.
+2:54
+See you in the next scrim.
