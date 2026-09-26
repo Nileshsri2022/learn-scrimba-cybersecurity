@@ -1,0 +1,112 @@
+
+Transcript
+0:00
+Time for us to modify the rate limit configuration here.
+0:03
+So far, we've seen five requests being successful and then the rest of our fifteen all failing.
+0:10
+This is because our sixty second window does not have time to reset.
+0:14
+The requests are getting thrown at the API so fast all within one second.
+0:19
+I'm keen for us to modify this so that we see requests being successful, being limited, and us getting four two nine failures, but then the window resetting and us getting successes again.
+0:30
+So time for another challenge.
+0:32
+I'd like you to modify the rate limiter window to allow a maximum of three requests in a ten second window.
+0:38
+Then modify the demo rate limit function that's over in test requests so it waits two seconds before making the next request.
+0:45
+So if we scroll down here, here's demo rate limit, and remember that here is where we are pausing between requests.
+0:55
+Then rerun the runner because remember, whenever we change code in server dot j s, before we run the test requests dot j s file, we need to rerun the runner and run the test requests to see the limiter in action.
+1:08
+And that's just node space test dash requests dot j s.
+1:13
+Okay.
+1:13
+Good luck.
+1:18
+Welcome back.
+1:19
+I hope that was alright.
+1:20
+So three requests.
+1:21
+So our limit is not five anymore, but three in a ten second.
+1:25
+So this is sixty seconds.
+1:27
+I'm gonna change sixty to ten.
+1:29
+There we go.
+1:30
+Modify the demo rate limit function so it waits two seconds.
+1:35
+Okay.
+1:36
+So we go back over here.
+1:37
+We've got fifty milliseconds, but we're gonna modify that.
+1:41
+So if we have three zeros, anything in front of the three is gonna be seconds, and we want two seconds.
+1:48
+So two thousand milliseconds is two seconds.
+1:52
+Save that file, and we now save this file.
+1:56
+I need to rerun our runner.
+1:59
+There we go.
+2:00
+In the terminal node.
+2:04
+Here we go.
+2:05
+So a lot slower now.
+2:06
+You can see we've got one, two, three, and the reset is changing.
+2:11
+Right.
+2:12
+We started at ten seconds.
+2:15
+We came to eight seconds, then, yeah, every two second.
+2:18
+Brilliant.
+2:19
+And if we scroll up yes.
+2:22
+Because our limit is now three.
+2:24
+So after request three is two hundred success.
+2:27
+We have request four, four two nine.
+2:30
+Request five, four two nine, and resets in two seconds.
+2:34
+And then it's reset.
+2:36
+It's gone back up to ten seconds.
+2:38
+And, hey, Presto.
+2:39
+We have a two hundred success.
+2:42
+Two hundred, two hundred.
+2:43
+There's our three.
+2:44
+So request six, seven, and eight are the three that hits the limit.
+2:48
+And by nine, we're back to four two nine reject.
+2:54
+And then we're back again request eleven to two hundred when it resets.
+3:01
+So the burst problem that I mentioned in the theory scrims, we can kind of imagine many quick requests will just all flood through, and that counter resetting gives you that potential of a burst, which may overwhelm the system.
+3:16
+Okay.
+3:16
+Next screen, we're gonna be talking about client identification.
+3:20
+See you there.
