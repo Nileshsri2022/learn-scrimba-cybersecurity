@@ -1,0 +1,72 @@
+
+Transcript
+0:00
+It's time to run our test file and check our predictions.
+0:03
+So let's rerun the runner, and we've got node test requests.
+0:11
+Okay.
+0:12
+One and two success.
+0:13
+Now we said three was gonna be successful after a delay.
+0:18
+There we go.
+0:19
+And then four, we were gonna say we've run out our remaining zero.
+0:23
+Can you see that?
+0:25
+We've got two left after one, one left after two, zero left after three.
+0:31
+That means four is gonna be failure.
+0:33
+But because we're resetting in four seconds, our window resets, and five is success.
+0:40
+Six is also a success.
+0:43
+Seven is a success, but eight is a failure because the window hasn't reset yet, and we're down to zero remaining.
+0:52
+I've extended our chart to help us really see what's going on here.
+0:56
+So I've now got a rate limit count column and an outcome column.
+1:00
+So as request one comes in, the count of how many we've had in the previous window is at zero, so it's success.
+1:07
+Two comes in.
+1:08
+We've now got one in the previous window, so that's two hundred.
+1:12
+Request three comes in.
+1:14
+We've got two, the previous two, so that's success.
+1:18
+But then when request four comes in, the window is twenty seconds behind sixteen, so all of the time we've had elapsed so far, the count's up to one two three, so we fail because three, remember, is our rate limit limit.
+1:30
+By five, process at twenty five, so twenty seconds before that is five seconds to twenty five, so it won't be counting the first two here.
+1:38
+So it's just this one is our successful one.
+1:41
+Won't count that because it was failure, so that's where we get one.
+1:44
+So it's a success.
+1:45
+Thirty seconds, that means this nine second process is dropped off as well.
+1:50
+So we've just got this is the one that's counting here and so on.
+1:54
+Same thing happens.
+1:55
+We get to a count of three.
+1:57
+One, two, three.
+1:58
+So we get a four two nine failure.
+2:00
+And then process stack keeps getting later and later.
+2:03
+So requests behind it get dropped out of the window, and we get to successes.
+2:08
+Join me in the next scrim where we have a final throttling challenge.
+2:11
+See you then.
