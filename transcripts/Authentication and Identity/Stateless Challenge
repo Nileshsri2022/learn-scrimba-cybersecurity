@@ -1,0 +1,178 @@
+
+Transcript
+0:00
+Welcome back.
+0:01
+We've now explored both forms of stateless identity, opaque bearer tokens and JSON web tokens, and we've looked at where each one can go wrong.
+0:09
+So in this scrim, we're going to put that knowledge into practice and run a quick stateless security audit.
+0:15
+Here in stateless challenge dot j s, I've come up with a handful of code snippets and scenarios.
+0:20
+Up the top here, I've also listed our five bearer token pitfalls and our four JWT pitfalls, as well as the instructions of what to do.
+0:28
+Each one of these code snippets or scenarios contain something that's risky, fragile, or poorly designed from a stateless identity point of view.
+0:36
+Our job is to spot what's gone wrong and provide a fix.
+0:39
+Now some of these will have code fixes and some will just require a conceptual answer in the form of a sentence or two.
+0:46
+For example, the first scenario here asks for a code fix, but scenario two asks for a conceptual answer.
+0:53
+So you would simply pop in a sentence of how you would fix this particular issue.
+0:57
+So let's work on scenario one together, which is under opaque bearer tokens.
+1:02
+This is one of the records in the token user lookup.
+1:05
+So what's wrong with it?
+1:06
+Well, it looks like it expires in the year three thousand.
+1:09
+And as always, this is probably just a typo, but still a pitfall.
+1:14
+And this is bearer token pitfall number two, long life tokens.
+1:17
+For the code fix, I'm just gonna copy and paste the original and change the expiry to thirty minutes from now.
+1:24
+And there's our super easy fix.
+1:26
+Okay.
+1:27
+It's your turn to handle scenario two and onwards.
+1:30
+Take your time and I'll see you on the other side.
+1:36
+Welcome back.
+1:37
+How did you go?
+1:38
+There were a few things to chew through.
+1:40
+So let's have a look at what we could have done.
+1:42
+Scenario two.
+1:43
+This is the token lookup after three months in production.
+1:46
+We can only see four entries here, but there is a comment saying that there are thousands more.
+1:51
+Now, obviously, I wasn't gonna pop a thousand lines here, so we'll just have to imagine.
+1:55
+Now thousands of records in just three months.
+1:58
+That sounds like bearer token pitfall number four, token lookup bloat because expired tokens were never removed.
+2:05
+In fact, we can see that every single one of these would have expired back in October of twenty twenty five.
+2:11
+So here's a quick one line conceptual fix.
+2:14
+Add a regular cleanup job that removes expired tokens.
+2:18
+And that's it.
+2:19
+Let's move right along.
+2:20
+Scenario three starts with another lookup followed by a variable that holds today's date and then a function which is called on every request.
+2:28
+It tries to authenticate a user from the bearer token that the request brings.
+2:33
+On the surface, this looks pretty harmless.
+2:35
+The function does take the token and then check if it exists in the lookup, and then it returns either the record itself or not if it doesn't exist.
+2:43
+But here's the problem that's lurking in the shadows and it's bearer token pitfall number three, no automatic revocation.
+2:50
+Now this function is accepting any token that exists in the table regardless of expiry.
+2:55
+So let's fix it up with a bit of JavaScript logic.
+2:58
+I'm going to grab the code of the function and pop it down here.
+3:02
+And we're gonna add a bit of logic to it.
+3:04
+Up here, we already have the variable now containing the current date and time.
+3:08
+So we'll just have to use another quick check here before returning the actual record.
+3:13
+Now if the record's expires property is less than or equal to now, we're going to return null.
+3:20
+And at this point, we can also remove it from the lookup.
+3:23
+Luckily, we have the index and we have the splice method.
+3:26
+So from token table three, we're gonna splice at the index and just one of them.
+3:33
+And now we've hit two birds with one stone.
+3:35
+Moving on to scenario four.
+3:38
+Now here, we find out that there was a recent security breach in our system and we're given a before and after snapshot of one part of our token lookup.
+3:46
+Now this might have taken a little while to find, but it looks like user number one who used to be a user is now an admin.
+3:53
+It would appear that during the security breach, our token lookup was changed And that is bearer token pitfall five tampered lookup.
+4:01
+The fix here is conceptual.
+4:03
+There's no piece of code that we can quickly whip up here to fix this.
+4:06
+So here I wrote, to protect the token lookup as carefully as the rest of our user database, prevent injection, lockdown admin tools, and monitor changes.
+4:16
+And with that, we're on to JWTs.
+4:19
+Here in scenario five, we can see the payload going into a JWT.
+4:23
+Well, this one's pretty obvious, isn't it?
+4:25
+There is way too much From sensitive data like a street address, all the way to unnecessary stuff like user switched tabs fourteen times and resized the window.
+4:35
+The JWT payload doesn't need any of that.
+4:39
+So here we have JWT pitfall number three overstuffed JWT payload.
+4:44
+Now fixing this is easy.
+4:45
+We just have to include only the stuff that a server needs to determine identity.
+4:50
+And I'd say that's just the ID, name, and the admin boolean.
+4:54
+And now we've definitely lessened the strain on this JWT.
+4:59
+And finally, scenario six.
+5:01
+This server config is used when issuing JWTs.
+5:04
+There's actually two issues here.
+5:06
+First, that secret is way too easy to guess and it's kept in the server code in plain text.
+5:11
+So it's probably committed to GitHub as well.
+5:14
+So we've got JWT pitfall number two, weak or leaked secret keys.
+5:19
+Another issue is the missing expiry.
+5:21
+This JWT is never going to expire and with no lookup or user session as a fallback, this is literally going to stay valid forever.
+5:29
+So JWT pitfall number four, long life JWTs.
+5:32
+And the fix here is conceptual because it will take too many steps than we can talk about in this one screen.
+5:38
+So here's what I suggested.
+5:39
+Use a long random secret loaded from a safe place like environment variables and always include an expiry claim so tokens are short lived.
+5:47
+Wow.
+5:48
+That was a lot.
+5:48
+Well done on getting through all of that.
+5:51
+By now, you should be feeling more confident spotting stateless identity problems in the wild and just as importantly knowing why they matter and how to respond to them.
+5:59
+In the next room, we're going to switch gears completely and look at a different approach to identity altogether.
+6:05
+One where your app doesn't have to verify users directly at all.
+6:09
+So when you're ready, let's move on.
