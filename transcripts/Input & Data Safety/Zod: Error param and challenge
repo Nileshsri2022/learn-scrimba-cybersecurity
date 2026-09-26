@@ -1,0 +1,160 @@
+
+Transcript
+0:00
+Right.
+0:00
+We have one more part of errors to learn, and then it'll be a quick challenge.
+0:04
+So virtually every Zod API accepts an optional error message.
+0:09
+Now what does that mean?
+0:10
+Well, we've been seeing the message in the console, haven't we?
+0:14
+Here's the default one, too small.
+0:16
+But I can actually add to dot string or dot min, any of these, a custom error message.
+0:24
+So to dot string, all I need to do in here is say, should always be a string.
+0:32
+I can do it after the eighteen.
+0:35
+Needs to be at least eighteen.
+0:39
+And when I save this, this message changes because it's no longer using the default message.
+0:44
+It's using my custom one.
+0:46
+If I then change Jonathan to numbers again, so we now have two validation problems.
+0:53
+Our array gets bigger by another object, and the first object is to do with the name, and that should always be a string.
+1:01
+That's my custom error.
+1:03
+And the age is my other custom error, needs to be at least eighteen.
+1:07
+So that's how we create our custom error messages.
+1:11
+We don't have to always go with Zod's default.
+1:14
+Alright.
+1:14
+Time for a challenge.
+1:16
+This is a bit different to usual.
+1:18
+So we're back to our character schema, but I've taken a few parts out and added these stars.
+1:24
+So we're getting a lot of red lines.
+1:25
+Don't worry about those.
+1:26
+Your challenge is to replace each of the six stars with the following, issues, result, path, success.
+1:35
+There is one instance of each of these words, and the above list has been jumbled, so they're not in that order, I'm afraid.
+1:40
+Then you can test the code by modifying the character object, saving, and checking the console.
+1:46
+You would modify it so that you either get errors or you don't get errors.
+1:51
+So you need to put something here.
+1:53
+You then need to go into result dot something.
+1:56
+This is very similar to the last scrim, actually, isn't it?
+1:59
+Result dot error dot ah.
+2:02
+It was that special thing I asked you to remember in the past scrim, and you're mapping around that field is gonna be er dot something.
+2:09
+What was that thing that was to do with nested fields?
+2:12
+And then it's gonna be something dot message there for the message property.
+2:17
+Hopefully, since there's not many of these, each one will become pretty clear If you work through it slowly right.
+2:23
+Good luck.
+2:24
+See you in a minute.
+2:30
+Okay.
+2:31
+I hope that was alright.
+2:32
+So what have we got to play with here?
+2:34
+Issues result.
+2:36
+So this is the validation.
+2:38
+So it kinda makes sense that we assign this to a variable, and result would make sense, wouldn't it?
+2:43
+So result there.
+2:44
+Let's get rid of result from our list.
+2:46
+Now if result dot well, that makes sense because we've just created result here.
+2:51
+If result dot something, that looks like everything's good with the validation.
+2:55
+So we remember that we need the success property, and we've got success here.
+3:01
+That makes sense.
+3:02
+Else, so if it's not a successful validation, console dot log result dot error dot something, and we're mapping around that.
+3:10
+So what was it can we map around from the error object?
+3:15
+Oh, yes.
+3:15
+It was that hidden issues array, And then we're calling each thing in the map, so it's dot something.
+3:23
+So this needs to be dot something.
+3:26
+And last but not least, path.
+3:28
+Yes.
+3:29
+That was the property in each object of the issues array, which had the field where the problem was, and it was the one that was array itself due to nested fields.
+3:40
+Okay.
+3:40
+Brilliant.
+3:41
+We're done.
+3:42
+Get rid of the challenge text.
+3:44
+Let's save, and let's see what's happened.
+3:47
+All good, bro.
+3:48
+Yep.
+3:48
+So everything's fine here.
+3:50
+Let's turn this into a string.
+3:52
+Save.
+3:53
+And now we have our custom gray and the one object because there's one problem with the validation field.
+3:59
+It's in the episode.
+4:00
+Yeah.
+4:01
+And the message is invalid input.
+4:04
+So just for fun, Wyden, I make this a customer message by adding in the brackets.
+4:11
+Should always be a number.
+4:14
+And I save, and the error updates.
+4:17
+Awesome.
+4:18
+Okay.
+4:18
+Nice work.
+4:19
+See you in the next room.
