@@ -1,0 +1,80 @@
+
+Transcript
+0:00
+Delegated identity and OAuth are fantastic because we never touch passwords at all.
+0:05
+We let something like Google handle that part for us.
+0:08
+But OAuth also involves something unusual.
+0:10
+We send the user away from our app, and then we trust Google to send them back.
+0:14
+Now this round trip introduces a few places where things can quietly go wrong.
+0:20
+Pitfall one, asking for too much information from Google.
+0:24
+Remember this OAuth authorization screen?
+0:27
+This is part of the authentication process, so we do have to keep an eye on it.
+0:31
+Most apps will only ever ask for the name, profile photo, and email address.
+0:35
+This helps give a personalized experience for sure.
+0:39
+But sometimes apps ask for a lot more.
+0:41
+More than is required.
+0:43
+Now this example is actually an AI powered personal assistant.
+0:47
+So this app does actually need access to my contacts, emails, and calendar events.
+0:52
+But a lot of the time when setting up the OAuth flow with Google, a developer just takes all the options, usually by accident or they're not sure of what they actually need.
+1:02
+But this causes two really big problems.
+1:05
+If anything ever leaks, attackers get far more access than they should, and users lose trust pretty quickly if an app feels nosy.
+1:13
+And that first one is essentially an information disclosure issue or sensitive data exposure.
+1:18
+So the rule of thumb is simple.
+1:20
+Ask for the smallest amount of Google data that your app genuinely needs and nothing more.
+1:26
+Pitfall two, a little OAuth code that appears when it shouldn't.
+1:30
+Remember that one time code that Google sends the server, the one that we then send back in exchange for the real token?
+1:36
+Sometimes that code ends up in places it really shouldn't, like the browser history, analytics tools, server logs, or the URL itself as part of a redirect.
+1:46
+If someone or even a script running the page sees that code before it expires, they can use it to finish the login flow and impersonate the user.
+1:54
+Now this is a straight spoofing issue or broken authentication because leaking that little code lets someone else finish the login and then pretend to be the user.
+2:04
+So even though the code is small, inconspicuous, and expires pretty quickly, keep it from being exposed, and we'll save ourselves from this particular pitfall.
+2:13
+And finally, pitfall three, trusting Google's ID token without checking it.
+2:17
+At the end of the flow, Google gives us an ID token, essentially assigned notes saying this user is logged in.
+2:24
+A very common mistake is to accept that note without verifying it because anyone can write a note.
+2:30
+So our back end needs to check that the token was actually signed and sent by Google, that the token was meant for our app, and that it hasn't been tampered with.
+2:38
+If we skip those checks, attackers can create fake identity tokens and pretend to be anyone.
+2:44
+And just like the last pitfall, this is a classic spoofing or broken authentication issue.
+2:50
+The right way to go is simple.
+2:51
+Don't trust anything until you're sure that Google actually sent it.
+2:55
+So those are some big OAuth pitfalls.
+2:58
+Scopes that ask for too much, little code that ends up in the wrong place, and identity tokens that must be checked properly.
+3:04
+In the next room, we'll have a look at a few small OAuth examples and try spotting what's risky.
+3:09
+It'll help cement the concepts without any technical setup.
+3:12
+I'll see you there.
