@@ -1,0 +1,183 @@
+Transcript
+0:00
+Okay.
+0:00
+Time for some collaboration now.
+0:03
+Here's your challenge.
+0:04
+I'd like you to use the package docs to create a rate limiter using the rate limit function.
+0:10
+I want you to allow five requests per sixty second window, and let's set a response message of too many requests.
+0:16
+Please try again later.
+0:18
+Now if you don't have the package docs ready, you can always click on the slides.
+0:24
+Here they are.
+0:25
+Let me go back for you and click this title here.
+0:28
+Remember that I've already imported rate limit here, and that's what you're gonna be using.
+0:32
+You can code just below the challenge text here, and the quick start usage part of the docs may be helpful.
+0:38
+But if you wanna get a bit deeper, have a look in configuration.
+0:42
+K.
+0:42
+Good luck.
+0:42
+See you in a minute.
+0:48
+I hope that went okay.
+0:50
+So let's create a limiter.
+0:53
+So as I said, we're gonna use this rate limit that I imported earlier, and we pass to it an object.
+0:59
+And that's gonna have a few different properties.
+1:02
+Limit window m s and message.
+1:06
+Those are all the things that I asked for.
+1:08
+So the limit, asked for it to be five.
+1:11
+For the window, I want it to be sixty seconds.
+1:13
+So since we're in milliseconds, milli is three zeros, and then we put however many seconds before that.
+1:20
+So that's gonna be sixty thousand milliseconds.
+1:22
+And let me copy the message so I don't make any typos.
+1:26
+There we go.
+1:27
+Now as you saw in the docs, hopefully, you have to create a variable which is gonna be the limiter.
+1:34
+So let's call it limiter.
+1:36
+So original.
+1:39
+There we go.
+1:40
+Let's get rid of the text.
+1:41
+Now where are we going to use this limiter we've just created?
+1:45
+So in the docs, it says to use it only for a certain endpoint, add the limiter as a middle argument to app dot get or app dot post, etcetera.
+1:54
+So we can see here, here's the limiter.
+1:56
+It's between the path and the handler.
+2:00
+Now one thing to note here is that once you've applied the rate limiter here in between these two, the middleware then attaches data to the request object.
+2:09
+So remember, here's the request object that we can use down here in the JSON response.
+2:15
+So if we wanted to, say, create another property here to remind us of the limit, we would use rec, and then it's attached as dot rate limit.
+2:25
+Remember, rec is the request object, and then the middleware, once it's in between here, which is what you're gonna do in a second, attaches this rate limit object to the request object.
+2:36
+And there's a few properties that we can access here.
+2:38
+We can go into it and find limit.
+2:41
+Or if you wanted, you could find the remaining requests allowed before the rate limiter kicks in or reset, which is when the window is gonna reset.
+2:50
+Now a bit of a warning here, including weight limiting info like this in the JSON response is not the final way we're gonna be doing this.
+2:58
+It's worth knowing that it's there as an option, but it's much better somewhere else in the headers, and we'll talk about that later in the course.
+3:05
+Okay?
+3:05
+But for now, it's just good to know, and I'm gonna get you to do it just so we can see some of the data.
+3:11
+So next challenge.
+3:12
+Here we go.
+3:13
+Use the package docs to apply the rate limiter to the endpoint.
+3:16
+Now I just mentioned where that needs to go.
+3:18
+Keep the time stamp in the JSON response, but change the request count to a remaining requests property.
+3:25
+This new property's value, the number of remaining requests allowed before the rate limiter kicks in.
+3:30
+Use the optional chaining operator to safely access this property.
+3:34
+Okay?
+3:35
+So everything you need to do there, I have just gone through that.
+3:37
+Good luck.
+3:38
+I'll see you in a second.
+3:42
+Okay.
+3:43
+I hope that was alright.
+3:44
+So we take our limiter, and we put it in between a path and the handler.
+3:49
+There we go.
+3:51
+Now the limiter is applied.
+3:53
+We're gonna change request count to remaining requests, and the value of this is going to be the remaining requests allowed.
+4:02
+So remember I said that the the way it attaches data to the request object.
+4:07
+So here's the request object.
+4:08
+We need to go into rate limit property, and in there, we want remaining.
+4:15
+Use the optional chaining operator.
+4:17
+So to safely access the remaining property even if rate limit is undefined or null, let's use our question mark there.
+4:25
+And if we wanted to go above and beyond, we could use the nullish coalescing operator at the end of here, the two question marks, to provide a fallback value if the left side of the question marks is null or undefined.
+4:39
+So why don't we go for unknown?
+4:42
+There we go.
+4:43
+Okay.
+4:44
+Every time we change any code in server dot j s, we need to rerun the runner.
+4:48
+So here we go.
+4:49
+Rerunning that.
+4:50
+Brilliant.
+4:51
+And now we can test node test request dot j s.
+4:58
+Oh, something's different here.
+5:00
+How many two hundreds have we got?
+5:02
+One, two, three, four, five.
+5:04
+But then after five, at six, we start getting four two nines.
+5:08
+Too many requests.
+5:09
+Please try again later.
+5:11
+And because they happen so fast, our one minute window did not finish.
+5:17
+But you can imagine if I'd spaced these out every ten seconds, then we could have seen that once the window had reset, we would start getting our five two hundred success again.
+5:28
+And the remaining requests has worked as well because after one request, we have four left.
+5:33
+After two, three, you can see that.
+5:35
+And then at five requests, we have no remaining, hence why request six is four two nine rejected.
+5:42
+Brilliant.
+5:42
+See you in the next screen where we're gonna talk about headers.
