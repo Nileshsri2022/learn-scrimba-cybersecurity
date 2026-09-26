@@ -1,0 +1,164 @@
+
+Transcript
+0:00
+Alright.
+0:00
+Let's start talking more about the delay MS part of this middleware.
+0:04
+In the previous scrim, we just returned an amount of milliseconds.
+0:08
+So that meant every delay after the two requests that were not delayed are gonna be delayed by five seconds.
+0:15
+So on a timeline, we could see this, that the five requests all in burst one arrived at t equals zero.
+0:23
+The middleware doesn't start counting requests until that first request arrives.
+0:27
+Okay.
+0:28
+Express slowdown uses sliding windows.
+0:31
+That means every subsequent request, remember we sent more at t equals fifteen, looks back the window m s length, which was ten seconds in our case, to count hits.
+0:43
+Now the docs use the word hits for requests that hit the API, so we're gonna continue in that way.
+0:49
+If no requests have been made for longer than the window m s length, then this new request that we'll see here essentially starts a fresh count.
+0:58
+Okay?
+0:58
+The five in the burst one arrive, and the middleware starts counting, and it gets to two, and then it starts to delay.
+1:05
+And the three others are delayed by five seconds.
+1:08
+Then at t equals fifteen, burst two arrives, and this is where the middleware looks back ten seconds, and it says, did any requests arrive, initially arrive, not being delayed, but initially arrive within this window?
+1:23
+Now these three, remember, were delayed from t equals zero, so they don't count, And the middleware then starts a new count, and it goes one two.
+1:31
+It allows two, and then the three more from this burst all get delayed by five seconds.
+1:37
+So in green, we've got accepted requests that arrived at this point, and then yellow are delayed requests.
+1:45
+So we have other delay options available to us.
+1:48
+This would be a fixed five second delay.
+1:50
+We can actually pass the hit number to this arrow function.
+1:55
+So if we here then went for hits minus two, because remember we're delaying after two, and then we multiply that by one second, as we get to the first delayed hit, which would be number three, hit would be three.
+2:12
+We'd have three minus two, which is one times one, and that would be delayed by one second.
+2:17
+And then for hit number four, it'd be delayed by two seconds.
+2:21
+So it'd be an incremental delay.
+2:24
+But we can go one step further, and we can make an exponential delay.
+2:28
+So we could use hits times hits times one thousand.
+2:33
+So that at hit number three, that would be three times three, nine seconds.
+2:38
+And then hit four would be four times four, sixteen seconds, and so on.
+2:42
+So that would be an example of an exponential delay.
+2:46
+So before we test this, let me just change something in our test request's file.
+2:52
+I'd like us to wait thirty seconds rather than fifteen seconds, and you'll see why in a minute.
+3:01
+Okay.
+3:02
+Awesome.
+3:02
+Let's rerun the runner and see what happens now.
+3:09
+So those are our two accepted.
+3:12
+And then request three, let's see how long that's delayed.
+3:15
+It should be three times three.
+3:17
+Ah, t equals nine.
+3:19
+Brilliant.
+3:20
+And we're gonna have to keep waiting longer and longer as we progress through.
+3:24
+Oh, there's four sixteen.
+3:25
+That's four times four.
+3:26
+That makes sense.
+3:28
+And then what's gonna happen now?
+3:31
+We well, five should be five times five twenty five.
+3:34
+Brilliant.
+3:35
+Then we should expect burst two.
+3:37
+There it is.
+3:38
+Because the window is reset at thirty seconds when it arrives, they're both processed.
+3:44
+And then eight should be that's it nine seconds after seven.
+3:49
+And then nine, we imagine should be sixteen seconds or it's gone to seventeen seconds after.
+3:56
+That's okay.
+3:57
+It's essentially the same.
+3:58
+And then request ten.
+4:00
+Yep.
+4:01
+Fantastic.
+4:02
+So we can see that exponential delay there.
+4:05
+Here's a little table to explain what's going on.
+4:08
+We've got the first burst all arriving at t equals zero.
+4:12
+Request one and two not delayed, and then request three delayed three times three, four four times four, and five five times five.
+4:19
+Process stat is then the arrived at time plus the delay, and then the new burst six to ten, all arriving at t equals thirty and the same sort of pattern forming.
+4:30
+And remember that our window is only ten seconds.
+4:33
+So at t equals ten, the window ended or, essentially, if anything after t equals ten had come in as a new request, the middleware would have looked back ten seconds, and it would not have seen requests one to five because remember they all arrived at zero.
+4:49
+Here we have the first two accepted.
+4:51
+Request three is delayed by nine seconds, sixteen seconds, and then twenty five seconds.
+4:58
+And when the new burst arrives at t equals thirty seconds, the middleware looks back the window amount, which is ten seconds, and it says, are there any requests that initially, remember, arrived in that ten second?
+5:11
+Look back, and no.
+5:13
+They didn't.
+5:13
+All of these five all arrived at zero, but some were delayed before they were processed.
+5:20
+So it starts a new count, and it counts one, two, and then any subsequent are all delayed.
+5:27
+Think back to the water slide metaphor I used.
+5:30
+The attendant has allowed two children down the water slide and given the child a timer of nine seconds, the next timer of sixteen seconds, and the next child a time of twenty five seconds to wait before they are allowed.
+5:43
+And then five more children arrive at t equals thirty seconds.
+5:47
+The attendant thinks back ten seconds and says to themselves, did any children arrive within that window?
+5:52
+No.
+5:53
+Okay.
+5:53
+I can allow two to go and then give delayed timers to the others.
+5:58
+Okay.
+5:58
+The fun begins in the next screen when we combine a rate limiter with this throttling middleware.
+6:03
+See you then.
