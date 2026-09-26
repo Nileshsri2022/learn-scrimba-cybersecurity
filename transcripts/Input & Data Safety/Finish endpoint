@@ -1,0 +1,124 @@
+
+Transcript
+0:00
+Welcome.
+0:01
+Let's finish off this endpoint.
+0:02
+We don't need the test anymore.
+0:04
+That was all fine.
+0:05
+Now I said business logic.
+0:06
+Let's talk about what that may be at this point in an application.
+0:09
+So we may hash the password.
+0:13
+We'd never want to store passwords in a database in plain text.
+0:17
+If the database is compromised, then attackers would get everyone's passwords.
+0:20
+So we could use something like Bcrypt or Argon two.
+0:26
+These are intentionally slow to prevent brute force attacks.
+0:29
+We could store the user in the database with parameterized queries.
+0:34
+This could be an extra layer against SQL injection.
+0:37
+We could generate a JWT token for authentication.
+0:41
+This is a way for the user to prove they're authenticated without having to send their password with every request.
+0:46
+We would then most likely send a verification email for the user to confirm their email is real and does belong to them.
+0:54
+Okay.
+0:54
+Now here, I mentioned earlier we need to make sure we return safe public fields.
+0:59
+So we need to make sure we exclude password, obviously, maybe age, and bio.
+1:05
+Now let's put this on a new line and make this into an object.
+1:10
+Now let's only return the fields that we're talking about now and that we have validation for.
+1:15
+So that would just be email, and that's gonna be user data dot email.
+1:20
+And just like up here, we need to make sure we return the mock user count.
+1:26
+And look at that.
+1:26
+I realized I've totally forgotten the status.
+1:28
+So let's put status two zero one.
+1:32
+There we go.
+1:33
+Well, I don't know you noticed that earlier.
+1:35
+So this is guaranteed to be a valid email.
+1:39
+Okay.
+1:39
+Lovely.
+1:40
+Saving that.
+1:41
+Let's check the runner.
+1:42
+Yep.
+1:42
+All good.
+1:43
+Let's NPM run dev to get the front end running.
+1:47
+Now if I don't add anything to these fields, we get the email and password errors.
+1:53
+Quick mention again.
+1:54
+I think I may need to just clarify.
+1:57
+When we talked about, uh, mapping over the issues array here and targeting the path, I think I mentioned that this data was coming from fields.
+2:06
+Now I need to be clear that when we validate nested objects or arrays let's have a look at our schema.
+2:15
+So we've only got one object here, but potentially, it could be nesting objects within other objects, like something like this, where we've got an object and a nested object.
+2:25
+So the reason why Zod uses the array here is that the path we're getting from this property name.
+2:34
+So this would be user, and then nested in there would be name or age.
+2:40
+So that's where path is coming from, the schema object property name.
+2:44
+And because we haven't got any nested schemas, we're always gonna access the first item in that path array.
+2:51
+And when validation fails, we're returning the errors, which we've made this array of objects for each error.
+2:57
+And here we can see them ended on the UI.
+2:59
+So we look back in front end.
+3:02
+We've got our display errors function, and we're going through errors and creating a list item, rendering error dot field colon error dot message.
+3:12
+Alright.
+3:13
+I hope that makes sense.
+3:14
+And then if we get a proper email address and a long enough password, those errors should go away.
+3:21
+Nice.
+3:21
+You might wonder why we've got undefined here.
+3:23
+That's because we're rendering the name.
+3:25
+Remember, we're not returning the name yet because we haven't created key for name.
+3:30
+That's coming up shortly.
+3:31
+K.
+3:31
+Let's extract this schema into its own file and do some type inference.
+3:35
+See you in the next scrim.
