@@ -1,0 +1,92 @@
+
+Transcript
+0:00
+We have finally reached the part of the course on throttling.
+0:04
+This is when we slow down API calls to prevent the overload of your servers or other systems.
+0:10
+Throttling is similar to rate limiting, but instead of a hard cap, we're gonna be slowing down requests after a certain number have gone through so that they don't crowd the system.
+0:20
+It's a bit like an attendant forcing kids to wait a certain time before launching down a water slide.
+0:28
+So we're back to having just a single endpoint with no rate limiting or anything.
+0:32
+I have made a bit of a change to test requests, though.
+0:35
+I'm now passing test start time to make requests, and we're then here working out the elapsed time in the test.
+0:44
+We're then gonna display this in this console log, and the demo throttle function has changed a bit.
+0:50
+Here's us working out the test start time and passing it each time to make request, but we have a few bursts now.
+0:57
+We have five rapid requests in burst one, then we're gonna wait fifteen seconds for burst one to complete, then we're gonna start burst two, and another five requests.
+1:09
+Then we'll wait another five seconds before console logging that the test is completed.
+1:14
+So let's see this action, shall we?
+1:22
+Okay.
+1:22
+There's five finished, and then we'll wait a little bit before the next five burst.
+1:31
+There we go.
+1:32
+And the t equals, that's the elapsed time.
+1:35
+So as you can see, fifteen seconds has gone by before burst two has fired.
+1:41
+And because there's no rate limiting, they're all two hundred success.
+1:45
+So we're gonna use another NPM package here.
+1:47
+It's called express slowdown.
+1:48
+Just as before, please click on this title to navigate to the docs.
+1:53
+Again, this is middleware that sits between the request and the endpoint.
+1:56
+It's gonna count requests in a specific time window, but we're gonna delay requests after a certain amount.
+2:02
+So we might say, allow five through, but any more than five start delaying.
+2:07
+And this also works with the previous NPM package.
+2:10
+So later on, we're gonna see them working in harmony.
+2:13
+So let's install the package.
+2:16
+NPM I express slow down.
+2:22
+And then at the top here, we're going to import the library.
+2:28
+Now we're gonna work together to configure this.
+2:31
+So let's make a throttle this time, and it's gonna be our slowdown that we imported.
+2:38
+And just as before, we pass to it an object of configuration.
+2:42
+We're gonna have to decide a few things.
+2:44
+The window, how many requests should succeed before the delay is implemented, and then how much to delay by.
+2:52
+Is it gonna be like a fixed delay or incremental maybe?
+2:56
+So I'm gonna do the delay m s, which hopefully, if you had a look at the docs, you see that that's one of the configuration properties they require.
+3:04
+And then you are going to finish off this with the window length and the delaying after.
+3:11
+So delay m s value of this property needs to be an arrow function.
+3:16
+Now the simplest way is to just add a millisecond amount that we want each delay to be.
+3:21
+So this would be a fixed delay.
+3:24
+I'm gonna go for five seconds.
+3:27
+But later, we're gonna see how we can modify this to make it incremental.
+3:31
+Okay.
+3:31
+In the next scrim, you're gonna finish this configuration object off.
+3:34
+See you there
