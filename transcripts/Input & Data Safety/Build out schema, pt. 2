@@ -1,0 +1,125 @@
+Transcript
+0:00
+We're so close now.
+0:01
+One more challenge for you.
+0:03
+Here it is.
+0:03
+You can probably guess, add a name key to the register schema, which only validates strings of between two and fifty characters.
+0:10
+You're gonna be getting pretty good at that by now.
+0:13
+Add a bio key, which only validates strings of up to five hundred characters, and make that bio key optional.
+0:20
+Then save, restart the front end in terminal, and test all of the fields now using the form.
+0:27
+Check that only the data that we have specified in the schema is being allowed.
+0:33
+Good luck.
+0:40
+Okay.
+0:41
+I hope that's alright.
+0:42
+Let's go for name right at the top.
+0:44
+And this is a string of between two and fifty characters.
+0:52
+There we go.
+0:53
+Add a bio key, and this is a string of up to five hundred.
+1:00
+So we go max five hundred.
+1:04
+Make the bio key optional.
+1:06
+So we just chain on one more dot optional.
+1:10
+Okay.
+1:11
+Nice.
+1:12
+Let me save that.
+1:14
+Check the runners happy.
+1:15
+Yep.
+1:15
+NPM run dev.
+1:18
+So name.
+1:19
+If I just go for one character here, we should have a problem with name.
+1:23
+Yep.
+1:24
+Too small expected string.
+1:26
+But notice we don't get a bio error messages because we made it optional.
+1:30
+So missing it out isn't a problem.
+1:32
+It's not gonna cause an error.
+1:35
+Okay.
+1:35
+Lovely stuff.
+1:36
+So let me add a customer message here and here.
+1:42
+And let's practice that regex again on name.
+1:45
+So we go dot regex.
+1:48
+And this time, I only want the name to be able to contain letters, spaces, hyphens, apostrophes, and periods.
+1:54
+So it's gonna look like this, and the custom error message will be.
+2:01
+And then I think it would be good to trim this as well in case there's any trailing white space.
+2:08
+And then let's go for a quick error message here.
+2:15
+Okay.
+2:15
+Very good.
+2:16
+So I hope you can start to see many of the benefits of using a validation library like Zod.
+2:22
+Tiny bit more housekeeping.
+2:24
+We now need to add down here name.
+2:28
+Finally, now if we pass validation, we should see the name in the success message.
+2:36
+Let's have a go.
+2:38
+Let's say I'm thirty.
+2:44
+Boom.
+2:44
+There we go.
+2:45
+So so it's not undefined anymore because we're returning the name in this user object.
+2:53
+Let's have a quick look in app.
+2:55
+We should see display success.
+2:57
+There we go.
+2:59
+We're getting response dot user dot name there.
+3:03
+Lovely.
+3:03
+So now we have all of the data in the correct data type.
+3:07
+We have a strong password.
+3:08
+We have transformed certain user inputs into a standardized format.
+3:12
+We have users of a suitable age, etcetera.
+3:16
+Good work in this project.
+3:17
+Why don't you try from scratch creating a new schema and implementing it in your own form?
