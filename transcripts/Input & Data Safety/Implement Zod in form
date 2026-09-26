@@ -1,0 +1,75 @@
+Transcript
+0:00
+Welcome back to our form project.
+0:02
+Now it's time to put our newfound Zod skills into practice.
+0:07
+If you recall, we only currently have that insecure endpoint.
+0:11
+This is what we're going to do to implement Zod and create a new fully secure endpoint.
+0:16
+We're gonna have to install Zod, then create some validation middleware.
+0:20
+We're gonna start with a basic inline schema.
+0:23
+We're gonna add middleware to a new endpoint and then test it, of course, and then render the errors to the form and test those, and then expand the schema into its separate file.
+0:34
+Let's have a quick look at this diagram how everything's gonna work.
+0:37
+So we start on the left with the form.
+0:40
+That's submitted, we make a post.
+0:43
+That's where our validation Zod middleware is gonna come in.
+0:46
+It's gonna check that data, and if there are any errors, it's not gonna let the data through the machine.
+0:53
+It's gonna send a four hundred back with the errors to render on the form.
+0:58
+But if the validation is successful, the data along with any transformations that Zod has made make their way through the machine and hit the back end.
+1:07
+In the real world, we would then save the user to a database, returning that user that's created, and then we can send that back to the front end with a two zero one.
+1:18
+So there's the full diagram.
+1:22
+Okay.
+1:22
+Nice.
+1:23
+So I've also created this read me dot m d.
+1:25
+I did promise earlier that I would remind you about the commands for compiling the back end and the front end, etcetera.
+1:33
+So a back end setup, the way I've set it up is that by saving a file with command or control s, that is going to compile the back end folder and restart the back end server.
+1:45
+So let me show you that.
+1:46
+So if I just put a full stop here, you see the little yellow dot meaning that this file has been edited.
+1:51
+If I now save and look in the mini browser, we see the mini browser changing.
+1:57
+The runner has run a script which recompiled the back end folder and restarted the back end server.
+2:02
+So that's really easy.
+2:03
+Now for the front end, it's in the terminal.
+2:05
+We can see here the server running.
+2:07
+So to recompile and restart, I go for control c.
+2:10
+It says HTTP dash server stopped, and then I just run NPM run dev, which runs a script to recompile the front end folder and restart that HTTP dash front end server.
+2:23
+And the mini browser shows us the front end rendered again.
+2:27
+Great.
+2:28
+And then this is the only endpoint we have right now slash register vulnerable, but we're gonna be creating a new one with the Zod implementation, which will be much more secure.
+2:37
+So for future challenges, you can always check this read me dot m d if you need reminding how to restart servers.
+2:43
+Okay.
+2:43
+Let's get cracking.
+2:44
+See you in the next scrim.
