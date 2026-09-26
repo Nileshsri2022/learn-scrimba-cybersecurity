@@ -1,0 +1,142 @@
+
+Transcript
+0:00
+Welcome back.
+0:01
+So we have our small inline schema here, but we're gonna now extract it into its own file.
+0:06
+So why extract the schema now?
+0:08
+We could want to reuse the schema in multiple places.
+0:11
+It's good for organization.
+0:13
+We're gonna be exporting the inferred types, so there'll still be type safety, and it means we have a single source of truth for validation rules.
+0:22
+So in back end, let's make a new folder called schemas.
+0:25
+And then in there, a file called user schema.
+0:29
+And then we can take away this schema we've already done and put it into user schema.
+0:35
+We then don't need this line, but we could put it up here.
+0:40
+We need to make sure we export this register schema and then import it at the top here.
+0:47
+It's in schemas and user schema.
+0:52
+There we go.
+0:53
+So that should still work.
+0:54
+Let's check-in store that we now have schemas.
+0:57
+Yep.
+0:58
+Okay.
+0:58
+Time to test.
+0:59
+So the run is working okay.
+1:01
+Let's just run NPM run dev.
+1:04
+Yep.
+1:04
+Okay.
+1:04
+Everything's compiled properly.
+1:07
+This is all working.
+1:08
+Let's just there we go.
+1:10
+See our errors.
+1:10
+Fantastic.
+1:11
+Okay.
+1:11
+You're up.
+1:12
+It's challenge time.
+1:13
+In the mini Zod course, we learned about inferring types.
+1:17
+So in user schema dot t s, create a register input type, which is inferred by Zod from this register schema.
+1:26
+Export this type, and then in auth dot t s, import the type and use it to add type annotation to the user data object, which remember is down in our new endpoint.
+1:36
+Here's user data, so this needs typing.
+1:39
+I'll just put that there to help.
+1:42
+Okay.
+1:42
+Use those Zod docs to help and go back to the mini Zod course if you need.
+1:46
+See you in a minute.
+1:53
+Hope that was alright.
+1:55
+Okay.
+1:55
+So we create a type, and it's gonna be called register input.
+2:01
+And this is gonna be inferred by Zod.
+2:03
+So we remember we need to use zed again, and we use the zed infer, funnily enough.
+2:08
+And then we have angle brackets.
+2:10
+And in there, we put the schema name.
+2:14
+But before that, we need to say it's a type of this schema.
+2:18
+There we go.
+2:19
+So now when we build out this schema, the type will be inferred.
+2:23
+It'll be constantly updated.
+2:25
+So this means that this type, this register input type becomes this automatically.
+2:34
+Okay.
+2:35
+Export the type, and then let's copy it.
+2:39
+And we go in here.
+2:40
+And then at the top, we just add it because it's coming from this file.
+2:44
+We can add it to this curly brackets, register input, and then we use it to type the user data.
+2:53
+Fantastic.
+2:54
+Save everything.
+2:56
+Brilliant.
+2:57
+I hope that was alright.
+2:58
+Let's run a quick test again.
+3:00
+That's all good.
+3:01
+Let's close this NPM run dev again.
+3:05
+And are we getting our errors?
+3:06
+We are.
+3:07
+Let's test with a nice long password and a valid email.
+3:12
+Fantastic.
+3:13
+There we go.
+3:14
+Alright.
+3:14
+We've got a few more fields to complete for the register schema, haven't we?
+3:19
+See you in the next scrim.
