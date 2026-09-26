@@ -1,0 +1,93 @@
+Transcript
+0:00
+Welcome back.
+0:01
+Now we've finished our middleware factory function, it's time to talk about the new endpoint we need before getting into the schema.
+0:09
+Eventually, we're gonna be passing the schema to the validate function, which returns our middleware function, and it's this function that Express will use for each request.
+0:19
+So back to auth dot t s, here's our vulnerable endpoint.
+0:23
+So below, we're gonna write a new fresh secure endpoint.
+0:28
+So we need to create a validated secure endpoint.
+0:33
+So we're gonna do a lot of similar things to up here.
+0:36
+So for speed, let's just copy this line.
+0:40
+Little bit lazy of me, but here we are.
+0:43
+Now, I'm gonna call it register instead of register vulnerable because it's going to not be vulnerable.
+0:48
+And we need to remember that we've got the path and then we've got the route handler, but in between there, that's where our middleware goes.
+0:57
+So let's use some different lines, shall we?
+1:00
+Here is the middleware.
+1:02
+Let me just finish this off.
+1:05
+There we go.
+1:06
+So our middleware is that validate function.
+1:09
+So let's import that at the top, And it's from we've gotta go back a level.
+1:15
+It's in the middleware folder, and it's the validate dot j s file that we're getting it from.
+1:23
+There we go.
+1:24
+So then we take this and we put it in between the path and the root handler.
+1:30
+And remember, it's a function and it's gonna take the schema.
+1:33
+So we'll leave that blank because you're gonna write the schema in a minute.
+1:38
+So remember, this root handler function only executes after all the middleware in the chain has completed successfully.
+1:45
+So it's almost like the data has to get through the Zod validation before any of the root handler fires.
+1:53
+So if there's an error, it's never gonna reach the root handler.
+1:56
+So we look back in validate dot t s, and we remember that the data is gonna be attached to the rec.
+2:03
+So let's copy this again.
+2:05
+So this is our data, and let's assign that to a variable.
+2:09
+Let's call it user data.
+2:12
+Now we need to test.
+2:14
+We then have our business logic here, and then the response we're gonna send back is gonna be an object, and it's going to a bit like before have a success property, and let's send the data back.
+2:31
+For now, we're just gonna send the whole user data.
+2:34
+Later, I'm gonna change this, but for now, it's almost challenge time for you.
+2:38
+Let's just write a test here.
+2:40
+So a simple console log, and it's gonna be the user data and which part of it.
+2:45
+We don't want anything potentially sensitive like a password, but let's just go with the email.
+2:50
+Now before it's challenge time, we need to change the endpoint so that we're using our new slash register.
+2:57
+So we go to the front end app dot t s, and we find where this is opening, which is here, this fetch, and we're just gonna get rid of dash vulnerable.
+3:07
+So it's now heading to slash register.
+3:10
+Save that, which is going to recompile the and let's just have a quick look at the diagram again.
+3:16
+So we've put our middleware in between the path and the root handler.
+3:21
+So that means that if it fails validation, we don't even get to the back end.
+3:26
+But if it passes validation, the validator gets to the back end, and we would then send it back with the user with a two zero one.
+3:35
+Okay.
+3:36
+In the next scrim, it's gonna be challenge time.
+3:38
+See you then.
