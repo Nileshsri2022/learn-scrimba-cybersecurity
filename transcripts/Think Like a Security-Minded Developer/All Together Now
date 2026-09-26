@@ -1,0 +1,53 @@
+Transcript
+0:00
+Alright.
+0:00
+We've come full circle.
+0:02
+We started with Stride, learning how to predict what could go wrong while we're still designing our app.
+0:07
+And then we met OWASP, learning how to recognize and fix what's actually gone wrong once the app is live.
+0:14
+Now let's zoom out and see how these two fit together.
+0:17
+Stride lives in the design phase, and OWASP lives in the runtime phase.
+0:22
+When you're sketching diagrams and planning features, Stride helps you ask what could go wrong.
+0:27
+And when the app is real and users are using it, OWASP helps you determine what actually went wrong.
+0:33
+Stride helps you build with security in mind, while OWASP helps you defend and respond when those ideas meet the real world.
+0:41
+And Stride asks, how do we prevent someone from breaking something?
+0:45
+And OWASP asks, how do I prevent someone from breaking it again?
+0:49
+Picture the software life cycle like this timeline.
+0:52
+Stride fits in early during the design and planning.
+0:56
+And OWASP kicks in after launch when bugs and exploits start to appear.
+1:01
+And together, they cover both ends of the security story.
+1:04
+Let's take QuickByte as an example where a user was able to view another user's receipts.
+1:09
+If we had used Stride early on, we might have spotted that URL parameter change issue before it happened.
+1:16
+It's a clear case of spoofing or tampering.
+1:19
+But once the app went live and that same bug started leaking customer receipts, OWASP would step in with a label, broken access control, plus a checklist of how to fix it.
+1:29
+Let's also have a look at our music school student portal example and our level ten thousand student.
+1:35
+If we had applied stride during design, we might have caught that feature where students can level up and realize it needed tighter role checks, a classic elevation of privilege risk.
+1:46
+But once that app went live and our seven year old hacker discovered she could boost her own level, that became an OWASP broken access control issue in the wild.
+1:55
+Stride would have warned us before launch, and OWASP can now help us understand it afterwards.
+2:00
+And that's how they connect.
+2:02
+Stride predicts and OWASP diagnoses.
+2:05
+And that's your picture of threat modeling from design time to runtime, from prediction to prevention.
