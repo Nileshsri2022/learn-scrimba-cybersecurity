@@ -1,0 +1,131 @@
+Transcript
+0:00
+Welcome back.
+0:01
+Let's get into errors.
+0:03
+When we failed the validation, we saw the Zod error.
+0:06
+Let me show you that again.
+0:07
+So if I change this to a number and save, we see our success property and error property.
+0:14
+And the error property is this Zod error.
+0:17
+So here we're seeing the standard error properties on all JavaScript errors.
+0:22
+This Zod error has a name property and a message property, but instances of Zod errors actually contain a dot issues array, which we can't see here.
+0:32
+We can go into the Zod error and target it and see that, and I'll show you that in a minute.
+0:37
+But I just wanted to mention that when we log the error here so we can actually go to dot error, couldn't we?
+0:44
+Here.
+0:45
+When we log this, we only see certain properties, the name and the message.
+0:50
+The issues array is hidden in the output, but it does exist.
+0:53
+And funnily enough, Zod is stringified the issues array and put it in this message.
+0:58
+So the issues array actually contains these things, but in a way that we can target that array, which has objects in it.
+1:07
+This all seems very complicated, but I will show you.
+1:10
+So what I want to do first is actually I'm going to create a results variable.
+1:16
+A result variable.
+1:17
+There we go.
+1:17
+And we're just going to there we go.
+1:20
+So that's our validation, and we've assigned it to result.
+1:24
+Now I'm gonna log result dot error.
+1:28
+This is what we had earlier.
+1:29
+So it's basically the same as what we just did.
+1:31
+But now I'm going to target this issues array that I promised you exists.
+1:35
+Here we go.
+1:37
+So this is actually an array that we can then target, meaning that we can go to the first thing in the array, which is this object which has expected code, path, and message properties.
+1:49
+Earlier, when we saw it say Zod error, as I said, Zod had stringified this issues array and made it into a message.
+1:58
+If we think back to our airport scanner analogy, the machine has taken the detailed scanner report and turned it into a nice, easily read display.
+2:08
+But we have to use this issues array if we want to actually get some of these values.
+2:13
+For instance, if I wanted this message, the default message here, I have to go dot message.
+2:22
+So, basically, issues, if we go back to it, is something like this.
+2:27
+It's an array, and each issue has an object.
+2:31
+So we could create more than one issue, couldn't we?
+2:33
+We could make the age under eighteen, and now we have the array of two objects.
+2:40
+The first one's to do with invalid type, expected string received number, and the next one is to do with the number being too small.
+2:49
+So why don't we do a little bit more code here?
+2:52
+We're gonna make an if statement and say, if result dot success, then we're gonna console log all good, bro.
+3:01
+But if it's not and the validation has failed, then we are going to console log the message of the problem.
+3:09
+So we've got result dot error dot issues, and we're just gonna imagine we have one issue.
+3:15
+So that means we can go into square bracket zero and go into the message property of that object.
+3:22
+So now let me make this back into the string Jonathan so that we only have one problem with our validation.
+3:29
+And there we go.
+3:30
+That's the message telling us that the age is too small.
+3:33
+We're gonna be doing this in our project a little bit later.
+3:36
+Well, actually, we're gonna be going one step further.
+3:38
+Because we may have more than one issue, why don't we do some mapping?
+3:42
+So, actually, instead of getting the first thing in the array, let's go dot map, and we're gonna call each in the array, uh, then we go big arrow, and we are gonna create an object with a field property and a message property.
+4:01
+So the field property is going to be, dot.
+4:05
+Now there was something in the object that told us where the problem was.
+4:08
+It was the path.
+4:11
+Now to allow for nested fields, because in some forms, you know, you can have nested fields, the value of this path property is actually an array itself.
+4:20
+So we're gonna go into the first item in the array, and message is just gonna be a message.
+4:28
+So let me just show you again what the issues array looks like.
+4:32
+Here it is.
+4:32
+You see that the path property is an array itself, so that's why we need square brackets there.
+4:37
+Why don't I put a comment here saying array for nested fields, e g, we could have, like, a user field, and in that user field is a profile field, and in that one is maybe an email.
+4:55
+Okay.
+4:55
+So now we see we've got a nice array with our custom properties.
+5:00
+We've got a field and a message.
+5:02
+So we can imagine if we did have an HTML form.
+5:06
+If things fail the validation, we might want some errors to show up at the bottom of the form, and we can use the value of this field property to tell them where the problem is and the value of this message property to tell them what the problem is.
+5:21
+This is just foreshadowing something we're gonna be doing later in the project.
+5:25
+So the main thing to remember here is the issues array, which is inside the error object.
+5:33
+See you in the next scrim.
