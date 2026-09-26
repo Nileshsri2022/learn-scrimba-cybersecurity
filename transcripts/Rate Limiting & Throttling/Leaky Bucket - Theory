@@ -1,0 +1,86 @@
+
+Transcript
+0:00
+We've arrived at our final algorithm, the leaky bucket algorithm.
+0:04
+So imagine we have a bucket with a hole in it.
+0:07
+Water is filled.
+0:08
+The bucket has a fixed capacity.
+0:10
+But because of the hole, water leaks at a fixed rate.
+0:15
+By now, you probably realized that the water being filled are the requests.
+0:19
+We're gonna be holding those requests in the bucket and processing them as they leak out of the bucket.
+0:25
+But if the bucket is filled faster and water leaks out, it will eventually overflow, and that excess water will be discarded.
+0:34
+So let's have a look at an example here.
+0:36
+The capacity of our bucket is five requests, and the system can process two requests per second.
+0:43
+So the system starts idle, and in the first second, four requests arrive.
+0:48
+Those are added to our first in, first out FIFO queue.
+0:53
+We know that the system can process two requests per second, so request number one is processed and request number two is processed.
+1:01
+We start the second second, and four more requests arrive.
+1:05
+In our queue, since there are only space for three requests, those three are added to the queue, and that final request eight is discarded.
+1:14
+We process two requests,
+1:18
+and we get to the third second.
+1:20
+No new requests arrive.
+1:22
+We process two requests.
+1:25
+We get to the fifth second.
+1:26
+No new requests arrive, and that final number seven is processed.
+1:31
+So you can see that requests are processed at a fixed rate.
+1:35
+This can prevent overload as we have the control to set how many are processed each second or per whatever window length we decide.
+1:44
+It's a FIFO queue, meaning the request that arrives the earliest will be processed first, and requests are discarded if that capacity is full.
+1:53
+So we can see that this is good for smoothing out bursts.
+1:57
+The queue prevent overloads, and it's quite easy to understand and implement this algorithm.
+2:02
+But the cons, it lacks flexibility in handling sudden traffic spikes.
+2:07
+We can see it prioritizes system stability over user experience.
+2:11
+If there's legitimate burst traffic, this would get queued or delayed.
+2:15
+In high traffic scenarios, users might even have to wait when the system could handle the burst absolutely fine.
+2:21
+Yep.
+2:22
+Just said that part here.
+2:23
+And this is often used for network bandwidth management, video streaming, and server request handling.
+2:28
+Yes.
+2:29
+Of course, we've got that constant output rate leaking from the bucket.
+2:33
+I like to think of token bucket as here are tokens, spend them whenever you want, and this leaky bucket as get in line.
+2:41
+I'll process you at my pace.
+2:43
+Okay.
+2:43
+Well done.
+2:44
+I realize that's quite a lot of algorithms to get your head around.
+2:47
+Might be worth pausing and trying to write down as much as you can remember about each of the different algorithms and then go back and check.
+2:55
+Looking forward to seeing you in the next scrim.
