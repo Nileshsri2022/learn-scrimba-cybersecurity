@@ -1,0 +1,82 @@
+
+Transcript
+0:00
+So the whole part here, one minus x times previous, that's estimating how many of the previous Windows requests fall within our sixty second look back.
+0:11
+That's our sort of sliding window idea.
+0:14
+We then add that to our current window count, and then if that plus one is smaller than the limit, we are allowing it.
+0:22
+So let's move to t equals forty.
+0:24
+We've got a new request.
+0:25
+So we calculate again.
+0:26
+Now this time, we're a third, not a sixth of the way into our current window.
+0:31
+So you can think that our sliding window look back is now not going as far.
+0:35
+So we're now one minus a third times five, previous window total, plus zero.
+0:40
+We're still at zero with our current window.
+0:42
+That's three point three three.
+0:43
+Now three point three three plus one is smaller than five, so accepted.
+0:51
+If another request has also come in at t equals forty, well, our current window count is now one.
+0:58
+So we're gonna be adding one at the end of this to get back to four point three three, which takes us back to five point three three when we add the one, and now we are bigger than five.
+1:08
+So that one is rejected.
+1:10
+And you can imagine that any more, no number has changed.
+1:14
+Right?
+1:14
+We're we're still the same fraction into this window.
+1:17
+The previous count has stayed the same.
+1:19
+The current window count has stayed the same, so any more requests at t equals forty are gonna keep rejecting.
+1:25
+Now if we compare this to the sliding window log, we can see that we have more green accepted requests here.
+1:33
+The t equals thirty and two from forty are accepted in the sliding window log, so it's actually more lenient than the sliding window counter.
+1:42
+When we do the calculation for the sliding window counter, we are taking into account all of the accepted requests in this previous window, aren't we?
+1:51
+Therefore, the system is thinking the capacity is more constrained than it really is.
+1:55
+Whereas for the log, remember, we just look back the window length from the current position.
+2:01
+So if we think about t equals forty here, we're going back to ten.
+2:05
+So we're cutting out these three, hence why it's more lenient here.
+2:09
+In the sliding window counter, the algorithm assumes that all of the requests are sort of nicely spaced evenly in that previous window, when actually here we can see they can be quite close to the beginning of the window.
+2:21
+So we see that when requests are near the start of the window, the sliding window log is more lenient.
+2:28
+But let's have a look now when the requests are more bunched up at the end of the window.
+2:32
+So for the sliding window log, because these requests have come in at t equals forty five, thirty seconds before that takes us to equals fifteen.
+2:40
+So it's including the four around here and then the one at t forty five and rejecting the other three.
+2:45
+But in the sliding window counter, the counter is actually underestimating recent traffic, so becoming more lenient.
+2:52
+This is all because the counter at the bottom here assumes that requests were evenly spread.
+2:57
+Because remember, it doesn't know exactly when they came in.
+2:59
+It's working out an estimated weighted count using the fraction of the previous window that overlaps times the previous window plus the current window.
+3:09
+So at the bottom here, we'd have a half times four, which is two, plus zero initially, and then that two plus one is definitely below five.
+3:19
+So that's why we'd allow one here, two, and then finally three, but not the fourth, making it more lenient.
+3:25
+Okay.
+3:26
+Onto the next scrim.
