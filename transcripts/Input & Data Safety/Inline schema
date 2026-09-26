@@ -1,0 +1,109 @@
+Transcript
+0:00
+Welcome back, and now it's challenge time.
+0:03
+So you're gonna write the inline schema just here above the new endpoint, and we're gonna see if it works.
+0:10
+So here's the challenge text.
+0:11
+I want you to create a register schema with the following keys.
+0:14
+Use the Zod email method on the email key along with a custom error message of invalid email address.
+0:20
+You can just copy and paste that.
+0:22
+Limit the password key to a string, so that's gonna be one method of at least eight characters, and that's gonna be a chained second method along with a suitable custom error message.
+0:32
+And I'd like that error message to be about the at least eight characters part.
+0:37
+Pass this register schema to the validate function in the smooth brackets and then save, which will recompile the back end.
+0:45
+Restart the front end that's going into terminal and running NPM run dev and test the validation using the log to the runner console.
+0:53
+So you'd be able to look here.
+0:54
+Don't worry about this error message.
+0:56
+It's just because there's nothing in here, and you should see the email logged to the console.
+1:01
+Now remember, for this to work, you need the validation to pass for it to be successful, which means you're going to have to give a valid email address in the email field and a password of at least eight characters in the password field.
+1:14
+I'm gonna help you quickly by just importing Zod at the top here.
+1:18
+Import star as zed from Zod.
+1:23
+There we go.
+1:24
+Alright.
+1:24
+You can do this challenge just in here.
+1:27
+Good luck.
+1:27
+See you in a minute.
+1:34
+Okay.
+1:34
+I hope that was alright.
+1:35
+So we go const register schema.
+1:38
+And because there's two keys, we need to go zed dot object, and we have the smooth brackets after every method.
+1:45
+And then we have the object with email and password keys.
+1:50
+The email is gonna be the Zod email method.
+1:53
+So we go zed dot email along with the customer message so we can copy this into the smooth brackets.
+2:00
+And the password is a string, so zed dot string.
+2:03
+And we're gonna chain on at least eight characters, so that's gonna be minimum min.
+2:09
+And the Zod doc show us that min takes the number of characters to start with and then the custom error message.
+2:15
+So let's go for password must be at least eight characters.
+2:22
+Then we pass this register schema to the validate middleware function.
+2:28
+There we go.
+2:30
+And we save.
+2:31
+Let's check the runner is working okay.
+2:33
+Yep.
+2:33
+And let's stop the front end server.
+2:36
+We compile and restart it with NPM run dev.
+2:40
+Here we go.
+2:41
+So let's for starters, let's just not do an email address to see if we do get the errors.
+2:47
+There we go.
+2:48
+Email invalid email address and password.
+2:50
+So the errors are definitely getting fed to the front end.
+2:53
+But if I use a valid email address in the right format, which needs an at and a dot com, something like that.
+3:01
+And then make sure this is at least eight characters.
+3:03
+There we go.
+3:04
+The errors go away, and we check-in the runner for our console log of the email.
+3:08
+Yes.
+3:08
+Fantastic.
+3:09
+So our inline schema is working with our new secure endpoint.
+3:14
+Fantastic.
+3:14
+Next, Grim, I'm just gonna be finishing off this endpoint.
+3:17
+See you then.
