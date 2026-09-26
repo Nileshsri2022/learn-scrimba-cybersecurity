@@ -1,0 +1,99 @@
+Transcript
+0:00
+Welcome back.
+0:01
+In the last two scrims, we explored opaque bearer tokens and the problems that can show up when they leak, last too long, or get mismanaged.
+0:08
+Now we're going one level deeper into stateless identity.
+0:12
+What if we wanted a token that didn't need a lookup at all?
+0:15
+A token that literally carries all the identity a server needs.
+0:19
+Well, that's exactly what JSON Web Tokens or JWTs or JWTs were designed to do.
+0:25
+A JSON Web Token is a self contained token.
+0:28
+That means it carries all the important information, who the user is, what they're allowed to do, which again is authorization, when the token expires, who issued it, plus a cryptographic signature to prevent tampering.
+0:40
+I know it's very fancy.
+0:41
+Everything the server needs to authenticate the user lives inside the token itself, Therefore, no lookup needed.
+0:48
+And this is the most stateless version of stateless identity.
+0:52
+This text sausage is a JSON web token.
+0:56
+It's a three part token separated by dots.
+0:59
+We have the header in blue, which describes the algorithm and token type.
+1:03
+Then we have the payload in yellow.
+1:05
+This is where we have the user identity information as well as roles, also known as the claims.
+1:11
+And finally, we have this signature in pink.
+1:14
+This is that little cryptographic stamp that proves that the token hasn't been tampered with.
+1:19
+So now that we've seen the text sausage, it's important to understand how that sausage is made, what goes into it, and why it ends up looking like that.
+1:27
+So here's the simple version.
+1:29
+The server starts with two ingredients, the header, which says use this algorithm and this is a JWT, and the payload, which is full of the user's information or claims.
+1:40
+Then the server combines those two ingredients with something only available within the server, the secret ingredient or a secret string.
+1:47
+It mixes the header and payload with the secret to create the signature, that pink tamper proof stamp, and then encodes all three parts and joins them with dots to form the final JWT.
+1:59
+Now anyone can decode the header and payload with a decoder, but only the server can create or verify it because only the server knows the secret.
+2:08
+That's what makes this whole thing trustworthy without needing a lookup.
+2:12
+Here's a standard login flow with JWTs.
+2:15
+The user logs in.
+2:17
+The server checks the credentials.
+2:18
+If valid, the server creates and signs a JWT.
+2:22
+This signed token goes back to the client and the client stores it locally.
+2:27
+Every subsequent request must include the JWT via the authorization header, just like the opaque bearer token.
+2:34
+And then the server verifies the signature.
+2:36
+No lookup and no server storage used.
+2:38
+And this is why JWTs are considered fully stateless.
+2:42
+The identity is the token itself.
+2:44
+So let's compare JWTs with the opaque bearer token.
+2:48
+Opaque tokens contain nothing.
+2:50
+They're just random unguessable strings.
+2:53
+A JWT, on the other hand, actually contains data, encoded claims like the user's ID, their role, and the token expiry.
+3:01
+In terms of how we identify the user, with an opaque token, the server has to look it up in that tiny token to user lookup.
+3:07
+But with a JWT, the server verifies the signature and simply reads the claims inside of the token itself.
+3:14
+In terms of server storage needed, of course, opaque bearer tokens need that small lookup, but JWTs don't need any storage at all.
+3:22
+And as for where identity lives, opaque bearer tokens have identity living on the server, But with JWTs, identity lives inside the token itself.
+3:32
+So an opaque bearer token points to identity stored on the server, and a JWT contains the identity right inside of itself.
+3:39
+So that's JWTs, Fully stateless, self contained tokens that the server can verify instantly.
+3:45
+They sound pretty magical and used correctly, they're incredibly powerful.
+3:50
+But because JWTs carry so much inside themselves, they also come with their own set of pitfalls and some can lead to some pretty bad security problems if you're not careful.
+3:59
+So in the next scrim, we'll walk through some common JWT mistakes and how to avoid them.
+4:04
+I'll see you there.
