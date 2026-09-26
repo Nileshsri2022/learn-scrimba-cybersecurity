@@ -1,0 +1,130 @@
+
+Transcript
+0:00
+Now that we've covered common cookie mistakes, let's flip to the server side and have a look at session pitfalls.
+0:06
+These issues are just as common, but because sessions live on the server, they're much easier to overlook.
+0:11
+Before we have a look at the pitfalls, a quick reminder of what a real session store looks like.
+0:16
+In an express app, you'll actually never manually write a session object.
+0:20
+The framework creates it for you and you store it behind the scenes usually in memory.
+0:24
+Each session is designed to be quite small, something like this.
+0:27
+Basically, an object of data related to the user session.
+0:31
+So we have the session ID, user ID, potentially a role, and, of course, expires.
+0:36
+For our examples, I'm going to write these out as simple JavaScript objects just to make things clearer.
+0:41
+Think of them as the kind of records a real session store would generate automatically.
+0:45
+The first pitfall is when we absolutely stuff the session store.
+0:49
+A session is meant to be tiny, just enough to identify the user.
+0:53
+And usually, that's just a user ID, maybe a role, and not much else.
+0:57
+But beginners sometimes treat the session like a little storage box.
+1:01
+Here in session pitfalls dot j s, I've got some examples set up.
+1:05
+So let's come over here to the first example and have a look.
+1:08
+Here, we have a session that contains the session ID, user ID, role, cart, last few page, theme, and some cached posts.
+1:15
+While this technically works, it causes some problems pretty quickly.
+1:19
+Remember, sessions live on the server.
+1:21
+So if we cram too much into them, we waste server memory and we risk the session going out of sync with the real database.
+1:28
+From a stride point of view, this becomes a tampering issue, not because someone is editing the session directly, but because the app is making decisions based on data that's stale or inconsistent.
+1:38
+And in OWASP terms, this falls under broken access control because the app is relying on outdated session information when deciding what requests to allow.
+1:47
+And, of course, the fix is simple.
+1:49
+Keep sessions small, identity, and maybe role only.
+1:53
+So to fix this session, we simply have to strip everything back until we only have the session ID, user ID, and role.
+2:00
+So let's grab them all, and we'll pop them in this new one.
+2:03
+Nice and small.
+2:05
+Moving along.
+2:06
+The second pitfall is a sneaky one, long live sessions.
+2:09
+If you're thinking, hey.
+2:10
+That sounds a lot like the second cookie pitfall, you'd be right.
+2:13
+Sessions need specific expiry as well.
+2:16
+Let's have a look at the example down here.
+2:18
+Now here we have a session which is actually identical to the one that we just fixed.
+2:22
+It looks fine, but now we know the issue with long life anythings.
+2:26
+In the last cookie scrim, we talked about long lived cookies and sessions have the same problem just on the server side.
+2:32
+If someone ever steals the cookie that points to this session, they get access for as long as the session survives.
+2:38
+And if the user's permission changes, the old session may still say that they're allowed And logging a user out of everywhere becomes almost impossible if none of their sessions ever expire.
+2:48
+It's the same long life issue, but even riskier because the server is trusting stale data.
+2:54
+Our Stride and OWASP vulnerabilities are the same as the cookies.
+2:58
+In Stride, this shows up as elevation of privilege because outdated session data can still grant access.
+3:03
+And in OWASP terms, this is an authentication failure.
+3:07
+The app isn't revalidating identity often enough.
+3:10
+So two fixes help us avoid these issues.
+3:12
+First, sessions should naturally expire after a reasonable time, maybe twenty minutes, maybe a couple of hours.
+3:19
+And sometimes the app should issue a brand new session, for example, after login, after a role change, or when the user reauthenticates.
+3:27
+And this is what it might look like in JavaScript objects.
+3:30
+So we'll just grab the original and pop it down here, and we're going to add a property that helps it expire.
+3:35
+Some frameworks use expires and some frameworks use expires at.
+3:40
+And I'm just gonna add today's date and a time that is around thirty minutes from now.
+3:45
+There we go.
+3:46
+It's that simple.
+3:47
+Short lived sessions means we have a much safer identity model.
+3:51
+So those are two pretty big session pitfalls, stuffing too much data into a session and sessions that never expire.
+3:57
+They're pretty easy mistakes to make but now that you know how stateful identity works behind the scenes, you'll know exactly why these issues matter and how to avoid them.
+4:05
+Now a quick note on the frameworks that offer stateful identity systems.
+4:10
+Most of these like Express, Django, Rails, Laravel handle the basics for you.
+4:14
+They keep the cookies small, manage the session store, and give you sensible defaults.
+4:18
+But these pitfalls still happen all the time because developers control what goes into the session and how long it lives.
+4:25
+Frameworks can store the session safely and offer sensible defaults, but only you decide what the session contains and when it expires.
+4:32
+Alright.
+4:33
+That's the session side of stateful identity done.
+4:35
+In the next scrim, you'll put your new knowledge to the test and try spotting these issues in real examples.
+4:41
+I'll see you there.
