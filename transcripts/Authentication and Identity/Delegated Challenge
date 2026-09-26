@@ -1,0 +1,292 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Learn Cybersecurity
+Authentication and Identity
+Delegated Challenge
+0:00
+/
+4:17
+Files
+Ports
+ code
+3. Blindly trusting the returned ID token
+
+
+Below are short OAuth scenarios. For each one:
+1. Identify the pitfall
+2. Specify why this is a risk
+3. Offer a conceptual fix
+
+---
+
+## /* -------------------------------------------------------------- */
+## /* ------------------------- Scenario 1 ------------------------- */
+
+Your app only needs the user’s email to log in, 
+but your OAuth request also asks Google for access to contacts, calendar, and Drive files.
+
+PITFALL:
+
+
+RISK:
+
+
+FIX:
+
+
+
+---
+
+
+## /* -------------------------------------------------------------- */
+## /* ------------------------- Scenario 2 ------------------------- */
+
+During login, the Google consent screen warns that your app wants permission to delete calendar events, even though your app never uses Google Calendar.
+
+PITFALL:
+
+
+RISK:
+
+
+FIX:
+
+
+
+---
+
+
+## /* -------------------------------------------------------------- */
+## /* ------------------------- Scenario 3 ------------------------- */
+
+After the user logs i
+123456789101112131415161718192021222324252627282930313233
+
+Welcome back. 
+We now understand what delegated identity is doing under the hood. 
+Google or another provider handles the login, sends our app a tiny code, and we exchange it for tokens that prove who the user is. 
+So in this scrim, we're going to do a short simple challenge to practice spotting those issues in the real world. 
+Here in delegated challenge dot n d, I've written a few short scenarios. 
+Each one describes something that can quietly go wrong during an OAuth login flow. 
+No code, no syntax, 
+just tiny real world situations. 
+Also at the top are the three delegated pitfalls we learned about in the last scrim as well as instructions for this challenge. 
+We'll do the first one together and then you can try the rest. 
+So let's have a look at scenario one. 
+Your app only needs the user's email to log in, but your OAuth request also asks Google for access to contacts, 
+calendar, 
+and drive files. 
+Now this is definitely pitfall one, asking for too much information. 
+Even if it's unintentional, 
+this creates a couple of problems. 
+If this token ever leaks, it exposes way more of the user's data than the app needs and it makes the app feel nosy and untrustworthy. 
+And the fix here is pretty straightforward. 
+Only ask for the parts of the user's Google identity that your app will actually use. 
+Nice and simple, nothing technical, 
+just the concept. 
+Okay. 
+Now it's your turn for scenario two and onwards. 
+For each scenario, 
+jot down the pitfall, 
+the implied risk or risks, and a potential fix. 
+And when you're ready, come back and we'll walk through them together. 
+I'll see you on the other side. 
+ Welcome back. 
+Let's walk through these one by one and talk about the risks in each scenario. 
+Scenario two, 
+during login, the Google consent screen warns that your app wants permission to delete calendar events even though your app never uses Google Calendar. 
+Now this is another example of pitfall one, asking for too much information. 
+The risk here is that a leaked token could cause some real damage. 
+And even before that, users may even lose trust when they see permissions that don't make sense. 
+The fix here is simple and basically the same as scenario one. 
+Only request OAuth scopes that your app actually uses and nothing more. 
+Alright. 
+Scenario three. 
+After the user logs in with Google, the page briefly shows the short lived OAuth code in the URL. 
+Now this is pitfall number two, leaked approval code. 
+A sensitive credential is ending up somewhere it shouldn't, and the risk is that URLs get logged, saved, and shared. 
+So if someone captures that code before it expires, 
+they can finish the login flow themselves. 
+The fix here is to never expose OWL's codes in the URL, handle the exchange immediately, 
+and keep credentials out of anything that can be logged. 
+Scenario four. 
+Your back end receives the ID token from Google and immediately accepts it without checking the signature or whether the token was actually meant for your app. 
+This is a classic pitfall three, blindly trusting the returned ID token. 
+The risk is that anyone can create something that looks like a Google token, but only Google can sign it properly. 
+If your app skips verification, 
+attackers could forge a token and pretend to be any user. 
+So the fix is simple. 
+Always verify the ID token signature and audience before you trust it. 
+That way, you know it's legit and meant for your app. 
+Last one, scenario five. 
+Your back end accepts an ID token that expired an hour ago. 
+And this is another case of pitfall three, blindly trusting the returned ID token. 
+And here's the risk. 
+Expired tokens can be reused. 
+If the server accepts tokens regardless of expiry, 
+an attacker could replay an old token and log in as the user over and over again. 
+And the fix, 
+always check the token's expiry and reject it once it's no longer valid. 
+And of course, our last pitfall scenario has to be expiry related. 
+And that's the whole challenge. 
+If you caught most of those issues, you're right on track. 
+OAuth seems magical on the surface. 
+But once you understand the flow, you immediately start recognizing the little places where things can drift off course. 
+Now that we've explored all three identity models of stateful, stateless, and delegated, we can finally step back and compare them side by side. 
+So in the next Grimm, we'll zoom out and look at how they relate, where they shine, and why real apps often combine all three. 
+I'll see you there. 
+Transcript
+0:00
+Welcome back.
+0:01
+We now understand what delegated identity is doing under the hood.
+0:04
+Google or another provider handles the login, sends our app a tiny code, and we exchange it for tokens that prove who the user is.
+0:12
+So in this scrim, we're going to do a short simple challenge to practice spotting those issues in the real world.
+0:18
+Here in delegated challenge dot n d, I've written a few short scenarios.
+0:22
+Each one describes something that can quietly go wrong during an OAuth login flow.
+0:27
+No code, no syntax, just tiny real world situations.
+0:31
+Also at the top are the three delegated pitfalls we learned about in the last scrim as well as instructions for this challenge.
+0:38
+We'll do the first one together and then you can try the rest.
+0:41
+So let's have a look at scenario one.
+0:43
+Your app only needs the user's email to log in, but your OAuth request also asks Google for access to contacts, calendar, and drive files.
+0:52
+Now this is definitely pitfall one, asking for too much information.
+0:56
+Even if it's unintentional, this creates a couple of problems.
+0:59
+If this token ever leaks, it exposes way more of the user's data than the app needs and it makes the app feel nosy and untrustworthy.
+1:07
+And the fix here is pretty straightforward.
+1:09
+Only ask for the parts of the user's Google identity that your app will actually use.
+1:14
+Nice and simple, nothing technical, just the concept.
+1:17
+Okay.
+1:18
+Now it's your turn for scenario two and onwards.
+1:20
+For each scenario, jot down the pitfall, the implied risk or risks, and a potential fix.
+1:26
+And when you're ready, come back and we'll walk through them together.
+1:29
+I'll see you on the other side.
+1:35
+Welcome back.
+1:36
+Let's walk through these one by one and talk about the risks in each scenario.
+1:40
+Scenario two, during login, the Google consent screen warns that your app wants permission to delete calendar events even though your app never uses Google Calendar.
+1:49
+Now this is another example of pitfall one, asking for too much information.
+1:54
+The risk here is that a leaked token could cause some real damage.
+1:57
+And even before that, users may even lose trust when they see permissions that don't make sense.
+2:02
+The fix here is simple and basically the same as scenario one.
+2:06
+Only request OAuth scopes that your app actually uses and nothing more.
+2:10
+Alright.
+2:11
+Scenario three.
+2:12
+After the user logs in with Google, the page briefly shows the short lived OAuth code in the URL.
+2:18
+Now this is pitfall number two, leaked approval code.
+2:21
+A sensitive credential is ending up somewhere it shouldn't, and the risk is that URLs get logged, saved, and shared.
+2:28
+So if someone captures that code before it expires, they can finish the login flow themselves.
+2:33
+The fix here is to never expose OWL's codes in the URL, handle the exchange immediately, and keep credentials out of anything that can be logged.
+2:41
+Scenario four.
+2:42
+Your back end receives the ID token from Google and immediately accepts it without checking the signature or whether the token was actually meant for your app.
+2:50
+This is a classic pitfall three, blindly trusting the returned ID token.
+2:55
+The risk is that anyone can create something that looks like a Google token, but only Google can sign it properly.
+3:01
+If your app skips verification, attackers could forge a token and pretend to be any user.
+3:07
+So the fix is simple.
+3:08
+Always verify the ID token signature and audience before you trust it.
+3:12
+That way, you know it's legit and meant for your app.
+3:16
+Last one, scenario five.
+3:18
+Your back end accepts an ID token that expired an hour ago.
+3:21
+And this is another case of pitfall three, blindly trusting the returned ID token.
+3:26
+And here's the risk.
+3:27
+Expired tokens can be reused.
+3:30
+If the server accepts tokens regardless of expiry, an attacker could replay an old token and log in as the user over and over again.
+3:38
+And the fix, always check the token's expiry and reject it once it's no longer valid.
+3:43
+And of course, our last pitfall scenario has to be expiry related.
+3:47
+And that's the whole challenge.
+3:49
+If you caught most of those issues, you're right on track.
+3:52
+OAuth seems magical on the surface.
+3:54
+But once you understand the flow, you immediately start recognizing the little places where things can drift off course.
+4:01
+Now that we've explored all three identity models of stateful, stateless, and delegated, we can finally step back and compare them side by side.
+4:08
+So in the next Grimm, we'll zoom out and look at how they relate, where they shine, and why real apps often combine all three.
+4:15
+I'll see you there.
