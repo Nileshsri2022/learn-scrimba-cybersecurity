@@ -1,0 +1,85 @@
+Transcript
+0:00
+Hello there, and welcome to this part of the back end security series.
+0:04
+Thinking like a security minded developer with Stride and OWASP.
+0:09
+I want you to imagine this.
+0:10
+You've just built a shiny new student portal app.
+0:13
+It works great.
+0:14
+Students can log in, see their assignments, and track their goals.
+0:18
+But one day, a student discovers that they can suddenly see another student's private profile.
+0:24
+That's not just a bug.
+0:25
+That's a security flaw.
+0:27
+And in fact, and this is hard to admit, that exact same thing happened to me just a few years ago.
+0:34
+After I developed my first ever student portal, I proudly showed it off to one of my students until this student decided to tweak the URL from her student ID to another student's ID.
+0:46
+And instantly, we were staring at another student's details.
+0:50
+Just like that, my app was broken into, hacked by a curious seven year old.
+0:56
+Now the scary part is that the code worked exactly like I wrote it.
+1:00
+I just hadn't written it with attackers or even accidentally curious users in mind.
+1:06
+You see, most of us developers start our journey focused on features.
+1:10
+Does it run?
+1:11
+Does it save?
+1:12
+Does it render?
+1:13
+But as developers, we also need to think like security minded developers and ask questions like, how can this be broken into so that we can predict how someone could break what we've built and then design it so that they can't?
+1:27
+And that is what security minded design and development is all about.
+1:32
+So here's the plan for this section.
+1:34
+We'll be looking at the following things.
+1:36
+Stride for design time thinking.
+1:38
+This is a checklist to help us spot what could go wrong.
+1:41
+And the OWASP top ten for runtime reality, which is a shared language to recognize what does go wrong once our apps are live.
+1:49
+And we'll also compare the two.
+1:51
+And, of course, there will be some thought provoking exercises to help you with this mindset shift.
+1:57
+By the end, you'll be able to look at any feature and see how someone might misuse it, and if it is misused, what we can do about it.
+2:05
+Now this part of the course is language neutral.
+2:07
+There are no framework or language assumptions.
+2:10
+We're going to be using diagrams to explain app scenarios and short bug report examples.
+2:15
+This means that what you learn here will be applicable to any stack no matter what your weapon of choice is.
+2:21
+And when we hit a challenge, the screen will pause and give you an exercise to consider and work out.
+2:27
+Once you're done, we'll chat about the possible answers.
+2:30
+Throughout it all, keep this phrase in your head.
+2:32
+Think like an attacker.
+2:34
+Design like a defender.
+2:36
+And that's the heartbeat of security minded development.
+2:39
+And by the end of this section, it will start to feel natural for you too.
+2:43
+Are you ready?
+2:44
+Let's dive in.
