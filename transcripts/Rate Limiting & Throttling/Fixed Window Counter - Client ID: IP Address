@@ -1,0 +1,71 @@
+Transcript
+0:00
+We're now at the stage that we want to start talking about client identification.
+0:04
+Rate limiting only really works if you can consistently identify who is making requests.
+0:11
+The identification strategy that you choose determines fairness.
+0:14
+Are you limiting the right entity?
+0:17
+Effectiveness.
+0:18
+Can users bypass your limits?
+0:20
+User experience.
+0:22
+Are legitimate users unfairly restricted?
+0:25
+And security.
+0:27
+Can malicious actors exploit your identification methods?
+0:31
+Make sure you always ask yourself who or what are you actually trying to limit.
+0:36
+Now the first common identification strategy is using the client's IP address as the unique identifier.
+0:44
+Pros here that we have no authentication required.
+0:47
+It works for anonymous users.
+0:49
+It's simple to implement, and it can't be easily changed by normal users.
+0:54
+The cons, there can be shared IPs.
+0:57
+So sometimes multiple users are behind the same NAT proxy or VPN, and they appear as one user.
+1:05
+In corporate offices, you might have hundreds of employees all working behind one IP.
+1:11
+In coffee shops and libraries, that might be all one IP address.
+1:16
+And mobile carriers maybe are all one IP address.
+1:19
+Dynamic IPs where the user IPs change, that would mean they would get a fresh limit.
+1:24
+And there are I p v six complications, where users get different IPs from the same subnet.
+1:31
+This could punish innocent users who are sharing the same IP.
+1:34
+So this strategy is best for public endpoints with no authentication, d d o s protection, and basic abuse prevention.
+1:43
+So without realizing it, we've been actually using this strategy up to now.
+1:47
+In the package docs, by default, the client IP address is used.
+1:52
+If you still have the package docs available, if you search key generator, you can start reading about how we can specify the client identification.
+2:01
+So if we were gonna add it here, we add a key generator property.
+2:06
+We're told that this needs to be a function that accepts the express request and response objects.
+2:12
+So that means we need rec and res, our arrow, and this needs to return a string.
+2:18
+So to use the IP, we're going to need to import something else from express rate limit, IP key generator.
+2:28
+And then we use that here, and we pass to it the IP from the request just like that.
+2:35
+So nothing's changed because as I mentioned, this is just the default for express rate limit, but it's good to see that here as we're going to be modifying in future scrims the value of this key generator property.
+2:47
+Next, we're gonna mock up some auth so we can talk about using a user ID as the client identification instead.
+2:54
+See you in the next scrim.
