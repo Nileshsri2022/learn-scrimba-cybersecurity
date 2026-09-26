@@ -1,0 +1,61 @@
+Transcript
+0:00
+Welcome back.
+0:01
+In the last room, we met OWASP and explored their top ten, these greatest hits of web vulnerabilities that keep sneaking into production apps.
+0:10
+We also saw how our little seven year old hacker accidentally uncovered a case of broken access control and how oWASP didn't just name the problem, it actually showed us how to fix it.
+0:22
+So let's put our new oWASP top ten knowledge into practice by jumping back into QuickByte.
+0:28
+Now QuickByte has grown quite a bit since we last saw it.
+0:31
+There is now a restaurant role where restaurants can manage menus, pricings, and order windows.
+0:37
+We've also integrated an external payment gateway to handle card details and payments.
+0:42
+And to make sure that deliveries can be tracked in real time, we've added a maps API so everyone can keep an eye on everyone else.
+0:50
+You can probably guess what that means for security.
+0:53
+With new things in the mix, we've multiplied the places where things can go wrong, and that is the perfect playground for our oWASP top ten bug triage.
+1:04
+Here in the Scrimba editor, I've got oWASP example dot m d open, And here we have a short bug report example.
+1:12
+It is our job to figure out which oWASP top ten best fits this bug and how we should go about fixing it.
+1:19
+I've also dropped a quick reference markdown file down here with our top ten.
+1:23
+There is also a link directly to the oWASP top ten website.
+1:27
+So think of this as a developer treasure hunt.
+1:30
+You've got this bug in hand, and you've got oWASP as your guide, and you're hunting for how to patch it.
+1:36
+So let's do this example together.
+1:39
+Customer passwords are being stored in plain text in the database.
+1:43
+Well, a quick skim through number one, broken access control, and number two, cryptographic failures will tell us that this would be an example of cryptographic failures.
+1:52
+Our app isn't properly protecting sensitive data.
+1:56
+So let's pop that in really quickly.
+1:58
+Cryptographic failures.
+2:00
+Then we'd hop on over to the cryptographic failures page, scroll down to the how to prevent section, and check out what we can do about it.
+2:08
+Now this one is pretty straightforward.
+2:11
+OWASP tells us to encrypt all sensitive data at rest, which is just a fancy way of saying scramble or hash passwords before storing so they can't be read directly.
+2:22
+And that's it.
+2:23
+One bug recognized with a potential fix.
+2:27
+We've identified the problem, matched it to an oWASP top ten category, and looked up a simple practical fix straight from the source.
+2:35
+In the next groom, you're gonna take on a few more quick bite bugs yourself, realistic ones that touch different parts of this new app.
+2:44
+I'll meet you there for the full triage session.
