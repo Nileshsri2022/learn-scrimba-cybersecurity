@@ -1,0 +1,59 @@
+Transcript
+0:00
+Now that we can see the three identity models as a whole, the next step is understanding when to use each one.
+0:06
+This isn't a checklist or a best practices chart.
+0:09
+It's a way of thinking.
+0:11
+Every system makes trade offs, and choosing the right one is really about deciding which trade offs your app can live with.
+0:17
+So let's walk through it.
+0:19
+When does stateful make sense?
+0:21
+Stateful shines when the server must stay in charge.
+0:24
+If your app needs instant log out, live roll updates, or tight control over user state, a server held session is the simplest, cleanest way to get you that.
+0:33
+It's stable, it's predictable, and ideal for traditional apps, dashboards, admin tools, and anything where trust and control matter more than horizontal scale.
+0:42
+So when does stateless make sense?
+0:44
+Stateless models shine when your architecture needs room to stretch.
+0:48
+If you're building APIs or really anything that needs to scale without coordinating shared session state, letting the client bring the token themselves removes that friction immediately.
+0:58
+Opaque tokens keep it simple, and JWTs remove the lookup entirely.
+1:03
+Both options reduce the server load just at different extremes.
+1:07
+And when does delegated make sense?
+1:09
+Well, delegated identity makes sense the moment you realize you don't want to run a password system at all.
+1:15
+Or if onboarding speed matters, if friction matters, or if you want a stronger security baseline without writing your own, Trusting a provider like Google or Apple is the fastest and safest way.
+1:27
+Your app shifts from proving identity to consuming it.
+1:30
+And here's the final mindset shift.
+1:32
+Sometimes you don't just pick one.
+1:34
+Real systems combine these approaches all the time.
+1:37
+A delegated identity to prove who the user is, a JWT for API calls, and a simple session for the main website.
+1:45
+Each of the three solve a different slice of the identity problem.
+1:49
+Understanding how they fit together is the skill that lets you design authentication intentionally instead of reactively.
+1:56
+So that's the big picture.
+1:58
+Choosing an identity model isn't about memorizing features.
+2:01
+It's about understanding what each approach gives you, what it takes away, and which trade offs your app can live with.
+2:07
+So with that mindset in place, you're ready to put it into practice in the next scrim.
+2:12
+I'll see you there.
