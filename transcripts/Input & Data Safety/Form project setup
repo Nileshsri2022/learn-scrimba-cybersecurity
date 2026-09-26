@@ -1,0 +1,154 @@
+
+Transcript
+0:00
+Welcome to this form project.
+0:02
+We're starting with a basic front end form using HTML and TypeScript, and we're gonna be investigating its various vulnerabilities before learning how to use and implement a validation library, Zod, to validate all of the fields against the schema that we're gonna be writing.
+0:19
+Let me talk through what we have so far.
+0:22
+Since we want to focus our time on the vulnerabilities and the eventual solution, I'm just gonna briefly touch on how we are currently set up.
+0:30
+So you can see in the mini browser this front end registration form.
+0:35
+We've got a front end and a back end folder.
+0:37
+We're gonna start with the front end, and index HTML is just our standard HTML form.
+0:43
+We've got a few containers for validation, success messages, error messages, submit button, all the usual stuff.
+0:51
+Now if you think back to when you learned about HTML forms, you may remember that they have a default built in HTML five validation, and this can block submission of the form before it reaches the back end.
+1:03
+So things like required on an input and type text or typed email, these are all part of the HTML five validation.
+1:13
+Type email, for instance, this specifies the email type, and it validates the input against a well formed email address pattern.
+1:21
+But a malicious user can bypass HTML five validation pretty easily.
+1:26
+They can disable JavaScript or even use the developer tools.
+1:30
+So if we rely on HTML five validation for all of our validation, our server could have no protection.
+1:37
+So in this course, we're gonna be learning about this validation library, Zod, which can validate on both the front end and the back end with the same code.
+1:45
+Side note, we will actually be focusing mainly on the back end.
+1:49
+Other benefits of using a library like this and not the HTML five validation is we have better control over the error messages.
+1:57
+We don't have to rely on the HTML five generic ones.
+2:01
+HTML five is also quite limited.
+2:03
+Libraries like Zod can handle complex business logic, and it means we have a single source of truth.
+2:08
+Instead of validation logic being scattered between HTML attributes and JavaScript, we're gonna have everything in one place in our Zod schema.
+2:16
+So you may guess I'm leading up to the fact we're gonna disable the HTML five validation.
+2:22
+So we sort of start from scratch.
+2:24
+And I'm gonna do that on the form, and I'm just gonna write no validate there.
+2:29
+Okay.
+2:29
+That's enough about this file.
+2:31
+So app dot t s, this is our browser logic.
+2:34
+It reads the form inputs, posts to the back end, manages loading state, and shows success or error messages.
+2:42
+Here's display success.
+2:43
+We've got set loading, handle submit.
+2:46
+Here's getting the form data.
+2:48
+Here's our fetch post.
+2:51
+And we're currently configured with this slash API slash register vulnerable endpoint.
+2:56
+This is the one that's set up right now, and on purpose, I've made it very vulnerable.
+3:01
+Not something we'd ever use in production.
+3:03
+As we go through the course, we're going to create a new endpoint, which is gonna be much more secure.
+3:08
+Now types dot t s, this mirrors the back end types for the client.
+3:13
+We've got register request.
+3:15
+We've got register response and validation error.
+3:18
+These are used in app dot t s.
+3:21
+So we can see at the top, we're importing them, and then we have validation error here in display errors.
+3:27
+We've got register response in display success, and down here, we've got register request.
+3:33
+So types dot t s here provides type safety for the API responses.
+3:38
+We also get IDE autocomplete, and it's good for API contract documentation.
+3:43
+There's a store folder here.
+3:44
+This is where our t s files are being compiled into JS files.
+3:48
+It's same for the back end.
+3:49
+We have a store folder there.
+3:52
+Okay.
+3:52
+Onto the back end.
+3:53
+Server dot TS.
+3:55
+This boots the Express app, enables JSON passing and permissive cores, mounts roots from slash roots slash auth, and exposes health endpoints.
+4:04
+It includes a global error and four zero four handlers and starts the server on port three thousand.
+4:10
+In roots, we've got auth.
+4:12
+This is where that endpoint is slash register vulnerable.
+4:15
+It's deliberately skipping any validation, echoing raw user input to demonstrate some of the vulnerabilities we're gonna be talking about soon.
+4:24
+And then the state folder, this includes mock d b.
+4:27
+This is a mock database of a user account.
+4:29
+There isn't actually any database here.
+4:32
+This is just so at the top of our front end, we have this user account that is gonna increment as we use the form.
+4:38
+Let me just quickly show you that.
+4:40
+I wish I was eighteen again.
+4:43
+There we go.
+4:44
+And now it's gone up one from three nine three to three nine four.
+4:48
+Now a quick note on how we're running back end and front end at the same time.
+4:53
+The back end is a node app using Express, and the runner here is running the back end server.
+5:00
+I have the runner set up so when I save a file, it's gonna recompile the back end folder and start the server.
+5:06
+So if I save this index dot HTML, we'll see in the mini browser goes to three thousand, and that means that in the terminal, here is where I'm running a lightweight front end server HTTP dash server.
+5:21
+So I go control c.
+5:23
+That just closes it, and I have a nice script in package dot JSON dev.
+5:28
+This is going to run TSC on the front end folder and start the front end server.
+5:34
+Let me show you that.
+5:35
+NPM run dev, and we're back up and running.
+5:39
+You're gonna be having to restart servers later when you do challenges, but I'm gonna remind you then about how to do it, so no need to remember or make a note.
+5:48
+I hope that made sense.
+5:49
+Do pause the video and have a look through the code yourself, and let's get cracking with the rest of the course.
