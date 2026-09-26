@@ -1,0 +1,112 @@
+
+Transcript
+0:00
+We've now seen how JSON web tokens work.
+0:02
+They're fully stateless, they're self contained, and they're verifiable without a lookup.
+0:06
+But here's the catch.
+0:08
+Some opaque bearer pitfalls still apply here.
+0:11
+A JWT is still a bearer token.
+0:13
+If someone steals it from you, they instantly become you.
+0:16
+Same spoofing risk, same stakes.
+0:18
+Not only that, but JWTs also come with a few extra pitfalls, little traps that exist because the token is self contained and often contain more information about the user.
+0:28
+So in this Grimm, we're going to have a look at some big pitfalls.
+0:32
+Number one, JWTs look encrypted, but they're actually not.
+0:36
+One of the most common mistakes with JWTs is assuming that they're encrypted because it looks like gibberish, but they're not.
+0:43
+They're just encoded, which is basically rotated text.
+0:46
+In fact, we can actually pop that JWT from the last scrim into a decoder like this, and we can see both the header and payload decoded.
+0:54
+Now the good thing is that only the server can verify the token because only the server has the secret that created the signature, so we are safe there.
+1:02
+But the pitfall still stands.
+1:04
+If the token leaks, then the contents leak as well.
+1:07
+This would be information disclosure with STRIDE or sensitive data exposure with OWASP.
+1:12
+The simple rule here is this, keep the JWT payload boring.
+1:16
+No phone numbers, no emails, no private data, nothing you wouldn't put on a post it note.
+1:21
+Pitfall number two is weak or leaked secret keys.
+1:24
+Now while we can decode the actual contents of a JWT, a server won't trust it unless the secret ingredient or key matches.
+1:32
+But that only works if the secret key is kept secret.
+1:36
+If the secret key is easily guessable or leaked or pushed to GitHub, which is very common, an attacker can generate their own valid JWTs.
+1:44
+They can literally create an I'm an admin token and the server will believe it.
+1:48
+That's classic elevation of privilege.
+1:51
+An attacker giving themselves higher permissions that they should never have.
+1:55
+So here's the rule.
+1:56
+Use an unguessable secret and keep it safe.
+1:59
+Pitfall three is that JWTs can get overstuffed.
+2:02
+They can hold a lot of fields, so people often treat them like a mini user profile.
+2:07
+Now this causes huge tokens and huge tokens causes big headers, slow requests, unhappy proxies, and bloated logs.
+2:15
+This also plays into the first pitfall.
+2:17
+JWTs can be decoded.
+2:19
+Do we really want these addresses, phone numbers, preferences, notifications leaked?
+2:24
+Probably not.
+2:25
+So the issues are this, slow requests and potentially lots of leaked information.
+2:31
+And that second one is an information disclosure problem or a sensitive data exposure because anything you pack into a JWT is immediately readable if that token leaks.
+2:41
+So what do we do?
+2:43
+We keep JWTs tiny.
+2:45
+Only include what the server truly needs on every request.
+2:49
+And pitfall number four, long life JWTs.
+2:52
+You probably saw this coming from a mile away.
+2:55
+Just like every other credential we've talked about, JWTs need an expiry.
+3:00
+If somebody steals it or if the account changes, they can still use that forever.
+3:04
+You can't revoke it.
+3:06
+You can't force log out either.
+3:07
+You just have to sit there and wait until the heat death of the universe.
+3:11
+And here we definitely have elevation of privilege or broken authentication because we keep granting access long after it should have stopped.
+3:19
+So the fix here and you know it, JWTs must always have an expiry and the short ones are the safest.
+3:26
+So those are some pretty big JWT pitfalls.
+3:29
+They do fix the lookup problem but they come with their own risks and they still inherit all the usual bearer token issues.
+3:35
+So we've covered opaque bearer tokens and JWTs.
+3:38
+Now let's put them both into practice.
+3:40
+In the next scrim, you audit a few scenarios, find some problems, and suggest some fixes.
+3:45
+I'll see you there.
