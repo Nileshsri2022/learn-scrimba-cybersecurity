@@ -1,0 +1,107 @@
+Transcript
+0:00
+Welcome back.
+0:01
+We've spent the whole module so far looking at systems where our app handles identity.
+0:05
+First, with stateful sessions and then with stateless tokens.
+0:08
+And now we're gonna switch to something completely different, delegated identity.
+0:12
+You know, you've actually seen this everywhere.
+0:14
+When you sign up for an app and you see buttons like sign in with Google, Facebook, or GitHub, that is delegated identity.
+0:21
+Under the hood, most of these flows use a standard called OAuth, which is the protocol that apps use to delegate identity checks to providers like Google.
+0:29
+In these cases, your app isn't checking a password.
+0:32
+Your app isn't verifying the user directly.
+0:34
+Instead, it asks a trusted third party provider to do it.
+0:38
+For this scrim, we're going to use Google as the example simply because almost everyone has seen that flow.
+0:43
+But just keep in mind that Google is just one OAuth provider amongst many.
+0:48
+Now before we go any further, we need to clear up one thing right away because it trips almost everyone.
+0:53
+OWASP is mainly about authentication, the kind that we already know about and the part we actually care about in the section.
+1:00
+Google checks the user's identity, who they are, and that's the authentication we've been talking about this whole time.
+1:05
+But then there's also OWASP authorization, and this is completely different from the authorization we talked about at the beginning.
+1:12
+This has nothing to do with our app's internal permissions.
+1:16
+Instead, it's about what parts of the user's Google identity our app is allowed to access.
+1:22
+If you've ever used Google to sign up or sign in to something, you've probably come across a screen that looks like this.
+1:27
+Here, the app is asking for our permission to use our name, profile photo, and email address from our Google identity.
+1:34
+And depending on the app, you might get asked for some more permissions.
+1:38
+Here, you can see that this app wants access to my contacts, more of my contacts, my calendar, my Google workspace directory, and all of my emails.
+1:46
+It's super nosy.
+1:48
+Now this is different to the authorization that we know about.
+1:51
+All of our apps authorizations like admin roles, user roles still happen inside our back end after authentication takes place.
+2:00
+So just to be clear, from an authentication point of view, OAuth just answers the question, who is the user for us?
+2:07
+Okay.
+2:08
+Let's walk through the classic sign in with Google flow.
+2:11
+First, the user gets prompted by the app to log in via Google.
+2:14
+Once this button is pressed, the user gets redirected to Google.
+2:18
+Here, our app is basically saying, hey, Google.
+2:21
+You handled the login.
+2:22
+I don't want to deal with this.
+2:24
+And at this point, the user has left our app temporarily and is interacting directly with Google.
+2:29
+The user is now asked to log in to their Google account.
+2:32
+And once that login is successful, Google confirms that this is in fact a real user with a real identity.
+2:38
+Depending on the app, Google might now show the permission screen.
+2:42
+Remember, these permissions aren't about our app's roles.
+2:45
+They're just about the parts of the user's Google identity that our app can access.
+2:49
+If the user agrees, Google sends our server a temporary one time code or an approval code.
+2:55
+This doesn't log anyone in.
+2:57
+It simply represents the user's approval.
+3:00
+Our server immediately sends that code back to Google along with our app's secret credentials.
+3:05
+This lets Google confirm that it really was our back end that requested the login.
+3:09
+And after all of that back and forth, Google replies with an ID token so we know who's logged in.
+3:15
+Now our app knows that this user has been authenticated by Google and they're legit.
+3:19
+So we log the user into our system, and that's delegated identity.
+3:24
+Who knew that so much happens behind this super handy button?
+3:28
+Notice that our app never handled passwords, never verified the user directly, and never stored the user's credentials.
+3:35
+We let a trusted provider take care of that for us.
+3:38
+But OAuth, as fancy as it is, also introduces brand new risks.
+3:42
+So in the next scrim, we're going to look at some common OAuth pitfalls and what we can do about it.
+3:47
+I'll see you there.
