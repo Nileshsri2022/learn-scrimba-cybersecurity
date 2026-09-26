@@ -1,0 +1,103 @@
+Transcript
+0:00
+Welcome back.
+0:01
+Here in the Scrimba editor, I've got o wasp challenge dot m d open.
+0:05
+You'll see a handful of new quick bite bug reports, and each one describes a real problem that you will see in a real life system.
+0:14
+Now your challenge is as follows.
+0:16
+For each bug, figure out which oWASP top ten category it fits to, and then find one simple fix from the how to prevent section on the oWASP website.
+0:25
+Now remember, the goal isn't to memorize the top ten.
+0:29
+It is to practice thinking like a security aware developer.
+0:33
+If you can identify what type of problem it is, oWASP will show you how to fix it.
+0:38
+So as always, I've popped a quick reference down here as well as the link to the top ten website.
+0:44
+Remember to take your time.
+0:46
+There is no rush.
+0:48
+Once you filled out all the bugs, come back and we'll go through them together.
+0:56
+Welcome back.
+0:56
+I hope your bug triage was insightful and enlightening.
+1:00
+This is what I would have done, but remember yours don't have to match mine word for word.
+1:05
+For me, I went through the oWASP docs for each of these to make sure that the fixes line up with what's recommended.
+1:11
+But I will keep it simple here so we're not just reading documentation together.
+1:15
+So the first one is that restaurant uploaded a file called menu dot j s instead of an image, and it actually ran when someone opened it.
+1:23
+Now this is security misconfiguration.
+1:26
+Our server is treating uploads like code instead of plain files.
+1:31
+We can fix this by only letting users upload image types and keeping those files somewhere where systems can't accidentally run them.
+1:39
+Next up, a driver changed the order ID in the URL and could see another customer's order details.
+1:45
+Now this is broken access control.
+1:48
+The app didn't double check who was asking.
+1:51
+For this, we'll need to make sure that the back end always verifies that the person requesting an order actually owns that order.
+1:59
+Next, any logged in user can open slash admin slash orders and see restaurant dashboards.
+2:05
+Well, this one is yet again broken access control.
+2:09
+Hidden links are never enough.
+2:11
+The server needs to confirm that only admins can open certain pages.
+2:15
+If you're not an admin, you should see a nope message instead.
+2:19
+Okay.
+2:20
+Moving on.
+2:21
+Payment webhooks are coming in with fake paid statuses because we're not verifying where the request is coming from.
+2:28
+Now this one is software and data integrity failures.
+2:32
+Our app believed whatever it was told.
+2:35
+We can fix this by checking that messages really come from our payment provider, not from someone just pretending to be our payment provider.
+2:43
+Moving along.
+2:44
+Login form is still using plain HTTP, and credentials show up in clear text in the network tab.
+2:52
+Now this is another cryptographic failures case.
+2:55
+If the page isn't using HTTPS, passwords can be seen by anyone watching the traffic.
+3:01
+And so the fix is to always use HTTPS everywhere, especially for logins.
+3:07
+And finally, logs are printing full card numbers and addresses whenever a payment fails.
+3:13
+Now that is security logging and monitoring failures.
+3:17
+We should only log what's necessary and blur or hide anything that's private, like showing just the last few digits of a card.
+3:25
+So that's our oWASP triage done.
+3:28
+Now remember, it's not about memorizing the list.
+3:31
+It's about spotting patterns and knowing the kind of fix that would make sense.
+3:35
+If you can name the problem, OWASP will point you straight to the right solution.
+3:40
+So now you've seen both sides, predicting the problems with STRIDE and spotting the real ones with oWASP.
+3:46
+In the next scrim, we're going to zoom out and look at how these two frameworks work together.
+3:51
+I'll see you there.
