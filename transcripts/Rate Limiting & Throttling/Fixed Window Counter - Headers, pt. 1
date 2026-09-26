@@ -1,0 +1,58 @@
+
+Transcript
+0:00
+We have our basic fixed window counter example rate limiter working.
+0:05
+That means I should probably change this single endpoint with rate limiter.
+0:10
+That's better.
+0:11
+So I mentioned in the last scrim that including rate limit info in the JSON response wasn't gonna be the final way we were gonna do this.
+0:20
+Headers are where metadata system information about the communication should live for best practice.
+0:27
+So we've got rate limits.
+0:28
+We've got content type and status codes.
+0:31
+But the JSON is for the application data, what your app actually needs.
+0:35
+And without headers as well, you only know you've hit the limit when you get a four two nine too many requests.
+0:41
+So we're gonna be modifying this and taking this rate limiting info out of the JSON data and using the headers instead.
+0:49
+Headers also show the user accurate information potentially about cost management.
+0:53
+We know that many APIs cost per request or have a sort of tiered pricing, while headers can help you track usage in real time, avoid wasting paid requests, and budget API calls across different features, and they're fantastic for debugging and monitoring purposes.
+1:10
+So there we have it.
+1:10
+Standard practice, they are the official way to communicate rate limiting information according to HTTP standards.
+1:17
+Headers are sent with every response, even when rate limited with a four two nine status.
+1:22
+And they're easy to read.
+1:24
+Any HTTP client can easily read headers without passing JSON.
+1:28
+Now we have an old format that rate limiting headers used to be written.
+1:32
+That was with an x dash rate limit dash and then either limit, remaining, or reset.
+1:38
+A new format of headers became standard around two thousand twenty one, two thousand twenty two, which looked like this.
+1:46
+They're called rate limit dash instead of x rate limit.
+1:50
+But the old legacy headers are still seen out in the wild, so it's good for you to be aware of both.
+1:56
+Now you may have seen while looking at the MPM docs earlier that there are some other properties that we can add here to this object that we're passing to rate limit, and they're gonna be standard headers and legacy headers.
+2:12
+Standard headers actually defaults to false, and legacy headers defaults to true.
+2:19
+But because we're gonna be forward thinking, we're gonna change these by specifying true for standard headers and false for legacy headers.
+2:29
+So let's save that.
+2:30
+Now in the next screen, I'm gonna show you how we can see these headers when we send a request to this API.
+2:36
+See you there.
