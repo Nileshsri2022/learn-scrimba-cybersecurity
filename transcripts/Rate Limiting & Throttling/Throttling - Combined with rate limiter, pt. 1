@@ -1,0 +1,95 @@
+Transcript
+0:00
+Let's now bring back the rate limiter to see how these two will work together.
+0:04
+This is a great opportunity for you to practice installing the express rate limit middleware, configuring it, and applying it to the endpoint.
+0:13
+So I'd like you to install it and import the library at the top.
+0:17
+Configure the limiter to allow three requests per twenty second window along with an appropriate message.
+0:23
+Set all responses to include standard headers rather than the legacy headers.
+0:27
+Apply this rate limiter to the endpoint after.
+0:31
+So if we look at our endpoint here, we've got the throttle here.
+0:34
+We are going to want progressive throttling before the rate limiter cuts us off.
+0:39
+So that's why we need the throttle first because remember it works from left to right.
+0:43
+And then after this comma, we're gonna have the limiter.
+0:47
+And then restart the runner and run node test requests.
+0:50
+Okay.
+0:51
+Good luck.
+0:51
+Remember the docs are there for your assistance.
+0:58
+So I'm gonna run MPMI Express rate limit.
+1:05
+And at the top, I'm gonna import the library,
+1:09
+and then we define our limiter.
+1:12
+We use rate limit, and there's the configuration object.
+1:17
+So we need limit.
+1:18
+We need window m s.
+1:21
+We need a message, and then standard headers and legacy headers.
+1:31
+So our limit is three in a twenty second window.
+1:36
+Twenty, three zeros.
+1:38
+Message, why don't we go for too many requests?
+1:42
+And we're gonna go for standard headers true and legacy false.
+1:48
+And then we want to apply this rate limiting middleware to the endpoint after the throttling middleware.
+1:53
+So here's the throttling middleware, so we're gonna put our limiter after it.
+1:58
+There we have it.
+1:59
+And this is now endpoint with rate limiter.
+2:05
+Now I'm just going to uncomment these now that we're gonna have some headers.
+2:14
+Okay.
+2:14
+Before we run the test code, let's have a think about what we are gonna expect.
+2:19
+So we know we have a limit of three requests in a twenty second window.
+2:24
+So we'd expect the first three requests here, one, two, and three, to all be successful.
+2:30
+Now request four is processed at t equals sixteen seconds.
+2:34
+If we look back, because remember, it's a sliding window for the rate limiter.
+2:38
+If we look back twenty seconds, that will be all of the time elapsed so far.
+2:43
+So it will count one, two, three successes, and that will hit the limit, and we're expecting to reject four.
+2:49
+Now five is being processed at t equals twenty five.
+2:53
+If we look back twenty seconds from then, it'll be from five seconds.
+2:57
+So that means these two will fall out of the window.
+3:01
+So it'll count one, and this will be a reject.
+3:04
+So one, and we should see request five being successful.
+3:09
+So if you're feeling up to it, why don't you pause the video now and see if you can work out?
+3:14
+I know you've probably seen this when you finished your challenge.
+3:18
+Maybe without looking back at those results, see if you can predict with what you know about the rate limiter what the outcome should be for request six to ten.
+3:29
+I'll see you in the next screen where we're gonna run the code and talk it through.
