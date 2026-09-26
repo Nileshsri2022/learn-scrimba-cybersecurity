@@ -1,0 +1,131 @@
+Transcript
+0:00
+Now that we know what Zod is, let's learn how to use it in practice.
+0:05
+Here I have just a simple TypeScript Vite project, and I'm going to install Zod with n p m I Zod.
+0:13
+It's such a small package that it's gonna install incredibly quickly.
+0:17
+And then I'm going to import it in this main dot t s at the top using import star as z or zed from Zod.
+0:28
+There we go.
+0:29
+Now it's probably gonna be set anyway, but in TS config dot JSON, we just need to check that strict is true, and it is.
+0:36
+So to validate data, we must first define a schema.
+0:41
+Schemas represent types, and they can be simple primitive values.
+0:45
+You probably saw some of these in the Zod docs to complex nested objects and arrays.
+0:51
+I'm gonna show you first, and then we're gonna dive a bit deeper into what a schema is later on.
+0:56
+So define schema.
+0:59
+And to do that, we just need to decide on a name.
+1:01
+I'm gonna go for teacher schema, and we then use the zed that we've imported here.
+1:07
+We then decide on the method to call against zed.
+1:10
+Now the simplest would be zed dot string, and then we have some smooth brackets.
+1:15
+This is like the rule that all the data we're gonna try and validate through the schema needs to follow if the validation is gonna be successful, the data valid.
+1:25
+I like to think of validating data a little bit like an airport scanner, where you have your bag or the data to pass through the machine.
+1:32
+The machine has been set up with certain rules, like no knives or no liquid of a certain size.
+1:37
+And if everything's okay, the data just goes through and comes out the other side of the machine.
+1:42
+But if it's failed some of the rules or your bag is not in the format that was expected, the machine errors, and your bag or the data doesn't make its way all the way through the machine.
+1:51
+You'll see in a second why I'm talking about going through the machine and coming out the other side.
+1:57
+So let me write here machine set with rule, and this is saying the rule is everything has to be a string.
+2:03
+But you probably saw in the docs, you could use zed dot number.
+2:07
+You could use zed dot boolean.
+2:10
+Let's stick to string for now.
+2:12
+Now we need to say what is the data that we're gonna be passing through the machine.
+2:16
+So let me just make a const.
+2:18
+Let's go for teacher, and let's go for me, Jonathan.
+2:23
+So the syntax when we're going to validate against the schema, and that's the wording we're gonna be using.
+2:28
+So to pass the data through the machine, we go schema name, and this is just pseudo code, by the way, and we use dot pass.
+2:37
+And then in smooth brackets, we go for data to validate.
+2:43
+And then the return of this, it's the validated data.
+2:47
+So you can imagine the bag has gone through the machine and comes down the ramp the other side, all good.
+2:52
+But if not, this is going to throw an error.
+2:57
+So let's do it.
+2:58
+What's our schema name?
+2:59
+Teacher schema.
+3:00
+And we use dot pass, and in smooth brackets, we put the data, which is just the const teacher.
+3:07
+There we go.
+3:08
+So this is going to return what we have on this line.
+3:12
+So because teacher is a string, should be all good.
+3:14
+Let's find out.
+3:15
+Let's console log this line.
+3:18
+There we go.
+3:18
+And I control or command s, bring up the console, and we have a string Jonathan.
+3:24
+So there we go.
+3:24
+It's returned the validated data.
+3:27
+Let's see if I can break this.
+3:29
+So what if I turn this into some numbers?
+3:32
+Save it again, and the data is not there anymore.
+3:36
+The machine is gone.
+3:38
+Error.
+3:38
+Error.
+3:39
+We have an uncaught Zod error.
+3:41
+We've got a few properties in an object here, expected string, code invalid type, path, nothing path, message, invalid input, expected string, received number.
+3:52
+That's quite helpful.
+3:53
+Okay.
+3:54
+But I guess if we change the rules of the machine and we change this to zed dot number and the actual data we're passing through the machine is a number, we should get the number back.
+4:05
+The bag or the data has gone through the machine, been scanned.
+4:08
+Yes.
+4:09
+This is what I was expecting, and it comes down the ramp.
+4:12
+Fantastic.
+4:13
+Alright.
+4:14
+See you in the next screen where we're going to build this out into an object.
+4:17
+See you then.
