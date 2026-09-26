@@ -1,0 +1,120 @@
+
+Transcript
+0:00
+Welcome.
+0:01
+It's time to work on a simple practical fixed window counter example.
+0:05
+For this, we're gonna use an express API so we can fire multiple requests at an endpoint and see exactly how the rate limiter works.
+0:13
+So a little bit about our current setup.
+0:15
+I have a server dot j s file here with a single endpoint at slash API slash data.
+0:21
+The JSON response is just gonna be a time stamp and a little request count property.
+0:27
+I've added a start script in the package dot JSON so that we can use the Scrimba runner to run our server.
+0:33
+There it is.
+0:35
+And so that we don't have to keep refreshing the browser to run multiple quick requests, I've written a test request dot JS testing file.
+0:43
+Let me briefly run through this for you.
+0:45
+You're you're welcome to pause the video at any time to have a deeper look through this code if you wish.
+0:50
+The make request function here returns a promise that wraps an HTTP get request.
+0:56
+This is a common pattern for handling asynchronous operations in Node.
+1:00
+Js.
+1:01
+The response is gonna be logging the request number and the status code and the JSON data.
+1:08
+So the promise has a resolve and a reject.
+1:12
+Resolve is called when the request succeeds, passing the result data.
+1:17
+Reject is called when the request fails, passing the error.
+1:21
+And if we scroll down, we have this demo rate limit function here.
+1:25
+Here's where we're gonna be making fifteen very quick requests with a small delay between them.
+1:31
+Here's our make request function being called.
+1:34
+So the flow of this is the HTTP request starts, and HTTP dot get is called.
+1:40
+The response arrives, and data event fires.
+1:43
+The response completes, and the end event fires.
+1:47
+We process our response.
+1:49
+Resolve is called with the result object.
+1:52
+And if any error occurs, the error event fires and reject is called.
+1:57
+And as I mentioned, set time out when it's wrapped in promise create to delay between requests.
+2:03
+This will make sure that the requests arrive in order.
+2:07
+So request one, request two.
+2:09
+If they all go at the same time, they won't necessarily all arrive in order.
+2:13
+Let's see this in action.
+2:14
+So in the terminal, I just need to run node test dash requests dot j s.
+2:21
+And we see it happening very fast, so let's scroll back up.
+2:24
+We've got request and the request number, the status code.
+2:28
+And then if we look back in server dot j s, we see a time stamp and request count.
+2:34
+Unlimited because we do not have a rate limiter set up yet.
+2:38
+And we go down, we have fifteen in order.
+2:41
+Brilliant.
+2:42
+So for rate limiting, we're gonna use this NPM package express rate limit.
+2:47
+If you could click this title to bring you to the docs, you're gonna be using them later.
+2:52
+This is middleware, which sits between the request and the endpoint.
+2:56
+It counts requests in a specified time window and blocks requests if it exceeds a set limit.
+3:03
+Now it's important to make a point here.
+3:05
+If in the docs, you could search in the configuration part for the window MS configuration property, I told you in the theory scrim earlier that the windows in fixed window counter keep ticking along regardless of if requests are hitting the API.
+3:23
+This package is a little bit different to that.
+3:26
+We can see in the docs that the window MS that we're gonna be specifying later, the length of the window, is, quote, a time frame for which requests are checked remembered.
+3:38
+The time window for each user starts at their first request.
+3:43
+After it elapses, the user's hit count is reset to zero.
+3:47
+A new time window is then started on their next request.
+3:51
+So it's not gonna be a pure fixed window counter where the window resets on schedule regardless of activity.
+3:59
+We call this maybe a lazy initialization of a window.
+4:02
+It only starts when the user makes a request.
+4:07
+Please keep that in mind as we use this package and learn more about the fixed window counter.
+4:12
+So it's a bit like a club bouncer who counts people and stops them at the door if the capacity has been reached.
+4:19
+So I'm gonna install this using NPM iXpress rate limit, and then we import the library at the top.
+4:28
+It's called rate limit.
+4:30
+There we go.
+4:31
+Join me in the next screen where we're gonna create the limiter in this server dot j s file.
