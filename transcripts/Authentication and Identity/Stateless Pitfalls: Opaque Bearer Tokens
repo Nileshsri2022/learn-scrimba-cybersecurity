@@ -1,0 +1,112 @@
+
+Transcript
+0:00
+Welcome back.
+0:01
+We now know how opaque bearer tokens work.
+0:04
+The server checks your login, generates a random token, and the client sends that token on every request.
+0:09
+The server keeps a tiny lookup that maps a token to a user.
+0:13
+It's simple, lightweight, and clean.
+0:16
+But bearer tokens have one huge weakness.
+0:18
+If someone steals your token, they instantly become you, and that's what bearer means.
+0:24
+Whoever bears it uses it.
+0:26
+So with opaque tokens, most of the danger isn't in how they work, but in how they can be stolen, misused, or replayed, which is just a fancy way of saying used over and over again.
+0:36
+So let's have a look at some common pitfalls.
+0:39
+Pitfall one is unsafe token storage.
+0:41
+The number one way that tokens get stolen is simply storing them somewhere unsafe.
+0:46
+If a plain text token sits in local storage, a plain variable, or an unprotected cookie, then any malicious script running on the page can grab it instantly.
+0:56
+And the moment that it's stolen, it becomes a spoofing problem.
+0:59
+The attacker is now indistinguishable from the user.
+1:02
+There's no perfect storage for tokens, but the rule of thumb is simple.
+1:06
+Store tokens somewhere harder for attackers to reach and reduce how often the token is exposed.
+1:12
+Pitfall two is long life tokens.
+1:15
+Anyone else getting deja vu?
+1:17
+Yes.
+1:17
+This one mirrors what we saw with cookies and sessions.
+1:21
+If your token last days or weeks or months and it somehow gets leaked, an attacker now has that long to impersonate the user and do some lasting damage.
+1:30
+That's information disclosure and spoofing rolled together.
+1:33
+Now the fix is pretty straightforward and you'll know this by now.
+1:37
+Use short expiry windows.
+1:39
+The shorter the window, the smaller the blast radius.
+1:42
+Pitfall three is that there's no automatic revocation.
+1:45
+Opaque tokens don't manage themselves.
+1:48
+They don't expire on their own.
+1:50
+They don't invalidate when someone logs out.
+1:52
+They don't just magically stop working unless that's how we've programmed them.
+1:56
+So even if we do set expiry dates on our tokens, if our app doesn't even action upon them, that token may still stay valid forever, and that leads to elevation of privilege and broken authentication.
+2:07
+So to make sure that this doesn't happen to us, our app has to check the expiry on every request and delete the token when the user logs out.
+2:15
+Both of these make a huge difference.
+2:18
+The next pitfall is token lookup bloat.
+2:21
+Opaque tokens rely on a lookup, and every login adds a new record.
+2:26
+And if tokens expire quickly, which they should, we'll generate a lot of them.
+2:30
+If we never clean up these expired tokens, then lookups will slow down.
+2:34
+Memory usage will spike, and the whole system gets sluggish.
+2:39
+And an attacker can deliberately abuse this, spamming your login endpoints to generate thousands of tokens and bog down the lookup, and that is a denial of service attack.
+2:50
+So how do we fix this?
+2:52
+A simple cleanup job.
+2:53
+Just regularly remove expired tokens.
+2:57
+And finally, pitfall five is a tampered lookup.
+3:01
+This lookup is your source of truth for identity.
+3:04
+If an attacker ever gains write access through something like SQL injection or leaked admin credentials, they can simply change the mapping.
+3:12
+A token that once belonged to a normal user can suddenly map to an admin user, and that is elevation of privilege.
+3:20
+Nothing about the token changed, only what it pointed to.
+3:24
+So protecting the database and any admin interfaces is just as important as protecting the application itself.
+3:31
+So those are some pretty big pitfalls of opaque bearer tokens.
+3:34
+They are lightweight, flexible, and widely used, but they don't protect themselves.
+3:39
+Most of the risk comes from how tokens are stored, how long they last, and how the lookup is managed.
+3:45
+And all of this leads naturally to our next question.
+3:49
+If OPIC bearer tokens need a lookup and they're this vulnerable to theft and replay, what is a better option?
+3:55
+And that's exactly what we're going to explore next.
