@@ -1,0 +1,105 @@
+Transcript
+0:00
+Let's finish off these instance properties then.
+0:03
+Here's a challenge for you.
+0:04
+Number one, create a tokens property that starts with the full capacity.
+0:09
+So remember, we have capacity here.
+0:12
+And number two, create a second since last refill property that starts at zero.
+0:18
+So these instance properties are where we're setting up the initial state of the class.
+0:23
+So we've got a refill interval property, a refill rate property, and a capacity property so far.
+0:28
+I want you to make a tokens property that's initial value is the capacity that's passed to the constructor when we make a new instance of it.
+0:36
+Okay.
+0:36
+Good luck.
+0:37
+See you in a minute.
+0:42
+Right.
+0:42
+So I hope that was alright.
+0:44
+So we need to go for this dot, and we're going tokens.
+0:48
+And this is gonna be the capacity of the bucket.
+0:53
+So we're gonna start with full bucket.
+0:56
+Now we need a second since last refill property.
+1:00
+So again, we use this dot, and this is gonna start at zero.
+1:04
+That's all it was.
+1:06
+Okay.
+1:06
+I'm gonna continue with process requests, and then you're gonna finish it off.
+1:10
+So here we have the number of requests that the user makes for this round.
+1:16
+Now if each round is one second, then as we process requests, we need to increment the second since last refill.
+1:24
+Because remember I mentioned that down here in play game, we increment the round number before we process requests.
+1:32
+So if the round number's gone up, that means the second since last refill needs to go up as well.
+1:38
+So we're gonna take this, and we're gonna increment it by one.
+1:41
+So we can use plus equals one.
+1:44
+Check if it's time to refill.
+1:46
+Now what have we got that's gonna help us?
+1:48
+We've got the refill interval.
+1:50
+How often in seconds to refill?
+1:53
+So if refill interval is three, which I think we're starting it as, if our second since last refill gets to three, then it should be refilled.
+2:02
+Right?
+2:03
+Because if it's been three seconds since and it should refill every three seconds, that's gonna prompt a refill.
+2:09
+So let's use an if statement, and we're gonna say if seconds since last refill is the refill interval, but we could use some defensive programming and use a bigger or equals just in case for some reason it gets bigger, the refill interval, then we're gonna refill.
+2:28
+So to refill, what do we need to do?
+2:30
+We need to add the refill rate to the token's amount, but we need to make sure that the tokens can't exceed the bucket capacity.
+2:41
+So why don't we use our math dot min?
+2:44
+And we're gonna pass the two things that we want it to find the smaller of.
+2:50
+So it can't be bigger than the capacity of the bucket, can it?
+2:54
+So we've got this dot capacity, and then if we add the current tokens to the refill rate, this is how many the bucket gets refilled with.
+3:08
+So if the current amount of tokens plus the refill is bigger than the capacity, then it will return the capacity.
+3:15
+But if not, it'll return the right hand side of the comma.
+3:18
+And all of this is gonna be the new amount of tokens in the bucket.
+3:23
+So we're just going to assign it to this dot tokens.
+3:27
+Great.
+3:28
+And if it's been refilled, then this needs to go back to zero, doesn't it?
+3:31
+So we'll just add that below.
+3:33
+Bingo.
+3:34
+Now we need to process the requests, consume the tokens, and return the accepted and rejected requests.
+3:40
+That's what you're gonna do in the next scrim.
+3:42
+See you there.
