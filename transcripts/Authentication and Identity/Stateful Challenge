@@ -1,0 +1,149 @@
+Transcript
+0:00
+Welcome to your stateful challenge scrim.
+0:02
+So far, we've learned about how stateful identity works, how cookies carry a tiny ID, and how the server stores a user session, and how simple mistakes can accidentally weaken authentication.
+0:13
+Now we're going to put all of that into practice.
+0:16
+Here in the editor, you'll see a series of cookie and session examples.
+0:20
+Some look harmless and some are obviously suspicious.
+0:23
+Our job is to scrutinize each one, spot what's wrong with it, and then fix it up.
+0:27
+Here at the top of the file, you'll see the four common pitfalls that we were just talking about as well as some instructions.
+0:34
+Let's walk through the first scenario together.
+0:36
+This function sets a cookie after login.
+0:39
+There are a couple of security risks here which we'll list down here in the pitfalls section.
+0:44
+First, this cookie has way too much in it.
+0:46
+Not only that, but it's full of super sensitive data such as this password or this IP address, and that's no good.
+0:53
+This is pitfall one, sensitive data in cookies.
+0:56
+We know by now that the only thing that belongs in a cookie is the session ID.
+1:00
+Well, the session ID and the expiry.
+1:02
+And speaking of the expiry, the max age here is way too long.
+1:06
+Google tells me that this is almost thirty two years.
+1:09
+And this is pitfall two.
+1:11
+Long lived or never expiring cookies.
+1:13
+Okay.
+1:14
+We've listed our risks.
+1:15
+Now it's time to fix it up.
+1:17
+I'm just gonna copy and paste the original and then I'm gonna cut everything from user ID all the way down to the IP address.
+1:25
+And then I'll fix up this max age so it's only eighteen hundred, which is about thirty minutes.
+1:30
+And we fixed it.
+1:31
+That's scenario one.
+1:33
+Okay.
+1:34
+Now it's up to you to handle scenarios two and onwards.
+1:37
+Think about all the pitfalls that we talked about in the last few scrims and use scenario one as a template for handling the rest.
+1:43
+Take your time and I'll catch you on the other side.
+1:49
+Welcome back.
+1:50
+How did you go?
+1:51
+I bet you did super well and crushed all those pesky pitfalls.
+1:55
+Let's go through these together.
+1:56
+Scenario two is another cookie that is set after a user logs in successfully.
+2:01
+This one is the complete opposite to scenario one.
+2:04
+It is too small and has no expiry.
+2:07
+So this falls under pitfall two, long lived or never expiring cookies.
+2:11
+And this one is super easy to fix.
+2:13
+We'll just have to add an expiry.
+2:15
+So let me grab the original and we'll just have to add the max age property.
+2:19
+And I've set it to thirty six hundred which is about one hour.
+2:22
+And there's scenario two.
+2:24
+Now down here, we're gonna jump over to sessions for scenario three where we have an object that represents a user session in the server.
+2:31
+And one look at the sheer size of this, we know we've got ourselves a pitfall three, overstuffed session stores.
+2:39
+Now while this is technically possible, we don't really need everything here.
+2:43
+We only need the session ID, some minimal identity data, and the expiry.
+2:48
+And speaking of expiry, we have something here that won't expire till the year three thousand.
+2:53
+Now this was probably just a typo but it is still dangerous.
+2:57
+So this is pitfall four long lived or never expiring sessions.
+3:01
+So let's fix them both up.
+3:03
+I'll copy the original and then I'll cut everything from the cart to the IP address.
+3:09
+And then I'll change the expiry to today around thirty minutes from now.
+3:14
+And all done.
+3:15
+And finally, let's have a look at scenario four, which has both a cookie and a session for us to scrutinize.
+3:21
+First, there are some non pitfall issues with the cookie.
+3:24
+Did you find them?
+3:25
+Well, first, the cookie is missing a session ID, which is literally the most important thing about a cookie, so we'll be sure to fix that in a second.
+3:33
+And that max age, well, I guess it's short, but it's probably too short for any situation.
+3:39
+So a cookie should have a reasonable expiry.
+3:42
+Now onto the pitfalls.
+3:44
+It looks like the cookie has some information that doesn't need to be there, the user ID and the role.
+3:49
+So that is pitfall one, sensitive data in cookies.
+3:52
+Now moving down to the session, all the properties we need are here, but one of them is sticking out like a sore thumb and, of course, that is the expiry.
+4:00
+So this is pitfall four long lived or never expiring sessions.
+4:05
+So there are a few things to fix here.
+4:07
+So let me grab a copy of both.
+4:10
+Now from the cookie, I'm going to get rid of the user ID and role and in their place, I'm going to add the session ID.
+4:17
+And then I'll bump this max age up to something a bit more reasonable, eighteen hundred or thirty minutes.
+4:22
+And down here in the session, let's swap that expiry to something that's thirty minutes from now.
+4:28
+And there we go, much better across the board.
+4:31
+Now even if your fixes looked different, the important thing is that you thought about the reasoning and that's exactly what security minded developers do.
+4:39
+In the next arc, we'll explore a completely different world where the server doesn't remember you at all and the token itself becomes a proof of identity.
+4:47
+I'll see you there.
