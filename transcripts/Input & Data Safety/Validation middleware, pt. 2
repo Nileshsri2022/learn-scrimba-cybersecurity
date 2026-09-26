@@ -1,0 +1,155 @@
+Transcript
+0:00
+Okay.
+0:01
+Time to finish off this validate function.
+0:03
+And, actually, before I do anything, let's export this because we're gonna be using it in auth dot t s in a minute.
+0:10
+So now that we've validated the rec dot body, let's put some more comments to know what we need to do.
+0:17
+So if validation fails, we want to render the errors and tell the user who's using the form where they went wrong and where they need to change.
+0:27
+So we're gonna kinda map the Zod errors to a user friendly format, and that could be something like field name and error message.
+0:38
+That might be how we render it on the front end.
+0:43
+And then we're gonna want to set the status and the JSON response, and then return.
+0:51
+And that means anything underneath will be if validation is successful.
+0:56
+So we're gonna want to attach the validated data to the request object and call next.
+1:06
+Okay.
+1:06
+Let's get cracking.
+1:08
+So if validation fails, so we can do an if statement, and then we need to think what in result is gonna tell us it's failed.
+1:14
+Well, because we've used that safe pass, we get the object with the success property.
+1:18
+So, basically, we have the result object, and we use dot notation to get success.
+1:24
+So this is false.
+1:25
+So why don't we use the exclamation mark?
+1:28
+So in here, we're gonna do all of this.
+1:30
+Map result errors.
+1:32
+Right.
+1:32
+Where are we gonna get the errors from?
+1:34
+Well, in our result object, if validation is unsuccessful, as well as getting that success as false, we also get the error property.
+1:45
+So those are the errors, result dot error.
+1:47
+And then we need to think when we learned about Zod errors, how we access the information, like the message of the error and potentially where the errors happened, the field.
+2:00
+See if you can remember.
+2:03
+Oh, yes.
+2:03
+It was in the issues array.
+2:05
+Now let me just paste in here what the issues array looks like.
+2:09
+I'm gonna do it right at the bottom.
+2:10
+It's an array, every issue has an object, and that object has got a message and a path which was an array because of potential nested fields, wasn't it?
+2:20
+So we want to map around all of these different errors.
+2:25
+So we're gonna go dot map, and then we say every error, let's call those er, we go arrow, and we want each one to be an object.
+2:35
+So we can kind of now customize what object we want it to be in the format.
+2:39
+So because we might want to render field and then error message, our object is gonna have a field property and a message property.
+2:49
+Now message is pretty easy because it's just message.
+2:52
+So we go dot because that's each object in the issues array, and we just access message.
+3:00
+But field, we have to be a little bit more careful because that's an array itself.
+3:06
+So we'll go er dot path, but because there's no nested fields, we just access the first item in that path array.
+3:15
+Okay.
+3:16
+Nice.
+3:17
+So all of this, we need to assign to a variable.
+3:20
+Let's go for errors variable.
+3:23
+Okay.
+3:24
+So our errors is now our array of objects in the format we want.
+3:29
+So now we set the status.
+3:31
+So we go res dot status.
+3:33
+And if it's failed, we're gonna go for four hundred, and we chain on dot JSON, and our response is gonna be an object.
+3:40
+Let's go for a success property, which is obviously gonna be false, and an errors property, which will be the errors array here.
+3:51
+So remember, with no colon, this is essentially errors colon errors.
+3:55
+Nice.
+3:56
+And then we just return at the bottom.
+3:59
+Okay.
+3:59
+Yep.
+4:00
+So that's if validation fails.
+4:01
+We don't really need that anymore.
+4:03
+And then below that, below the return, this is gonna be if success is true, as in validation has been successful.
+4:12
+Attach the validated data.
+4:14
+So the request object is rec, and we can attach it to the object and attach it whatever property we want.
+4:21
+Let me call it validated data.
+4:24
+And where do we get the data from?
+4:25
+Well, we've got this result, haven't we?
+4:28
+That's the object with the success property, and if it's a successful validation, a data property.
+4:34
+So that'd be result dot data.
+4:36
+Now because up here, we validated the request body against the schema, that means it must match the schema.
+4:44
+So TypeScript will know the exact shape of this data based on the schema.
+4:48
+This means we get typed data downstream.
+4:51
+Now we need to type this rec.
+4:54
+And because Express's request type doesn't include this validated data that we've made up, sort of like a custom property, we can use as any.
+5:04
+This bypasses TypeScript to add a custom property.
+5:07
+It's a common way to extend the request object.
+5:10
+And then we just call next.
+5:12
+This passes control to the root handler.
+5:16
+So in the front end, we are gonna use this errors array to help us render it below the form.
+5:24
+Great.
+5:24
+I hope that makes sense.
+5:26
+Next, on to writing the schema.
+5:28
+See you then.
