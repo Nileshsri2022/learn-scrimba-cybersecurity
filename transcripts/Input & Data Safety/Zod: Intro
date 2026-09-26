@@ -1,0 +1,151 @@
+Transcript
+0:00
+Welcome.
+0:01
+Let me introduce you to Zod.
+0:03
+The docs describe it as a TypeScript first schema validation library with static type inference.
+0:11
+They have zero external dependencies.
+0:14
+It works in Node.
+0:15
+Js and all modern browsers.
+0:17
+It's tiny, installs really fast.
+0:20
+It's an immutable API.
+0:22
+We're gonna see what this means later.
+0:24
+It means that methods return a new instance.
+0:27
+It's a really concise interface.
+0:29
+The method names are really short.
+0:31
+They're chainable.
+0:32
+It's declarative, meaning you describe what you want, not how to check it.
+0:37
+And there's no boilerplate code.
+0:39
+No need for lots of if statements and error throwing.
+0:42
+It works with TypeScript, as I said, and plain JS, and there is an extensive ecosystem.
+0:48
+So if you click on this link, you'll go to their ecosystems page.
+0:52
+There really is a thriving ecosystem of libraries, tools, and integrations.
+0:56
+So you'll see a complete list that supports Zod or are built on top of it.
+1:01
+Speaking of their docs, you're gonna be needing these for challenges later, so I really recommend clicking this link and having a new tab open and checking out the basics and all about schemas and errors, etcetera.
+1:14
+Right.
+1:14
+That's a good start.
+1:16
+Let's get our hands on the keyboard and actually use Zod.
+1:19
+See you in a minute.Transcript
+0:00
+Welcome.
+0:01
+Let me introduce you to Zod.
+0:03
+The docs describe it as a TypeScript first schema validation library with static type inference.
+0:11
+They have zero external dependencies.
+0:14
+It works in Node.
+0:15
+Js and all modern browsers.
+0:17
+It's tiny, installs really fast.
+0:20
+It's an immutable API.
+0:22
+We're gonna see what this means later.
+0:24
+It means that methods return a new instance.
+0:27
+It's a really concise interface.
+0:29
+The method names are really short.
+0:31
+They're chainable.
+0:32
+It's declarative, meaning you describe what you want, not how to check it.
+0:37
+And there's no boilerplate code.
+0:39
+No need for lots of if statements and error throwing.
+0:42
+It works with TypeScript, as I said, and plain JS, and there is an extensive ecosystem.
+0:48
+So if you click on this link, you'll go to their ecosystems page.
+0:52
+There really is a thriving ecosystem of libraries, tools, and integrations.
+0:56
+So you'll see a complete list that supports Zod or are built on top of it.
+1:01
+Speaking of their docs, you're gonna be needing these for challenges later, so I really recommend clicking this link and having a new tab open and checking out the basics and all about schemas and errors, etcetera.
+1:14
+Right.
+1:14
+That's a good start.
+1:16
+Let's get our hands on the keyboard and actually use Zod.
+1:19
+See you in a minute.Transcript
+0:00
+Welcome.
+0:01
+Let me introduce you to Zod.
+0:03
+The docs describe it as a TypeScript first schema validation library with static type inference.
+0:11
+They have zero external dependencies.
+0:14
+It works in Node.
+0:15
+Js and all modern browsers.
+0:17
+It's tiny, installs really fast.
+0:20
+It's an immutable API.
+0:22
+We're gonna see what this means later.
+0:24
+It means that methods return a new instance.
+0:27
+It's a really concise interface.
+0:29
+The method names are really short.
+0:31
+They're chainable.
+0:32
+It's declarative, meaning you describe what you want, not how to check it.
+0:37
+And there's no boilerplate code.
+0:39
+No need for lots of if statements and error throwing.
+0:42
+It works with TypeScript, as I said, and plain JS, and there is an extensive ecosystem.
+0:48
+So if you click on this link, you'll go to their ecosystems page.
+0:52
+There really is a thriving ecosystem of libraries, tools, and integrations.
+0:56
+So you'll see a complete list that supports Zod or are built on top of it.
+1:01
+Speaking of their docs, you're gonna be needing these for challenges later, so I really recommend clicking this link and having a new tab open and checking out the basics and all about schemas and errors, etcetera.
+1:14
+Right.
+1:14
+That's a good start.
+1:16
+Let's get our hands on the keyboard and actually use Zod.
+1:19
+See you in a minute.
