@@ -1,0 +1,130 @@
+
+Transcript
+0:00
+In the last scrim, we looked at Stride for the first time and how each of its letters stand for a threat that might happen to our food delivery app, QuickBite.
+0:09
+Here in the Scrimba editor, I've got Stride challenge dot m d open.
+0:13
+You're gonna see six potential threats for quick bite listed out.
+0:17
+And for each one, we're going to decide which stride category it belongs to and jot down a quick sentence of why.
+0:24
+I've also popped the six stride threats down here in a markdown file for quick reference.
+0:29
+So we're going to work through the first one together.
+0:32
+So potential threat number one, thousands of fake orders slow the app to a crawl.
+0:37
+Well, this one would be d, denial of service.
+0:40
+And why?
+0:41
+That's because it's a flood of requests that overwhelms the server.
+0:45
+Basically, someone is spamming the system with junk traffic so real customers can't get through.
+0:50
+The server's too busy dealing with fake requests to handle real ones, and everyone goes hungry.
+0:56
+And now it's your turn to give it a go with the remaining five potential threats.
+1:00
+Take your time and fill it in just like I've done with example one.
+1:04
+When you're done, we'll go through some possible answers.
+1:06
+So I'll catch you in a bit.
+1:12
+Welcome back.
+1:12
+How did you go?
+1:13
+This is what I would have done.
+1:15
+So potential threat number two, a driver marks an order delivered but later insists that they didn't.
+1:21
+Well, this one would be r for repudiation.
+1:24
+And why?
+1:25
+There is no audit trail to prove that any action was taken.
+1:28
+Now this one's all about being able to deny what you did.
+1:31
+If we didn't log the delivery properly, there's no time stamp, there's no proof photo, there's no signature, there's no way to prove what actually happened.
+1:39
+Both sides can point fingers and we're stuck.
+1:42
+Okay.
+1:42
+Number three.
+1:43
+A driver discovers an admin dashboard link and can see all the current orders.
+1:48
+Well, this one is definitely e for elevation of privilege.
+1:53
+And why?
+1:54
+Because a lower role user has gained admin access.
+1:57
+They've somehow stumbled into powers they were never meant to have, maybe through a hidden route or weak access control, and that is a classic privilege elevation issue.
+2:08
+Potential threat number four.
+2:09
+A customer changes an order ID in the URL and views another person's receipt.
+2:14
+Well, this one will be s, spoofing.
+2:16
+And why?
+2:17
+They're pretending to be another user.
+2:19
+By tweaking the URL, they're basically saying, hey.
+2:22
+I'm user number forty two now.
+2:24
+And if the app doesn't double check who's actually making that request, everyone can see everyone else's private information.
+2:31
+Potential threat number five.
+2:33
+An error message prints the customer's full address to the browser console.
+2:37
+Well, this one will be d, information disclosure.
+2:40
+And why?
+2:41
+Because of a simple leak of private data.
+2:44
+This one is actually super common.
+2:46
+Developers often forget that error messages can leak secrets.
+2:50
+It may not seem like a big deal, but if your stack trace or debug info exposes personal data, you've just handed attackers some free intel.
+2:59
+And finally, number six, a customer edits their total price to thirty cents before checkout.
+3:05
+Now this one is definitely t for tampering.
+3:08
+And why?
+3:09
+Because data is being modified before it is sent to the server.
+3:13
+If we're not validating that number server side, we've basically said, sure.
+3:17
+Thirty cents for a full meal.
+3:19
+Why not?
+3:20
+Okay.
+3:21
+If you've nailed them all, nice work.
+3:23
+If you've mixed up a few, don't worry.
+3:25
+The point isn't to memorize letters.
+3:27
+It's learning to spot patterns and talk about risks in a clear way.
+3:32
+In the next room, we're going to flip the script a little bit.
+3:35
+Instead of starting with threats like this, we're going to start with features and learn to spot what could go wrong before it ever does.
+3:43
+I'll see you there.
