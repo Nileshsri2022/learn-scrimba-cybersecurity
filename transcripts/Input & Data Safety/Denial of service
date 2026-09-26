@@ -1,0 +1,140 @@
+
+Transcript
+0:00
+The next vulnerability to talk about is the denial of service.
+0:04
+This is generally an attack on the availability of a system.
+0:07
+So there are a few types of DoS.
+0:10
+The first one is a magic bullet, sometimes called a ninja attack.
+0:15
+A very targeted attack when a bad guy on the left here writes a specially crafted message, taking advantage of a rule he'll violate in the protocol.
+0:25
+Could be a buffer overflow when you send more info than expected, which makes the system go down.
+0:31
+The next type would be a volume based attack.
+0:34
+This saturates the bandwidth.
+0:36
+Without length limits, maybe an attacker could send an extremely large input that exhausts server resources, causing a denial of service.
+0:45
+So a quick example here is in the name field, they could use a dot repeat ten million.
+0:51
+So the database would fill up quickly, queries would slow down, storage costs would spike, and backups would become huge.
+0:59
+The next type is protocol attacks.
+1:01
+These exploit weaknesses in network protocols to use up server resources, like connection tables.
+1:07
+An example could be a SYN flood.
+1:10
+This exploits the handshake process of a TCP connection.
+1:14
+Under normal conditions, TCP connections exhibit three distinct processes in order to make a connection.
+1:20
+Everything starts out well with the bad guy sending a SYN packet.
+1:23
+The problem is the address they've included that should be their address is a fake address.
+1:29
+That means when the system continues the handshake and sends a SYN ACK, it goes to the wrong place.
+1:35
+This is an unexpected system at the bottom here.
+1:38
+At this point, the system starts a timer and starts using resources.
+1:42
+Normally, the system that receives the SYN ACK should then send one back, completing the three processes.
+1:50
+But because they're totally unaware, they do not send anything back, meaning that the server resources continue to be taken up.
+1:57
+The bad guy then sends another SYN packet with another fake address.
+2:01
+This goes somewhere else, and another timer is started using even more resources.
+2:06
+This continues until the service goes down.
+2:10
+So the handshake is never completed, leaving the server stuck with these half open connections.
+2:15
+We can call this a type of death by a thousand cuts attack strategy.
+2:19
+And one of these death by a thousand cut attack types taken to another level is the DDOS, distributed denial of service.
+2:27
+This is using botnets or sometimes called zombies.
+2:30
+It starts with a user here on the right accessing a system absolutely fine.
+2:34
+A bad guy on the left starts taking over systems.
+2:37
+They could be doing this using malware or hacking into them, building an army of unsuspecting users.
+2:44
+This is the botnet or zombies.
+2:46
+Then when the bad guy wants to start the attack, they send a message to these systems that he's taken over, and they start to bombard the victim's system with traffic.
+2:56
+So these botnets coordinate many infected computers to send attack traffic from multiple sources, making it hard to defend against, hence why it's called a distributed attack coming from lots of places.
+3:08
+And this can potentially cause the server or network to become overwhelmed, resulting in a denial of service to normal traffic.
+3:14
+And because each bot is a legitimate Internet device, separating the attack traffic from normal traffic can be very difficult.
+3:20
+So what can we do about this?
+3:22
+Ideally, we'd have infinite capacity, but that's not really feasible, is it?
+3:27
+So redundancy and the rule of three, multiple instances or backups of critical system components to maintain availability if one fails or becomes overwhelmed.
+3:38
+That's three servers, three data centers, three network paths, three DNS servers, etcetera.
+3:45
+One can fail due to an attack or a hardware failure.
+3:48
+One can be under attack, and, hopefully, one remains available to serve legitimate traffic.
+3:54
+Rate limiting and throttling.
+3:56
+This is controlling how much and how fast.
+3:59
+It limits the volume or frequency of requests.
+4:02
+For example, maybe a maximum of a hundred API calls per minute or no more than five login attempts in ten minutes.
+4:09
+Maybe limiting bandwidth throttling to one megabyte a second.
+4:13
+Filtering is controlling what, who, and from where.
+4:17
+It examines and blocks or allows based on content, source, or other criteria.
+4:22
+For example, blocking traffic from specific IP addresses or countries, rejecting requests with malicious payloads, like SQL injection or XSS, allowing only authenticated users, or finally blocking requests based on user agent or headers.
+4:38
+Hardening is removing unnecessary services, reducing the attack surface of a system.
+4:43
+The idea is that every service running is a potential vulnerability.
+4:47
+We may have to remove default accounts like default admin users, disable accounts for people who no longer work at the company, and ensuring no unnecessarily privileged accounts exist because attackers can exploit leftover or default credentials.
+5:01
+Patching is always using the latest software.
+5:04
+Software always has bugs, doesn't it?
+5:05
+And some of those bugs are security vulnerabilities, flaws that attackers can exploit to gain access, escalate privileges, crash systems, steal data, etcetera.
+5:15
+When a vulnerability is discovered, the software vendor releases a patch, essentially a fix that closes that hole.
+5:21
+Patching is the process of applying those fixes.
+5:24
+Monitoring means continuously watching your system so you know what normal looks like.
+5:29
+That means you can then spot when something abnormal is happening.
+5:32
+You always need a baseline of normal activity so you can recognize anomalies.
+5:37
+For example, if your server normally gets a thousand requests per hour and suddenly gets a hundred thousand, that's a big red flag.
+5:45
+But you'd only know that if you'd been monitoring normal behavior first.
+5:50
+And finally, incident response, security orchestration, automation, and response, SOAR.
+5:58
+We really need dynamic playbooks so that we can respond quickly to threats.
+6:03
+Fantastic.
+6:04
+See you in the next scrim.
