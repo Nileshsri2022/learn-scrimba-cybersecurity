@@ -1,0 +1,116 @@
+
+Transcript
+0:00
+Welcome back.
+0:01
+Last time we explored stateful identity where the server remembers everything and the browser just holds a tiny ID in a cookie.
+0:08
+But sometimes your app can't and shouldn't remember that kind of state.
+0:12
+Maybe you're building a public API.
+0:15
+Maybe you're working on a mobile app.
+0:17
+Maybe your system needs to scale across multiple servers where storing sessions will be slow, messy, or impossible.
+0:23
+So for the next handful of scrims, we're shifting gears and looking at stateless identity.
+0:28
+But before any of that, we must clear up the biggest beginner misconception.
+0:33
+When we say stateless, we don't mean that the server stores nothing.
+0:36
+We mean that the server stores no session object, nothing that tracks the user between requests.
+0:41
+The server doesn't hold a user's identity.
+0:44
+The request brings everything the server needs to figure out who the user is, and that's the stateless idea.
+0:51
+With that in mind, let's start with the simplest form, opaque bearer tokens.
+0:55
+An opaque bearer token is sent with every request in the authorization header.
+1:00
+It's just a random unguessable string.
+1:02
+We call it opaque because the server can't read anything inside it.
+1:06
+It's not encoded.
+1:06
+It's not structured.
+1:08
+It's just a random string credential.
+1:10
+Now a quick side note.
+1:11
+Even though the header is literally called authorization, in this context, it's still being used for authentication, proving who the user is.
+1:20
+This bearer token doesn't grant any permissions.
+1:22
+It just identifies.
+1:24
+This name is just an odd historical leftover from the early HTTP days.
+1:29
+Here's the basic flow with an opaque bearer token.
+1:32
+The user logs in with their username and password.
+1:34
+The server checks the username and password.
+1:37
+Invalid, the server generates a random opaque token.
+1:40
+The server also keeps a token to user lookup, a tiny mapping just so the user can recognize a token.
+1:46
+Then that token is sent back to the client, and the client stores it maybe in local storage.
+1:51
+Then every future request includes the bearer token in the authorization header.
+1:57
+Now this is something that our app must be programmed to do.
+2:00
+Then the server validates the token, finds the user in the token user lookup, and the user is authenticated.
+2:06
+At this point, you're probably thinking, hey, why does this sound exactly like cookies and sessions?
+2:12
+And why if you just use the exact same slides?
+2:15
+And you'd be on to something.
+2:16
+Both systems do involve something the client sends, something the server checks, and something that connects the two in order to identify a user.
+2:25
+But the philosophy of identifying a user is completely different.
+2:29
+Yes.
+2:29
+In both systems, identity ultimately lives on the server, but the way they go about it is completely different, And therefore, the server stores different things.
+2:37
+A stateful server stores a full user session object, while the stateless server only stores a tiny token to user lookup.
+2:45
+It's not a session.
+2:46
+It's just enough for the server to recognize the token and work out who the user is.
+2:51
+On the client side, the difference is very simple.
+2:53
+A stateful client stores a cookie with the session ID, but a stateless client stores the token itself.
+3:00
+And those different storage models change how identity travels back to the server.
+3:04
+Stateful identity is sent automatically through cookies, but stateless identity has to be sent explicitly in the authorization header as a bearer token.
+3:13
+And finally, each model fits different use cases.
+3:16
+Stateful identity works beautifully in traditional web apps, but stateless tokens are the standard choice for APIs and mobile apps.
+3:24
+A good analogy is like a key card to access a building.
+3:27
+The card doesn't contain your name or identity.
+3:30
+It's just a piece of programmable plastic.
+3:33
+You tap it at a door's card reader, and it checks the card against a list of allowed cards to decide whether to let you through.
+3:40
+So that's opaque bearer tokens.
+3:42
+They're small, they're simple, they're stateless ish, and honestly, they're very elegant.
+3:47
+But, of course, there are plenty of ways to mess them up, and I have a feeling you're already thinking of a few.
+3:52
+So in the next room, we'll have a look at the common pitfalls that developers run into with the bearer tokens and how to avoid them.
