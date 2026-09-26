@@ -1,0 +1,62 @@
+
+Transcript
+0:00
+Before we get into the details, here's the core problem.
+0:03
+HTTP is stateless.
+0:04
+Every request is brand new.
+0:06
+No memory, no context, and no built in way to remember who the user is.
+0:11
+So if your app needs to recognize a user across multiple requests, it has to store identity somewhere.
+0:17
+Modern apps usually solve this in one of three ways, stateful identity, stateless identity, and delegated identity.
+0:24
+And these three families power almost every login flow you'll ever see.
+0:28
+A stateful identity means the server remembers the user.
+0:32
+Once someone authenticates, the server creates a session, which is a bundle of information that represents that logged in user.
+0:38
+The browser sends a tiny session ID and each request uses that ID to look up the user once again.
+0:45
+This is the pattern that you see in traditional web apps and in many frameworks by default.
+0:49
+If you've used Express session before, this should ring a bell.
+0:52
+Express stores your session, your browser sends back the session ID, and Express uses it to remember who the user is.
+0:59
+Stateless identity means that the client carries the proof.
+1:02
+The server doesn't store a user session.
+1:05
+Instead, the client sends something, usually a token on every request.
+1:09
+The server can validate that token without storing an entire user session on the server.
+1:14
+And this works beautifully for APIs, mobile apps, and distributed systems where shared server memory isn't always an option.
+1:21
+If you've ever hit an API and gotten this four zero one unauthorized missing authorization header, that's what's happening.
+1:28
+The server expects the user to bring the proof every time.
+1:32
+A delegated identity is when a trusted third party confirms who the user is on your behalf.
+1:38
+Your app says, hey, Google.
+1:39
+Can you check who this person is?
+1:41
+Google handles the login and gives your app a token that proves the user's identity.
+1:46
+This is when you see those buttons that say sign in with Google, sign in with GitHub, or sign in with Facebook.
+1:51
+Together, these three families cover almost every identity system you'll encounter.
+1:56
+They all work towards the same goal, authenticating users and enabling authorization decisions, but they take very different approaches with different strengths and different security pitfalls.
+2:06
+Across the rest of the section, we'll explore each family in turn.
+2:10
+For each of the models, we'll have a look at how it actually works, some common mistakes that developers make, and how to work around those mistakes through a security mindset challenge.
+2:19
+Now let's dive into the first identity model, stateful identity.
