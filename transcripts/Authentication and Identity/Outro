@@ -1,0 +1,42 @@
+
+Transcript
+0:00
+Well done.
+0:01
+Seriously, well done.
+0:02
+You've just made your way through a fundamental part of back end security, understanding how modern apps handle identity.
+0:09
+In this section, we first learned the difference between authentication and authorization, who the user is and what they're allowed to do.
+0:16
+We then learned how to think about identity three different ways.
+0:20
+Stateful identity, when the server remembers who the user is.
+0:24
+Stateless identity, when the client brings proof every time, and delegated identity, when another provider does the logging in for you.
+0:32
+You learn how to reason with them, how to spot weak points, and what made each one safe or unsafe, and what threats they defend against, and what they're prone to.
+0:42
+Most importantly, you can now look at any login system, cookies, tokens, JWTs, OAuth, and understand the trade offs behind it.
+0:50
+You can ask questions like where does identity actually live?
+0:54
+How does the server know I am who I say I am?
+0:57
+What happens if this part leaks or expires or is tampered with?
+1:01
+Which model fits my app and why?
+1:04
+And this is the exact thinking that shapes real security decisions.
+1:08
+From here, every back end you build and every OWASP button you click in the wild will look different.
+1:14
+You'll see the patterns, the risks, and the design choices hiding underneath.
+1:18
+So take a moment because this is a huge achievement.
+1:21
+Most developers only ever learn these ideas indirectly, but you've taken the time to understand them properly.
+1:27
+Well done again, truly.
+1:28
+Thanks for hanging out with me, and I'll see you next time.
